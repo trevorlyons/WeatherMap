@@ -20,11 +20,92 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="oao-x0-zHs">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </mapView>
+                            <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Al-M5-Jn6">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleAspectFit" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="2bz-t6-511">
+                                        <rect key="frame" x="15" y="27" width="345" height="25"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZzG-XE-Q65">
+                                                <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                                <state key="normal" image="Search"/>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wq5-GD-gee">
+                                                <rect key="frame" x="123" y="0.0" width="99.5" height="25"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Weather Map">
+                                                        <attributes>
+                                                            <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <font key="NSFont" size="24" name="SignPainter-HouseScriptSemibold"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UYq-Uc-oiZ">
+                                                <rect key="frame" x="320" y="0.0" width="25" height="25"/>
+                                                <state key="normal" image="Settings Cog"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.28627450980000002" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="2bz-t6-511" firstAttribute="leading" secondItem="1Al-M5-Jn6" secondAttribute="leading" constant="15" id="3wa-iR-Y5S"/>
+                                    <constraint firstItem="2bz-t6-511" firstAttribute="centerX" secondItem="1Al-M5-Jn6" secondAttribute="centerX" id="781-oN-ZJw"/>
+                                    <constraint firstAttribute="trailing" secondItem="2bz-t6-511" secondAttribute="trailing" constant="15" id="AtW-1U-9hU"/>
+                                    <constraint firstAttribute="bottom" secondItem="2bz-t6-511" secondAttribute="bottom" constant="8" id="iVY-aE-Wwm"/>
+                                    <constraint firstAttribute="height" constant="60" id="kAa-z2-Kc5"/>
+                                </constraints>
+                            </view>
+                            <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EVN-gq-LLQ">
+                                <rect key="frame" x="0.0" y="627" width="375" height="40"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Select a city for current forecast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19o-9D-ZtP">
+                                        <rect key="frame" x="63" y="8" width="249" height="24"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.28627450980000002" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="dlT-yC-CJO"/>
+                                    <constraint firstItem="19o-9D-ZtP" firstAttribute="centerY" secondItem="EVN-gq-LLQ" secondAttribute="centerY" id="s8n-ZR-D36"/>
+                                    <constraint firstItem="19o-9D-ZtP" firstAttribute="centerX" secondItem="EVN-gq-LLQ" secondAttribute="centerX" id="yGE-9f-J6m"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="1Al-M5-Jn6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="3xx-9L-VLo"/>
+                            <constraint firstItem="oao-x0-zHs" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="6F3-CX-muQ"/>
+                            <constraint firstItem="1Al-M5-Jn6" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="9hj-O6-jL1"/>
+                            <constraint firstItem="EVN-gq-LLQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="A3u-C8-Ozp"/>
+                            <constraint firstItem="oao-x0-zHs" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="B6C-8k-sh1"/>
+                            <constraint firstAttribute="trailing" secondItem="oao-x0-zHs" secondAttribute="trailing" id="Wfp-j8-eHQ"/>
+                            <constraint firstAttribute="trailing" secondItem="EVN-gq-LLQ" secondAttribute="trailing" id="owp-ub-AYR"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="EVN-gq-LLQ" secondAttribute="bottom" id="qOg-3Z-jac"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="oao-x0-zHs" secondAttribute="bottom" id="tHX-Do-poM"/>
+                            <constraint firstAttribute="trailing" secondItem="1Al-M5-Jn6" secondAttribute="trailing" id="tez-8d-Thx"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="oao-x0-zHs" id="pbp-ge-9iE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="129.98500749625188"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Search" width="25" height="25"/>
+        <image name="Settings Cog" width="25" height="25"/>
+    </resources>
 </document>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C13BF151EBB34B400C078A8 /* SignPainter.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8C13BF141EBB34B400C078A8 /* SignPainter.otf */; };
 		8C45E7141EBA2437006E6B91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C45E7131EBA2437006E6B91 /* AppDelegate.swift */; };
 		8C45E7161EBA2437006E6B91 /* WeatherMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C45E7151EBA2437006E6B91 /* WeatherMapVC.swift */; };
 		8C45E7191EBA2437006E6B91 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C45E7171EBA2437006E6B91 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		581CA612DBF31EBF95328E38 /* Pods-WeatherMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherMap/Pods-WeatherMap.debug.xcconfig"; sourceTree = "<group>"; };
+		8C13BF141EBB34B400C078A8 /* SignPainter.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SignPainter.otf; sourceTree = "<group>"; };
 		8C45E7101EBA2437006E6B91 /* WeatherMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C45E7131EBA2437006E6B91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C45E7151EBA2437006E6B91 /* WeatherMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherMapVC.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				8C13BF0C1EBA2F2700C078A8 /* View */,
 				8C13BF0B1EBA2F1C00C078A8 /* Controller */,
 				8C45E7131EBA2437006E6B91 /* AppDelegate.swift */,
+				8C13BF141EBB34B400C078A8 /* SignPainter.otf */,
 				8C45E7171EBA2437006E6B91 /* Main.storyboard */,
 				8C45E71A1EBA2437006E6B91 /* Assets.xcassets */,
 				8C45E71C1EBA2437006E6B91 /* LaunchScreen.storyboard */,
@@ -177,6 +180,7 @@
 			files = (
 				8C45E71E1EBA2437006E6B91 /* LaunchScreen.storyboard in Resources */,
 				8C45E71B1EBA2437006E6B91 /* Assets.xcassets in Resources */,
+				8C13BF151EBB34B400C078A8 /* SignPainter.otf in Resources */,
 				8C45E7191EBA2437006E6B91 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
