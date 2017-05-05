@@ -9,10 +9,12 @@
 import UIKit
 import MapKit
 
-class WeatherMapVC: UIViewController, MKMapViewDelegate, UIPopoverPresentationControllerDelegate {
+class WeatherMapVC: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     
+    
+    lazy var slideInTransitioningDelegate = SlideInPresentationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,29 +23,20 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, UIPopoverPresentationCo
         
     }
     
-    
-    override func prepare(for segue:UIStoryboardSegue, sender:Any!) {
-        if segue.identifier == "settings" {
-            let settingsController = segue.destination as! SettingsVC
-            let screenSize = UIScreen.main.bounds
-            let screenWidth = screenSize.width
-            let screenHeight = screenSize.height
-            settingsController.preferredContentSize = CGSize(width: screenWidth, height: screenHeight*0.75)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? SettingsVC {
+            slideInTransitioningDelegate.direction = .bottom
+            controller.transitioningDelegate = slideInTransitioningDelegate
+            controller.modalPresentationStyle = .custom
             
-            let popoverController = settingsController.popoverPresentationController
+        } else if let controller = segue.destination as? CityWeatherVC {
             
-            if popoverController != nil {
-                popoverController!.delegate = self
-                popoverController!.backgroundColor = UIColor.white
-                popoverController!.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
-
-            }
+            slideInTransitioningDelegate.direction = .bottom
+            controller.transitioningDelegate = slideInTransitioningDelegate
+            controller.modalPresentationStyle = .custom
         }
     }
     
-    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-        return .none
-    }
 
     @IBAction func settingsBtnPressed(_ sender: Any) {
     }

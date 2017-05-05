@@ -35,6 +35,7 @@
                                                 <state key="normal" image="Search"/>
                                                 <connections>
                                                     <action selector="searchBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="68S-hk-26B"/>
+                                                    <segue destination="DP8-Ry-I28" kind="presentation" identifier="selectedCity" id="8Wb-oz-EY4"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wq5-GD-gee">
@@ -55,9 +56,7 @@
                                                 <state key="normal" image="Settings Cog"/>
                                                 <connections>
                                                     <action selector="settingsBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gth-Ez-9tU"/>
-                                                    <segue destination="YL4-nr-ctP" kind="popoverPresentation" identifier="settings" popoverAnchorView="UYq-Uc-oiZ" id="BcU-AB-oip">
-                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                                    </segue>
+                                                    <segue destination="YL4-nr-ctP" kind="presentation" identifier="settings" id="BcU-AB-oip"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -153,7 +152,50 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AoD-m8-l25" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="837.60000000000002" y="129.98500749625188"/>
+            <point key="canvasLocation" x="945" y="525"/>
+        </scene>
+        <!--City WeatherVC-->
+        <scene sceneID="eye-Z6-YNE">
+            <objects>
+                <viewController id="DP8-Ry-I28" customClass="CityWeatherVC" customModule="WeatherMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9o3-YM-rmn"/>
+                        <viewControllerLayoutGuide type="bottom" id="xSl-TB-Mwd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cIw-DX-xUz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ffm-ul-fcb">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="437"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k29-2P-Uby">
+                                        <rect key="frame" x="170" y="203.5" width="34" height="30"/>
+                                        <state key="normal" title="Back"/>
+                                        <connections>
+                                            <action selector="backButtonPressed:" destination="DP8-Ry-I28" eventType="touchUpInside" id="nM1-79-EuX"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.99303108449999999" green="0.92052930590000004" blue="0.31934186819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="437" id="Flq-Gs-bgL"/>
+                                    <constraint firstItem="k29-2P-Uby" firstAttribute="centerX" secondItem="ffm-ul-fcb" secondAttribute="centerX" id="kSt-pY-qO5"/>
+                                    <constraint firstItem="k29-2P-Uby" firstAttribute="centerY" secondItem="ffm-ul-fcb" secondAttribute="centerY" id="oVs-an-9fI"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ffm-ul-fcb" firstAttribute="leading" secondItem="cIw-DX-xUz" secondAttribute="leading" id="7aD-zJ-4qA"/>
+                            <constraint firstItem="ffm-ul-fcb" firstAttribute="top" secondItem="cIw-DX-xUz" secondAttribute="top" id="CMk-a8-oJX"/>
+                            <constraint firstAttribute="trailing" secondItem="ffm-ul-fcb" secondAttribute="trailing" id="mAf-LV-bUo"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GAf-bg-9Pr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="944.79999999999995" y="-150.67466266866569"/>
         </scene>
     </scenes>
     <resources>
