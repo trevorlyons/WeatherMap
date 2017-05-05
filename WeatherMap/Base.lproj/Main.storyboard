@@ -33,6 +33,9 @@
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZzG-XE-Q65">
                                                 <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                                 <state key="normal" image="Search"/>
+                                                <connections>
+                                                    <action selector="searchBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="68S-hk-26B"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wq5-GD-gee">
                                                 <rect key="frame" x="123" y="0.0" width="99.5" height="25"/>
@@ -50,6 +53,12 @@
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UYq-Uc-oiZ">
                                                 <rect key="frame" x="320" y="0.0" width="25" height="25"/>
                                                 <state key="normal" image="Settings Cog"/>
+                                                <connections>
+                                                    <action selector="settingsBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gth-Ez-9tU"/>
+                                                    <segue destination="YL4-nr-ctP" kind="popoverPresentation" identifier="settings" popoverAnchorView="UYq-Uc-oiZ" id="BcU-AB-oip">
+                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                    </segue>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -66,8 +75,8 @@
                             <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EVN-gq-LLQ">
                                 <rect key="frame" x="0.0" y="627" width="375" height="40"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Select a city for current forecast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19o-9D-ZtP">
-                                        <rect key="frame" x="63" y="8" width="249" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a city for current forecast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19o-9D-ZtP">
+                                        <rect key="frame" x="65.5" y="8.5" width="244.5" height="23.5"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -101,7 +110,50 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="129.98500749625188"/>
+            <point key="canvasLocation" x="137" y="130"/>
+        </scene>
+        <!--SettingsVC-->
+        <scene sceneID="F6D-TE-Ded">
+            <objects>
+                <viewController id="YL4-nr-ctP" customClass="SettingsVC" customModule="WeatherMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TIv-LR-bYk"/>
+                        <viewControllerLayoutGuide type="bottom" id="y0N-SZ-7fx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tG5-lk-ch2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WSQ-9u-aK0">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jrM-z6-tW5">
+                                        <rect key="frame" x="170" y="235" width="34" height="30"/>
+                                        <state key="normal" title="Back"/>
+                                        <connections>
+                                            <action selector="backButtonPressed:" destination="YL4-nr-ctP" eventType="touchUpInside" id="a9M-DL-HL5"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="jrM-z6-tW5" firstAttribute="centerY" secondItem="WSQ-9u-aK0" secondAttribute="centerY" id="BG9-i9-ifL"/>
+                                    <constraint firstItem="jrM-z6-tW5" firstAttribute="centerX" secondItem="WSQ-9u-aK0" secondAttribute="centerX" id="Bjd-dl-Ggb"/>
+                                    <constraint firstAttribute="height" constant="500" id="SZU-ku-ajp"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WSQ-9u-aK0" firstAttribute="top" secondItem="tG5-lk-ch2" secondAttribute="top" id="Dfx-N8-MQD"/>
+                            <constraint firstAttribute="trailing" secondItem="WSQ-9u-aK0" secondAttribute="trailing" id="r2v-BW-BXj"/>
+                            <constraint firstItem="WSQ-9u-aK0" firstAttribute="leading" secondItem="tG5-lk-ch2" secondAttribute="leading" id="uzX-vH-Pex"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AoD-m8-l25" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="837.60000000000002" y="129.98500749625188"/>
         </scene>
     </scenes>
     <resources>
