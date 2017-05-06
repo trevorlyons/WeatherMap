@@ -15,12 +15,7 @@ class SettingsVC: UIViewController {
         
 
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        
-//        self.view.superview?.layer.cornerRadius = 0.0
-//    }
+
 
     @IBAction func backButtonPressed(_ sender: Any) {
         dismiss(animated: false, completion: nil)
