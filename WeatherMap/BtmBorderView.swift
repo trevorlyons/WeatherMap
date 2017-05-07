@@ -11,6 +11,8 @@ import UIKit
 class BtmBorderView: UIView {
 
     override func layoutSubviews() {
+        super.layoutSubviews()
+        
         addBottomBorderWithColor(color: UIColor.darkGray, width: 0.5)
     }
 }
