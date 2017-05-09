@@ -22,6 +22,12 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var dayLowTempLbl: UILabel!
     
     var currentWeather: CurrentWeather!
+    var longRangeForecast: LongRangeForecast!
+    var longRangeForecasts = [LongRangeForecast]()
+    var hourlyForecast: HourlyForecast!
+    var hourlyForecasts = [HourlyForecast]()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,31 +38,64 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         collectionView.dataSource = self
         
         currentWeather = CurrentWeather()
-
+        
+        currentWeather.downloadWeatherDetails {
+            self.downloadApiData {
+                self.updateCurrentWeatherUI()
+            }
+        }
 
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//        currentWeather.downloadWeatherDetails {
-//            self.updateCurrentWeatherUI()
-//            print(self.currentWeather.currentTemp)
-//        }
-        dumbFunc()
+    }
+
+    func downloadApiData(completed: DownloadComplete) {
+        
+        let currentWeatherUrl = URL(string: CURRENT_WEATHER_URL)!
+        Alamofire.request(currentWeatherUrl).responseJSON { response in
+            let result = response.result
+            
+            if let dict = result.value as? Dictionary<String, AnyObject> {
+                if let hourly = dict["hourly"] as? Dictionary<String, AnyObject> {
+                    if let data = hourly["data"] as? [Dictionary<String, AnyObject>] {
+                        
+                        for obj in data {
+                            let forecast = HourlyForecast(hourlyDict: obj)
+                            self.hourlyForecasts.append(forecast)
+                            print(obj)
+                        }
+                        self.collectionView.reloadData()
+                    }
+                        
+                }
+                if let daily = dict["daily"] as? Dictionary<String, AnyObject> {
+                    if let data = daily["data"] as? [Dictionary<String, AnyObject>] {
+                        
+                        for obj in data {
+                            let forecast = LongRangeForecast(longWeatherDict: obj)
+                            self.longRangeForecasts.append(forecast)
+                            print(obj)
+                        }
+                        self.longRangeForecasts.remove(at: 0)
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+            
+        }
+        completed()
         
     }
-    func dumbFunc() {
-        currentWeather.downloadWeatherDetails {
-            self.updateCurrentWeatherUI()
-        }
-    }
-    
     
     // tableView - long range forecast
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "longRangeForecastCell", for: indexPath) as? LongRangeForecastCell {
+            let forecast = longRangeForecasts[indexPath.row]
+            cell.configureCell(longRangeForecast: forecast)
             return cell
             
         } else {
@@ -69,7 +108,7 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return longRangeForecasts.count
     }
     
     
@@ -77,6 +116,9 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hourlyForecastCell", for: indexPath) as? HourlyForecastCell {
+            
+            let forecast = hourlyForecasts[indexPath.row]
+            cell.configureCell(hourlyForecast: forecast)
             return cell
         } else {
             return HourlyForecastCell()
@@ -89,7 +131,7 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 12
+        return hourlyForecasts.count
     }
     
 
