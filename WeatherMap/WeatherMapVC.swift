@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import Alamofire
 
 class WeatherMapVC: UIViewController, MKMapViewDelegate {
 
@@ -20,7 +21,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         
         mapView.delegate = self
-        
+    
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
