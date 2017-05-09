@@ -7,11 +7,21 @@
 //
 
 import UIKit
+import Alamofire
 
 class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var cityNameLbl: UILabel!
+    @IBOutlet weak var currentTempLbl: UILabel!
+    @IBOutlet weak var dateLbl: UILabel!
+    @IBOutlet weak var currentWeatherImg: UIImageView!
+    @IBOutlet weak var currentWeatherType: UILabel!
+    @IBOutlet weak var dayHighTempLbl: UILabel!
+    @IBOutlet weak var dayLowTempLbl: UILabel!
+    
+    var currentWeather: CurrentWeather!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +31,27 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        currentWeather = CurrentWeather()
+
 
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+//        currentWeather.downloadWeatherDetails {
+//            self.updateCurrentWeatherUI()
+//            print(self.currentWeather.currentTemp)
+//        }
+        dumbFunc()
+        
+    }
+    func dumbFunc() {
+        currentWeather.downloadWeatherDetails {
+            self.updateCurrentWeatherUI()
+        }
+    }
+    
     
     // tableView - long range forecast
     
@@ -64,7 +93,14 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
 
-    
+    func updateCurrentWeatherUI() {
+        dateLbl.text = currentWeather.date
+        currentTempLbl.text = "\(currentWeather.currentTemp)°"
+        currentWeatherType.text = currentWeather.weatherDesc
+        currentWeatherImg.image = UIImage(named: currentWeather.weatherType)
+        dayHighTempLbl.text = "\(currentWeather.highTemp)"
+        dayLowTempLbl.text = "\(currentWeather.lowTemp)"
+    }
     
     
     

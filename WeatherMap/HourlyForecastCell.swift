@@ -10,5 +10,8 @@ import UIKit
 
 class HourlyForecastCell: UICollectionViewCell {
     
+    @IBOutlet weak var hourLbl: UILabel!
+    @IBOutlet weak var currentWeatherImg: UIImageView!
+    @IBOutlet weak var currentTempLbl: UILabel!
     
 }

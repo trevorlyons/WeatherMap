@@ -450,7 +450,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="CwJ-UE-R9J">
                                                                 <rect key="frame" x="0.0" y="0.0" width="133.5" height="78"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="32°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61X-68-BJa">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" text="32°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61X-68-BJa">
                                                                         <rect key="frame" x="0.0" y="0.0" width="67" height="58.5"/>
                                                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="42"/>
                                                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
@@ -485,7 +485,7 @@
                                                                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DIs-Dc-eFl">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DIs-Dc-eFl">
                                                                                 <rect key="frame" x="28.5" y="0.0" width="16.5" height="19.5"/>
                                                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
@@ -571,6 +571,11 @@
                                                             <constraint firstItem="TFV-ac-5AP" firstAttribute="centerY" secondItem="0oZ-g4-byL" secondAttribute="centerY" id="xUt-i3-IYE"/>
                                                         </constraints>
                                                         <size key="customSize" width="65" height="65"/>
+                                                        <connections>
+                                                            <outlet property="currentTempLbl" destination="GZa-4W-jQV" id="JVB-OT-2ii"/>
+                                                            <outlet property="currentWeatherImg" destination="CnB-27-73w" id="tQk-tU-No1"/>
+                                                            <outlet property="hourLbl" destination="TlH-vx-gNy" id="n1m-Uj-171"/>
+                                                        </connections>
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
@@ -622,13 +627,13 @@
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="NqY-hZ-raz">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="73" height="36"/>
                                                                                     <subviews>
-                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Precip:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L8B-cn-xRX">
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Precip:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L8B-cn-xRX">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="41" height="18"/>
                                                                                             <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="13"/>
                                                                                             <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
-                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="20%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aV0-4e-Tai">
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="20%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aV0-4e-Tai">
                                                                                             <rect key="frame" x="44" y="0.0" width="29" height="18"/>
                                                                                             <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="13"/>
                                                                                             <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
@@ -659,7 +664,7 @@
                                                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="k3j-jr-1pC">
                                                                                             <rect key="frame" x="18" y="18" width="42.5" height="18"/>
                                                                                             <subviews>
-                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="35" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7sd-IS-Od4">
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="35" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7sd-IS-Od4">
                                                                                                     <rect key="frame" x="0.0" y="0.0" width="17" height="18"/>
                                                                                                     <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="13"/>
                                                                                                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
@@ -688,6 +693,15 @@
                                                         </tableViewCellContentView>
                                                         <color key="backgroundColor" red="0.80000000000000004" green="0.88235294119999996" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        <connections>
+                                                            <outlet property="cloudsLbl" destination="9Sf-K8-Lom" id="6hS-0x-OIr"/>
+                                                            <outlet property="currentWeatherImg" destination="Yej-Od-V0k" id="WCk-qF-6xw"/>
+                                                            <outlet property="dailyHighTempLbl" destination="7sd-IS-Od4" id="7Fu-Ud-t8w"/>
+                                                            <outlet property="dailyLowTempLbl" destination="azc-Gv-Srf" id="83K-az-KR7"/>
+                                                            <outlet property="dayLbl" destination="txZ-lG-72h" id="0ze-Eq-dNU"/>
+                                                            <outlet property="precipLbl" destination="aV0-4e-Tai" id="QHn-3P-y6i"/>
+                                                            <outlet property="weatherTypeLbl" destination="fJY-xd-g1A" id="icT-6E-vVK"/>
+                                                        </connections>
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
@@ -744,7 +758,14 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="900"/>
                     <connections>
+                        <outlet property="cityNameLbl" destination="Zn0-Zc-U3O" id="3bT-eS-77h"/>
                         <outlet property="collectionView" destination="o2H-r1-vHd" id="tgZ-Ob-csR"/>
+                        <outlet property="currentTempLbl" destination="61X-68-BJa" id="8Yb-gY-c2D"/>
+                        <outlet property="currentWeatherImg" destination="w5d-lC-SR0" id="yZ4-hj-zDu"/>
+                        <outlet property="currentWeatherType" destination="sEQ-fh-ERj" id="P0d-rf-ENU"/>
+                        <outlet property="dateLbl" destination="NKQ-Pr-vdA" id="O8c-Q3-eRC"/>
+                        <outlet property="dayHighTempLbl" destination="XK3-cr-AvF" id="WiB-fv-lQx"/>
+                        <outlet property="dayLowTempLbl" destination="DIs-Dc-eFl" id="PhA-gh-7zR"/>
                         <outlet property="tableView" destination="H88-WK-gC7" id="xVL-4H-7RK"/>
                     </connections>
                 </viewController>

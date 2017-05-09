@@ -10,5 +10,12 @@ import UIKit
 
 class LongRangeForecastCell: UITableViewCell {
 
+    @IBOutlet weak var currentWeatherImg: UIImageView!
+    @IBOutlet weak var dayLbl: UILabel!
+    @IBOutlet weak var weatherTypeLbl: UILabel!
+    @IBOutlet weak var precipLbl: UILabel!
+    @IBOutlet weak var cloudsLbl: UILabel!
+    @IBOutlet weak var dailyHighTempLbl: UILabel!
+    @IBOutlet weak var dailyLowTempLbl: UILabel!
 
 }
