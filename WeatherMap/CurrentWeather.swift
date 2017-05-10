@@ -72,6 +72,8 @@ class CurrentWeather {
         }
         return _weatherDesc
     }
+
+    
     
     func downloadWeatherDetails(completed: @escaping DownloadComplete) {
         let currentWeatherUrl = URL(string: CURRENT_WEATHER_URL)!
@@ -84,17 +86,14 @@ class CurrentWeather {
                         
                         let roundedTemp = Double(round(temperature))
                         self._currentTemp = roundedTemp
-                        print(self._currentTemp)
                     }
                     if let icon = currently["icon"] as? String {
                         
                         self._weatherType = icon
-                        print(self._weatherType)
                     }
                     if let summary = currently["summary"] as? String {
                         
                         self._weatherDesc = summary
-                        print(self._weatherDesc)
                     }
                 }
                 if let daily = dict["daily"] as? Dictionary<String, AnyObject> {
@@ -103,20 +102,19 @@ class CurrentWeather {
                             
                             let roundedTemp = Double(round(temperatureMax))
                             self._highTemp = roundedTemp
-                            print(self._highTemp)
                         }
                         if let temperatureMin = data[0]["temperatureMin"] as? Double {
                             
                             let roundedTemp = Double(round(temperatureMin))
                             self._lowTemp = roundedTemp
-                            print(self._lowTemp)
                         }
                     }
                 }
                 
             }
+            completed()
         }
-        completed()
+        
     }
     
 }

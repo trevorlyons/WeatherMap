@@ -40,10 +40,6 @@ class HourlyForecast {
         
         if let time = hourlyDict["time"] as? Double {
             let unixConvertedDate = Date(timeIntervalSince1970: time)
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .full
-            dateFormatter.dateFormat = "EEEE"
-            dateFormatter.timeStyle = .none
             self._time = unixConvertedDate.hourOfTheDay()
         }
         if let icon = hourlyDict["icon"] as? String {
@@ -60,7 +56,7 @@ extension Date {
     func hourOfTheDay() -> String {
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE"
+        dateFormatter.dateFormat = "ha"
         return dateFormatter.string(from: self)
     }
 }

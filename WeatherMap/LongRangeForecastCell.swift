@@ -19,13 +19,13 @@ class LongRangeForecastCell: UITableViewCell {
     @IBOutlet weak var dailyLowTempLbl: UILabel!
     
     func configureCell(longRangeForecast: LongRangeForecast) {
-        currentWeatherImg.image = UIImage(named: longRangeForecast.weatherDesc)
+        //currentWeatherImg.image = UIImage(named: longRangeForecast.weatherDesc)
         dayLbl.text = longRangeForecast.date
         weatherTypeLbl.text = longRangeForecast.weatherDesc
-        precipLbl.text = "\(longRangeForecast.precip)"
-        cloudsLbl.text = "\(longRangeForecast.clouds)"
-        dailyHighTempLbl.text = "\(longRangeForecast.highTemp)"
-        dailyLowTempLbl.text = "\(longRangeForecast.lowTemp)"
+        precipLbl.text = "\(Int((longRangeForecast.precip)*100))%"
+        cloudsLbl.text = "\(Int((longRangeForecast.clouds)*100))%"
+        dailyHighTempLbl.text = "\(Int(longRangeForecast.highTemp))"
+        dailyLowTempLbl.text = "\(Int(longRangeForecast.lowTemp))"
     }
 
 }

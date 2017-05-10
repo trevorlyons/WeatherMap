@@ -37,19 +37,21 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        currentWeather = CurrentWeather()
         
-        currentWeather.downloadWeatherDetails {
-            self.downloadApiData {
-                self.updateCurrentWeatherUI()
-            }
-        }
+        currentWeather = CurrentWeather()
+
 
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        currentWeather.downloadWeatherDetails {
+            self.downloadApiData {
+                self.updateCurrentWeatherUI()
+            }
+            
+        }
     }
 
     func downloadApiData(completed: DownloadComplete) {
@@ -59,13 +61,13 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             let result = response.result
             
             if let dict = result.value as? Dictionary<String, AnyObject> {
+                
                 if let hourly = dict["hourly"] as? Dictionary<String, AnyObject> {
                     if let data = hourly["data"] as? [Dictionary<String, AnyObject>] {
                         
                         for obj in data {
                             let forecast = HourlyForecast(hourlyDict: obj)
                             self.hourlyForecasts.append(forecast)
-                            print(obj)
                         }
                         self.collectionView.reloadData()
                     }
@@ -77,7 +79,6 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                         for obj in data {
                             let forecast = LongRangeForecast(longWeatherDict: obj)
                             self.longRangeForecasts.append(forecast)
-                            print(obj)
                         }
                         self.longRangeForecasts.remove(at: 0)
                         self.tableView.reloadData()
@@ -137,11 +138,11 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
 
     func updateCurrentWeatherUI() {
         dateLbl.text = currentWeather.date
-        currentTempLbl.text = "\(currentWeather.currentTemp)°"
+        currentTempLbl.text = "\(Int(currentWeather.currentTemp))°"
         currentWeatherType.text = currentWeather.weatherDesc
         currentWeatherImg.image = UIImage(named: currentWeather.weatherType)
-        dayHighTempLbl.text = "\(currentWeather.highTemp)"
-        dayLowTempLbl.text = "\(currentWeather.lowTemp)"
+        dayHighTempLbl.text = "\(Int(currentWeather.highTemp))"
+        dayLowTempLbl.text = "\(Int(currentWeather.lowTemp))"
     }
     
     
