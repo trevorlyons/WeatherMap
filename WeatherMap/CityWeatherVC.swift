@@ -133,6 +133,7 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return hourlyForecasts.count
+        
     }
     
 

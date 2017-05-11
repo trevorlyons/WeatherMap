@@ -21,6 +21,9 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     let locationManager = CLLocationManager()
     var currentLocation: CLLocation!
     var mapHasCenteredOnce = false
+    var mapUrl: String!
+    var mapAnnnotation: MapAnnotation!
+    var mapAnnotations = [MapAnnotation]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,13 +50,8 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
             Location.sharedInstance.latitude = currentLocation.coordinate.latitude
             Location.sharedInstance.longitude = currentLocation.coordinate.longitude
             
-//            currentWeather.downloadWeatherDetails {
-//                
-//                self.downloadForecastData {
-//                    
-//                    self.updateMainUI()
-//                }
-//            }
+            //Old location for download weather API
+            
         } else {
             locationManager.requestWhenInUseAuthorization()
             locationAuthStatus()
@@ -79,6 +77,60 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
             }
         }
     }
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        let allAnnotations = self.mapView.annotations
+        self.mapView.removeAnnotations(allAnnotations)
+        
+        let latitudeDelta = mapView.region.span.latitudeDelta
+        let longitudeDelta = mapView.region.span.longitudeDelta
+        let centerCoordLat = mapView.centerCoordinate.latitude
+        let centerCoordLong = mapView.centerCoordinate.longitude
+        
+        Location.sharedInstance.lowerLeftLatitude = (centerCoordLat - (latitudeDelta/2.0))
+        Location.sharedInstance.lowerLeftLongitude = (centerCoordLong - (longitudeDelta/2.0))
+        Location.sharedInstance.upperRightLatitude = (centerCoordLat + (latitudeDelta/2.0))
+        Location.sharedInstance.upperRightLongitude = (centerCoordLong + (longitudeDelta/2.0))
+        
+        self.mapUrl = "http://api.openweathermap.org/data/2.5/box/city?bbox=\(Location.sharedInstance.lowerLeftLongitude!),\(Location.sharedInstance.lowerLeftLatitude!),\(Location.sharedInstance.upperRightLongitude!),\(Location.sharedInstance.upperRightLatitude!),8&appid=***REMOVED***"
+
+        downloadMapWeatherApi {
+            
+            annotate()
+            self.mapAnnotations = []
+        }
+        
+        
+    }
+    
+    func downloadMapWeatherApi(completed: DownloadComplete) {
+        Alamofire.request(self.mapUrl).responseJSON { response in
+            let result = response.result
+            if let dict = result.value as? Dictionary<String, AnyObject> {
+                if let list = dict["list"] as? [Dictionary<String, AnyObject>] {
+                    
+                    for obj in list {
+                        let annotation = MapAnnotation(locationDict: obj)
+                        self.mapAnnotations.append(annotation)
+                    }
+                }
+            }
+        }
+        completed()
+    }
+    
+    
+    func annotate() {
+        for location in self.mapAnnotations {
+            let annotation = MKPointAnnotation()
+            annotation.title = location.cityName
+            annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+            mapView.addAnnotation(annotation)
+        }
+    }
+    
+    
+    
     
     
     

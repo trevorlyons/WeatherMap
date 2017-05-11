@@ -1,5 +1,5 @@
 //
-//  Location.swift
+//  ScreenRectCoords.swift
 //  WeatherMap
 //
 //  Created by Trevor Lyons on 2017-05-11.
@@ -7,20 +7,13 @@
 //
 
 import Foundation
-import CoreLocation
 
-class Location {
+class ScreenRectCoords {
     
-    static var sharedInstance = Location()
-    private init() {}
-    
-    var latitude: Double!
-    var longitude: Double!
-
     var upperRightLatitude: Double!
     var upperRightLongitude: Double!
     var lowerLeftLatitude: Double!
     var lowerLeftLongitude: Double!
     
-
+    
 }
