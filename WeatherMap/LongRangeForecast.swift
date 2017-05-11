@@ -12,6 +12,7 @@ import Alamofire
 class LongRangeForecast {
     
     private var _weatherDesc: String!
+    private var _weatherType: String!
     private var _date: String!
     private var _precip: Double!
     private var _clouds: Double!
@@ -23,6 +24,13 @@ class LongRangeForecast {
             _weatherDesc = ""
         }
         return _weatherDesc
+    }
+    
+    var weatherType: String {
+        if _weatherType == nil {
+            _weatherType = ""
+        }
+        return _weatherType
     }
     
     var date: String {
@@ -63,7 +71,10 @@ class LongRangeForecast {
     init(longWeatherDict: Dictionary<String, AnyObject>) {
         
         if let icon = longWeatherDict["icon"] as? String {
-            self._weatherDesc = icon
+            self._weatherType = icon
+        }
+        if let summary = longWeatherDict["summary"] as? String {
+            self._weatherDesc = summary
         }
         if let date = longWeatherDict["time"] as? Double {
             let unixConvertedDate = Date(timeIntervalSince1970: date)

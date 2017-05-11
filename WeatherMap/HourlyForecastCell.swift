@@ -16,8 +16,8 @@ class HourlyForecastCell: UICollectionViewCell {
     
     func configureCell(hourlyForecast: HourlyForecast) {
         hourLbl.text = hourlyForecast.time
-        //currentWeatherImg.image = UIImage(named: hourlyForecast.weatherDesc)
-        currentTempLbl.text = "\(Int(hourlyForecast.temp))"
+        currentWeatherImg.image = UIImage(named: hourlyForecast.weatherDesc)
+        currentTempLbl.text = "\(Int(hourlyForecast.temp))°"
     }
     
 }

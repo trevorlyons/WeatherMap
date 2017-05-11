@@ -72,8 +72,7 @@ class CurrentWeather {
         }
         return _weatherDesc
     }
-
-    
+        
     
     func downloadWeatherDetails(completed: @escaping DownloadComplete) {
         let currentWeatherUrl = URL(string: CURRENT_WEATHER_URL)!
@@ -110,6 +109,7 @@ class CurrentWeather {
                         }
                     }
                 }
+                
                 
             }
             completed()
