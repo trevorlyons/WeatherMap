@@ -35,7 +35,6 @@
                                                 <state key="normal" image="Search"/>
                                                 <connections>
                                                     <action selector="searchBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="68S-hk-26B"/>
-                                                    <segue destination="DP8-Ry-I28" kind="presentation" identifier="selectedCity" modalPresentationStyle="overCurrentContext" id="8Wb-oz-EY4"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wq5-GD-gee">
@@ -116,11 +115,12 @@
                     </view>
                     <connections>
                         <outlet property="mapView" destination="oao-x0-zHs" id="pbp-ge-9iE"/>
+                        <segue destination="DP8-Ry-I28" kind="presentation" identifier="selectedCity" modalPresentationStyle="overCurrentContext" id="HaH-6G-M3F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="129.98500749625188"/>
+            <point key="canvasLocation" x="-126" y="124"/>
         </scene>
         <!--SettingsVC-->
         <scene sceneID="F6D-TE-Ded">
@@ -388,7 +388,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AoD-m8-l25" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="944.79999999999995" y="524.8875562218891"/>
+            <point key="canvasLocation" x="664" y="618"/>
         </scene>
         <!--City WeatherVC-->
         <scene sceneID="eye-Z6-YNE">
@@ -465,15 +465,15 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="R2M-dq-AF2">
-                                                                <rect key="frame" x="166.5" y="1" width="76" height="76"/>
+                                                                <rect key="frame" x="164.5" y="1" width="80" height="76"/>
                                                                 <subviews>
                                                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w5d-lC-SR0">
-                                                                        <rect key="frame" x="11" y="0.0" width="53.5" height="75"/>
+                                                                        <rect key="frame" x="2" y="0.0" width="75" height="75"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     </imageView>
                                                                 </subviews>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="76" id="N65-c6-JL2"/>
+                                                                    <constraint firstAttribute="width" constant="80" id="N65-c6-JL2"/>
                                                                     <constraint firstAttribute="height" constant="76" id="uPg-1c-WPa"/>
                                                                 </constraints>
                                                             </view>
@@ -621,15 +621,14 @@
                                                                                 <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="YqG-MF-403">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                                                     <subviews>
-                                                                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yej-Od-V0k">
+                                                                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yej-Od-V0k">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                         </imageView>
                                                                                     </subviews>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="30" id="AT1-FT-zqu"/>
                                                                                         <constraint firstAttribute="height" constant="30" id="GjU-oK-Xq5"/>
-                                                                                        <constraint firstItem="Yej-Od-V0k" firstAttribute="centerY" secondItem="YqG-MF-403" secondAttribute="centerY" id="SeQ-W3-J7d"/>
-                                                                                        <constraint firstItem="Yej-Od-V0k" firstAttribute="centerX" secondItem="YqG-MF-403" secondAttribute="centerX" id="pFn-5Q-8mJ"/>
                                                                                     </constraints>
                                                                                 </view>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="7tT-Ou-7ve">
@@ -794,7 +793,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GAf-bg-9Pr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="944.79999999999995" y="-246.47676161919043"/>
+            <point key="canvasLocation" x="664" y="-226"/>
         </scene>
     </scenes>
     <resources>

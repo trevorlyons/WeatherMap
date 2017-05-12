@@ -24,6 +24,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     var mapUrl: String!
     var mapAnnnotation: MapAnnotation!
     var mapAnnotations = [MapAnnotation]()
+    //var currentWeather: CurrentWeather!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +80,12 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        print("Zoom: \(mapView.getZoomLevel())")
+        if mapView.getZoomLevel() > 6 {
+            mapView.setCenter(coordinate: mapView.centerCoordinate, zoomLevel: 8, animated: true)
+        }
+        
+        
         let allAnnotations = self.mapView.annotations
         self.mapView.removeAnnotations(allAnnotations)
         
@@ -92,7 +99,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         Location.sharedInstance.upperRightLatitude = (centerCoordLat + (latitudeDelta/2.0))
         Location.sharedInstance.upperRightLongitude = (centerCoordLong + (longitudeDelta/2.0))
         
-        self.mapUrl = "http://api.openweathermap.org/data/2.5/box/city?bbox=\(Location.sharedInstance.lowerLeftLongitude!),\(Location.sharedInstance.lowerLeftLatitude!),\(Location.sharedInstance.upperRightLongitude!),\(Location.sharedInstance.upperRightLatitude!),8&appid=d9edbc6106170dc5ca87733c4b46128d"
+        self.mapUrl = "http://api.openweathermap.org/data/2.5/box/city?bbox=\(Location.sharedInstance.lowerLeftLongitude!),\(Location.sharedInstance.lowerLeftLatitude!),\(Location.sharedInstance.upperRightLongitude!),\(Location.sharedInstance.upperRightLatitude!),9&appid=d9edbc6106170dc5ca87733c4b46128d"
 
         downloadMapWeatherApi {
             
@@ -100,6 +107,24 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
             self.mapAnnotations = []
         }
         
+        
+    }
+    
+//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//        if annotation is MKUserLocation {
+//            return nil
+//        }
+//        return MKAnnotationView
+//    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+
+        let test = SegueData(cityName: ((view.annotation?.title)!)!, temperature: ((view.annotation?.subtitle)!)!, latitude: (view.annotation?.coordinate.latitude)!, longitude: (view.annotation?.coordinate.longitude)!)
+        performSegue(withIdentifier: "selectedCity", sender: test)
         
     }
     
@@ -124,6 +149,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         for location in self.mapAnnotations {
             let annotation = MKPointAnnotation()
             annotation.title = location.cityName
+            annotation.subtitle = "\(Int(location.temperature))°"
             annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
             mapView.addAnnotation(annotation)
         }
@@ -141,6 +167,10 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
             controller.modalPresentationStyle = .custom
             
         } else if let controller = segue.destination as? CityWeatherVC {
+            
+            if let x = sender as? SegueData {
+                controller.segueData = x
+            }
             
             slideInTransitioningDelegate.direction = .bottom
             controller.transitioningDelegate = slideInTransitioningDelegate
