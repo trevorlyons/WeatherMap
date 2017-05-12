@@ -27,6 +27,15 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     var hourlyForecast: HourlyForecast!
     var hourlyForecasts = [HourlyForecast]()
     
+    private var _segueData: SegueData!
+    var segueData: SegueData {
+        get {
+            return _segueData
+        } set {
+            _segueData = newValue
+        }
+    }
+    
     
     
     override func viewDidLoad() {
@@ -39,8 +48,6 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         
         currentWeather = CurrentWeather()
-
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -56,7 +63,7 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
 
     func downloadApiData(completed: DownloadComplete) {
         
-        let currentWeatherUrl = URL(string: CURRENT_WEATHER_URL)!
+        let currentWeatherUrl = URL(string: "\(darkSkyUrl)\(segueData.latitude),\(segueData.longitude)?units=si")!
         Alamofire.request(currentWeatherUrl).responseJSON { response in
             let result = response.result
             
@@ -138,8 +145,9 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
 
     func updateCurrentWeatherUI() {
+        cityNameLbl.text = segueData.cityName
         dateLbl.text = currentWeather.date
-        currentTempLbl.text = "\(Int(currentWeather.currentTemp))°"
+        currentTempLbl.text = segueData.temperature
         currentWeatherType.text = currentWeather.weatherDesc
         currentWeatherImg.image = UIImage(named: "\(currentWeather.weatherType)L")
         dayHighTempLbl.text = "\(Int(currentWeather.highTemp))"

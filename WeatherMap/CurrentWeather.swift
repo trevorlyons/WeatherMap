@@ -11,7 +11,6 @@ import Alamofire
 
 class CurrentWeather {
     
-    private var _cityName: String!
     private var _currentTemp: Double!
     private var _date: String!
     private var _weatherType: String!
@@ -19,12 +18,6 @@ class CurrentWeather {
     private var _lowTemp: Double!
     private var _weatherDesc: String!
     
-    var cityName: String {
-        if _cityName == nil {
-            _cityName = ""
-        }
-        return _cityName
-    }
     
     var currentTemp: Double {
         if _currentTemp == nil {
@@ -72,7 +65,8 @@ class CurrentWeather {
         }
         return _weatherDesc
     }
-        
+    
+    
     
     func downloadWeatherDetails(completed: @escaping DownloadComplete) {
         let currentWeatherUrl = URL(string: CURRENT_WEATHER_URL)!
