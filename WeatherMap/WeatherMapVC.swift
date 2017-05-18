@@ -24,7 +24,6 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     var mapUrl: String!
     var mapAnnnotation: MapAnnotation!
     var mapAnnotations = [MapAnnotation]()
-    //var currentWeather: CurrentWeather!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,7 +81,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         print("Zoom: \(mapView.getZoomLevel())")
         if mapView.getZoomLevel() > 6 {
-            mapView.setCenter(coordinate: mapView.centerCoordinate, zoomLevel: 8, animated: true)
+            //mapView.setCenter(coordinate: mapView.centerCoordinate, zoomLevel: 8, animated: true)
         }
         
         
@@ -99,7 +98,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         Location.sharedInstance.upperRightLatitude = (centerCoordLat + (latitudeDelta/2.0))
         Location.sharedInstance.upperRightLongitude = (centerCoordLong + (longitudeDelta/2.0))
         
-        self.mapUrl = "http://api.openweathermap.org/data/2.5/box/city?bbox=\(Location.sharedInstance.lowerLeftLongitude!),\(Location.sharedInstance.lowerLeftLatitude!),\(Location.sharedInstance.upperRightLongitude!),\(Location.sharedInstance.upperRightLatitude!),9&appid=***REMOVED***"
+        self.mapUrl = "http://api.openweathermap.org/data/2.5/box/city?bbox=\(Location.sharedInstance.lowerLeftLongitude!),\(Location.sharedInstance.lowerLeftLatitude!),\(Location.sharedInstance.upperRightLongitude!),\(Location.sharedInstance.upperRightLatitude!),20&appid=***REMOVED***"
 
         downloadMapWeatherApi {
             
@@ -110,12 +109,24 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         
     }
     
-//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//        if annotation is MKUserLocation {
-//            return nil
-//        }
-//        return MKAnnotationView
-//    }
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            return nil
+        }
+        let reuseID = "location"
+        var av = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID)
+        
+        if av != nil {
+            av?.annotation = annotation
+        } else {
+            //let customAnno = Bundle.main.loadNibNamed("AnnotationView", owner: self, options: nil)
+            av = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
+            av?.image = UIImage(named:"location")
+            
+            //av?.addSubview(customAnno)
+        }
+        return av
+    }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
@@ -123,8 +134,8 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
 
-        let test = SegueData(cityName: ((view.annotation?.title)!)!, temperature: ((view.annotation?.subtitle)!)!, latitude: (view.annotation?.coordinate.latitude)!, longitude: (view.annotation?.coordinate.longitude)!)
-        performSegue(withIdentifier: "selectedCity", sender: test)
+        let send = SegueData(cityName: ((view.annotation?.title)!)!, temperature: ((view.annotation?.subtitle)!)!, latitude: (view.annotation?.coordinate.latitude)!, longitude: (view.annotation?.coordinate.longitude)!)
+        performSegue(withIdentifier: "selectedCity", sender: send)
         
     }
     

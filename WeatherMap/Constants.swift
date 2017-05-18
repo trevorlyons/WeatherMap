@@ -10,6 +10,8 @@ import Foundation
 
 typealias DownloadComplete = () -> ()
 
+typealias JSONDictionary = [String:Any]
+
 let darkSkyUrl = "https://api.darksky.net/forecast/***REMOVED***/"
 let seperator = ","
 
