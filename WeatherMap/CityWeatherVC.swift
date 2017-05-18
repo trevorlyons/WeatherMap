@@ -27,6 +27,7 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     var hourlyForecast: HourlyForecast!
     var hourlyForecasts = [HourlyForecast]()
     
+    
     private var _segueData: SegueData!
     var segueData: SegueData {
         get {
@@ -45,19 +46,14 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         tableView.dataSource = self
         collectionView.delegate = self
         collectionView.dataSource = self
-        
-        
-        currentWeather = CurrentWeather()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        currentWeather.downloadWeatherDetails {
-            self.downloadApiData {
-                self.updateCurrentWeatherUI()
-            }
-            
+        
+        downloadApiData {
+            //self.updateCurrentWeatherUI()
         }
     }
 
@@ -66,6 +62,11 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         let currentWeatherUrl = URL(string: "\(darkSkyUrl)\(segueData.latitude),\(segueData.longitude)?units=si")!
         Alamofire.request(currentWeatherUrl).responseJSON { response in
             let result = response.result
+            
+            if let array = result.value as? JSONDictionary {
+                let current = CurrentWeather(currentDict: array)
+                self.updateCurrentWeatherUI(currentWeather: current)
+            }
             
             if let dict = result.value as? Dictionary<String, AnyObject> {
                 
@@ -144,10 +145,10 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
 
-    func updateCurrentWeatherUI() {
+    func updateCurrentWeatherUI(currentWeather: CurrentWeather) {
         cityNameLbl.text = segueData.cityName
         dateLbl.text = currentWeather.date
-        currentTempLbl.text = segueData.temperature
+        currentTempLbl.text = "\(Int(currentWeather.currentTemp))°"
         currentWeatherType.text = currentWeather.weatherDesc
         currentWeatherImg.image = UIImage(named: "\(currentWeather.weatherType)L")
         dayHighTempLbl.text = "\(Int(currentWeather.highTemp))"
