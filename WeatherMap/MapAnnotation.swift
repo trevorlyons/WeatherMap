@@ -14,6 +14,7 @@ class MapAnnotation {
     private var _longitude: Double!
     private var _cityName: String!
     private var _temperature: Double!
+    private var _weatherType: String!
     
     var latitude: Double {
         if _latitude == nil {
@@ -43,6 +44,13 @@ class MapAnnotation {
         return _temperature
     }
     
+    var weatherType: String {
+        if _weatherType == nil {
+            _weatherType = ""
+        }
+        return _weatherType
+    }
+    
     init(locationDict: Dictionary<String, AnyObject>) {
         if let coord = locationDict["coord"] as? Dictionary<String, AnyObject> {
             if let Lat = coord["Lat"] as? Double {
@@ -58,6 +66,11 @@ class MapAnnotation {
         if let main = locationDict["main"] as? Dictionary<String, AnyObject> {
             if let temp = main["temp"] as? Double {
                 self._temperature = temp
+            }
+        }
+        if let weather = locationDict["weather"] as? [Dictionary<String, AnyObject>] {
+            if let icon = weather[0]["icon"] as? String {
+                self._weatherType = icon
             }
         }
     }

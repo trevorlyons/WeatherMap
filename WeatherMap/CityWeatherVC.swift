@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import os.log
 
 class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
 
@@ -155,11 +156,28 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         dayLowTempLbl.text = "\(Int(currentWeather.lowTemp))"
     }
     
+    func saveFavouritesData() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(Singleton.sharedInstance.favouritesArray, toFile: Favourites.ArchiveURL.path)
+        if isSuccessfulSave {
+            os_log("Meals successfully saved.", log: OSLog.default, type: .debug)
+        } else {
+            os_log("Failed to save meals...", log: OSLog.default, type: .error)
+        }
+    }
+    
     
     
     @IBAction func backButtonPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
 
+    @IBAction func favouritesButtonPressed(_ sender: Any) {
+        
+        let favs = Favourites(cityName: segueData.cityName, latitude: segueData.latitude, longitude: segueData.longitude)
+        Singleton.sharedInstance.favouritesArray.append(favs)
+        saveFavouritesData()
+        
+        
+    }
 
 }

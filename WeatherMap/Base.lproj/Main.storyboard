@@ -24,7 +24,7 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="oao-x0-zHs">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </mapView>
-                            <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Al-M5-Jn6">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Al-M5-Jn6">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleAspectFit" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="2bz-t6-511">
@@ -70,7 +70,7 @@
                                     <constraint firstAttribute="height" constant="60" id="kAa-z2-Kc5"/>
                                 </constraints>
                             </view>
-                            <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EVN-gq-LLQ">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EVN-gq-LLQ">
                                 <rect key="frame" x="0.0" y="627" width="375" height="40"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" alignment="center" spacing="-2" translatesAutoresizingMaskIntoConstraints="NO" id="kPA-J4-K49">
@@ -90,9 +90,17 @@
                                             </label>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xOJ-bL-BJt">
+                                        <rect key="frame" x="16" y="8.5" width="23" height="22"/>
+                                        <state key="normal" image="Star"/>
+                                        <connections>
+                                            <segue destination="x8W-Xa-fpW" kind="presentation" id="Rwo-HL-Db2"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.28627450980000002" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="xOJ-bL-BJt" firstAttribute="centerY" secondItem="EVN-gq-LLQ" secondAttribute="centerY" id="2bO-Zg-2v2"/>
                                     <constraint firstItem="kPA-J4-K49" firstAttribute="centerY" secondItem="EVN-gq-LLQ" secondAttribute="centerY" id="Ioz-Rj-47S"/>
                                     <constraint firstAttribute="height" constant="40" id="dlT-yC-CJO"/>
                                     <constraint firstItem="kPA-J4-K49" firstAttribute="centerX" secondItem="EVN-gq-LLQ" secondAttribute="centerX" id="h5E-Tt-2bm"/>
@@ -106,6 +114,7 @@
                             <constraint firstItem="1Al-M5-Jn6" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="9hj-O6-jL1"/>
                             <constraint firstItem="EVN-gq-LLQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="A3u-C8-Ozp"/>
                             <constraint firstItem="oao-x0-zHs" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="B6C-8k-sh1"/>
+                            <constraint firstItem="xOJ-bL-BJt" firstAttribute="centerX" secondItem="ZzG-XE-Q65" secondAttribute="centerX" id="OoG-UG-hL4"/>
                             <constraint firstAttribute="trailing" secondItem="oao-x0-zHs" secondAttribute="trailing" id="Wfp-j8-eHQ"/>
                             <constraint firstAttribute="trailing" secondItem="EVN-gq-LLQ" secondAttribute="trailing" id="owp-ub-AYR"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="EVN-gq-LLQ" secondAttribute="bottom" id="qOg-3Z-jac"/>
@@ -120,7 +129,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-126" y="124"/>
+            <point key="canvasLocation" x="-127.2" y="123.68815592203899"/>
         </scene>
         <!--SettingsVC-->
         <scene sceneID="F6D-TE-Ded">
@@ -424,14 +433,23 @@
                                             <action selector="backButtonPressed:" destination="DP8-Ry-I28" eventType="touchUpInside" id="nM1-79-EuX"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VvP-5l-DRT">
+                                        <rect key="frame" x="327" y="9" width="23" height="22"/>
+                                        <state key="normal" image="Star"/>
+                                        <connections>
+                                            <action selector="favouritesButtonPressed:" destination="DP8-Ry-I28" eventType="touchUpInside" id="1TJ-ZR-Qwh"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.28627450980000002" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="k29-2P-Uby" firstAttribute="centerY" secondItem="XkB-bc-mGa" secondAttribute="centerY" id="7iY-fg-dQV"/>
+                                    <constraint firstItem="VvP-5l-DRT" firstAttribute="centerY" secondItem="XkB-bc-mGa" secondAttribute="centerY" id="A1u-hF-S7O"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="LfB-jQ-p66"/>
                                     <constraint firstItem="Zn0-Zc-U3O" firstAttribute="centerY" secondItem="XkB-bc-mGa" secondAttribute="centerY" id="W2T-KQ-pnz"/>
                                     <constraint firstItem="k29-2P-Uby" firstAttribute="leading" secondItem="XkB-bc-mGa" secondAttribute="leading" constant="25" id="XQu-0S-u8n"/>
                                     <constraint firstAttribute="height" constant="40" id="Xjr-sr-b39"/>
+                                    <constraint firstAttribute="trailing" secondItem="VvP-5l-DRT" secondAttribute="trailing" constant="25" id="Yf8-eC-snf"/>
                                     <constraint firstItem="Zn0-Zc-U3O" firstAttribute="centerX" secondItem="XkB-bc-mGa" secondAttribute="centerX" id="df0-to-oYY"/>
                                 </constraints>
                             </view>
@@ -795,11 +813,115 @@
             </objects>
             <point key="canvasLocation" x="664" y="-226"/>
         </scene>
+        <!--FavouritesVC-->
+        <scene sceneID="0bj-XC-OkE">
+            <objects>
+                <viewController id="x8W-Xa-fpW" customClass="FavouritesVC" customModule="WeatherMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MsB-ok-21L"/>
+                        <viewControllerLayoutGuide type="bottom" id="XVv-b7-d7w"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Rb3-Hn-UCE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tvT-17-6fB" userLabel="Header">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saved Cities" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GRJ-Zn-YXs">
+                                        <rect key="frame" x="136.5" y="8" width="102" height="25"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oRc-hn-uu7">
+                                        <rect key="frame" x="25" y="9" width="28" height="22"/>
+                                        <state key="normal" image="Down Arrow">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="backButtonPressed:" destination="DP8-Ry-I28" eventType="touchUpInside" id="REh-bV-oHj"/>
+                                            <action selector="backButtonPressed:" destination="x8W-Xa-fpW" eventType="touchUpInside" id="qbt-L6-Mjs"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.28627450980000002" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="oRc-hn-uu7" firstAttribute="centerY" secondItem="tvT-17-6fB" secondAttribute="centerY" id="C24-w0-ZIp"/>
+                                    <constraint firstItem="oRc-hn-uu7" firstAttribute="leading" secondItem="tvT-17-6fB" secondAttribute="leading" constant="25" id="Rw4-ya-x9G"/>
+                                    <constraint firstItem="GRJ-Zn-YXs" firstAttribute="centerY" secondItem="tvT-17-6fB" secondAttribute="centerY" id="WJW-1z-igx"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="eiD-XS-9sv"/>
+                                    <constraint firstItem="GRJ-Zn-YXs" firstAttribute="centerX" secondItem="tvT-17-6fB" secondAttribute="centerX" id="hEP-zV-dqc"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="kyL-rB-dL6"/>
+                                    <constraint firstAttribute="height" constant="40" id="xnI-f8-UUO"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BEa-QR-d8Y">
+                                <rect key="frame" x="0.0" y="50" width="375" height="617"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.88235294119999996" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="sectionIndexBackgroundColor" red="0.80000000000000004" green="0.88235294119999996" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="favouritesCell" id="ph4-z6-Neu" customClass="FavouritesCell" customModule="WeatherMap" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ph4-z6-Neu" id="lVK-gg-dLo">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iDl-b1-81B">
+                                                    <rect key="frame" x="44" y="3" width="83" height="36"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                                    <state key="normal" title="City Name">
+                                                        <color key="titleColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="cityNameBtnPressed:" destination="ph4-z6-Neu" eventType="touchUpInside" id="bqN-jV-WJt"/>
+                                                        <segue destination="DP8-Ry-I28" kind="presentation" id="HMt-E6-uGq"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.80000000000000004" green="0.88235294119999996" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="iDl-b1-81B" firstAttribute="leading" secondItem="lVK-gg-dLo" secondAttribute="leading" constant="44" id="0FE-h5-2Hx"/>
+                                                <constraint firstItem="iDl-b1-81B" firstAttribute="centerY" secondItem="lVK-gg-dLo" secondAttribute="centerY" id="UI6-EJ-KfM"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.80000000000000004" green="0.88235294119999996" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="cityNameButtonLbl" destination="iDl-b1-81B" id="idW-Em-RaS"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.80000000000000004" green="0.88235294119999996" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="BEa-QR-d8Y" secondAttribute="trailing" id="Ejw-3E-Hef"/>
+                            <constraint firstItem="BEa-QR-d8Y" firstAttribute="top" secondItem="tvT-17-6fB" secondAttribute="bottom" constant="10" id="G0f-9H-53T"/>
+                            <constraint firstItem="tvT-17-6fB" firstAttribute="leading" secondItem="Rb3-Hn-UCE" secondAttribute="leading" id="HH6-6F-vBp"/>
+                            <constraint firstItem="XVv-b7-d7w" firstAttribute="top" secondItem="BEa-QR-d8Y" secondAttribute="bottom" id="Tg4-ag-CYV"/>
+                            <constraint firstAttribute="trailing" secondItem="tvT-17-6fB" secondAttribute="trailing" id="aGW-OU-VWA"/>
+                            <constraint firstItem="tvT-17-6fB" firstAttribute="top" secondItem="Rb3-Hn-UCE" secondAttribute="top" id="gAB-UI-PLQ"/>
+                            <constraint firstItem="BEa-QR-d8Y" firstAttribute="leading" secondItem="Rb3-Hn-UCE" secondAttribute="leading" id="uys-TK-4XZ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="BEa-QR-d8Y" id="xSx-06-9q0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KIy-bE-DCS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1464.8" y="182.15892053973016"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Down Arrow" width="28" height="15"/>
         <image name="Right Arrow" width="8" height="14"/>
         <image name="Search" width="25" height="25"/>
         <image name="Settings Cog" width="25" height="25"/>
+        <image name="Star" width="23" height="21"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="HMt-E6-uGq"/>
+    </inferredMetricsTieBreakers>
 </document>
