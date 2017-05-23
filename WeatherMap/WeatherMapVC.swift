@@ -34,6 +34,9 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startMonitoringSignificantLocationChanges()
+        
+        
+        loadFavouritesData()
     
     }
     
@@ -41,6 +44,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         super.viewDidAppear(animated)
         
         locationAuthStatus()
+        
     }
     
     func locationAuthStatus() {
@@ -49,9 +53,6 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
             mapView.showsUserLocation = true
             Location.sharedInstance.latitude = currentLocation.coordinate.latitude
             Location.sharedInstance.longitude = currentLocation.coordinate.longitude
-            
-            //Old location for download weather API
-            
         } else {
             locationManager.requestWhenInUseAuthorization()
             locationAuthStatus()
@@ -79,14 +80,23 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        var apiScale = "9"
+        
         print("Zoom: \(mapView.getZoomLevel())")
-        if mapView.getZoomLevel() > 6 {
-            //mapView.setCenter(coordinate: mapView.centerCoordinate, zoomLevel: 8, animated: true)
+        if mapView.getZoomLevel() < 2 {
+            mapView.setCenter(coordinate: mapView.centerCoordinate, zoomLevel: 2, animated: true)
+            apiScale = "2"
         }
+        else if mapView.getZoomLevel() > 9 {
+            apiScale = "13"
+        }
+        else if mapView.getZoomLevel() >= 10 {
+            mapView.setCenter(coordinate: mapView.centerCoordinate, zoomLevel: 9, animated: true)
+        }
+        print(apiScale)
         
-        
-        let allAnnotations = self.mapView.annotations
-        self.mapView.removeAnnotations(allAnnotations)
+        //let allAnnotations = self.mapView.annotations
+        //self.mapView.removeAnnotations(allAnnotations)
         
         let latitudeDelta = mapView.region.span.latitudeDelta
         let longitudeDelta = mapView.region.span.longitudeDelta
@@ -98,46 +108,44 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         Location.sharedInstance.upperRightLatitude = (centerCoordLat + (latitudeDelta/2.0))
         Location.sharedInstance.upperRightLongitude = (centerCoordLong + (longitudeDelta/2.0))
         
-        self.mapUrl = "http://api.openweathermap.org/data/2.5/box/city?bbox=\(Location.sharedInstance.lowerLeftLongitude!),\(Location.sharedInstance.lowerLeftLatitude!),\(Location.sharedInstance.upperRightLongitude!),\(Location.sharedInstance.upperRightLatitude!),20&appid=d9edbc6106170dc5ca87733c4b46128d"
+        self.mapUrl = "http://api.openweathermap.org/data/2.5/box/city?bbox=\(Location.sharedInstance.lowerLeftLongitude!),\(Location.sharedInstance.lowerLeftLatitude!),\(Location.sharedInstance.upperRightLongitude!),\(Location.sharedInstance.upperRightLatitude!),\(apiScale)&appid=d9edbc6106170dc5ca87733c4b46128d"
 
         downloadMapWeatherApi {
             
             annotate()
             self.mapAnnotations = []
         }
-        
-        
     }
     
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if annotation is MKUserLocation {
-            return nil
-        }
-        let reuseID = "location"
-        var av = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID)
-        
-        if av != nil {
-            av?.annotation = annotation
-        } else {
-            //let customAnno = Bundle.main.loadNibNamed("AnnotationView", owner: self, options: nil)
-            av = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
-            av?.image = UIImage(named:"location")
-            
-            //av?.addSubview(customAnno)
-        }
-        return av
-    }
+    
+//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//        if annotation is MKUserLocation {
+//            return nil
+//        }
+//        let reuseID = "location"
+//        var av = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID)
+//        
+//        if av != nil {
+//            av?.annotation = annotation
+//        } else {
+//            av = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
+//            av?.image = UIImage(named: annotation.subtitle!!)
+//        }
+//        return av
+//    }
+    
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        
+
     }
+    
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
 
         let send = SegueData(cityName: ((view.annotation?.title)!)!, temperature: ((view.annotation?.subtitle)!)!, latitude: (view.annotation?.coordinate.latitude)!, longitude: (view.annotation?.coordinate.longitude)!)
         performSegue(withIdentifier: "selectedCity", sender: send)
-        
     }
+    
     
     func downloadMapWeatherApi(completed: DownloadComplete) {
         Alamofire.request(self.mapUrl).responseJSON { response in
@@ -160,7 +168,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         for location in self.mapAnnotations {
             let annotation = MKPointAnnotation()
             annotation.title = location.cityName
-            annotation.subtitle = "\(Int(location.temperature))°"
+            annotation.subtitle = location.weatherType
             annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
             mapView.addAnnotation(annotation)
         }
@@ -186,6 +194,18 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
             slideInTransitioningDelegate.direction = .bottom
             controller.transitioningDelegate = slideInTransitioningDelegate
             controller.modalPresentationStyle = .custom
+            
+        } else if let controller = segue.destination as? FavouritesVC {
+            slideInTransitioningDelegate.direction = .bottom
+            controller.transitioningDelegate = slideInTransitioningDelegate
+            controller.modalPresentationStyle = .custom
+        }
+    }
+    
+    
+    func loadFavouritesData() {
+        if let favouritesData = NSKeyedUnarchiver.unarchiveObject(withFile: Favourites.ArchiveURL.path) as? [Favourites] {
+            Singleton.sharedInstance.favouritesArray = favouritesData
         }
     }
     

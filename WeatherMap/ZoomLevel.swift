@@ -12,6 +12,7 @@ import MapKit
 fileprivate let MERCATOR_OFFSET: Double = 268435456
 fileprivate let MERCATOR_RADIUS: Double = 85445659.44705395
 
+
 extension MKMapView {
     
     func getZoomLevel() -> Double {
