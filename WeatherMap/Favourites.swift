@@ -24,6 +24,8 @@ class Favourites: NSObject, NSCoding {
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
+        
+        // try using similar method as current weather to avoid errors
         guard
             let cityName = aDecoder.decodeObject(forKey: "cityName") as? String,
             let latitude = aDecoder.decodeDouble(forKey: "latitude") as? Double,

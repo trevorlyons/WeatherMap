@@ -21,12 +21,15 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var currentWeatherType: UILabel!
     @IBOutlet weak var dayHighTempLbl: UILabel!
     @IBOutlet weak var dayLowTempLbl: UILabel!
+    @IBOutlet weak var favouritesBtn: UIButton!
+    
     
     var currentWeather: CurrentWeather!
     var longRangeForecast: LongRangeForecast!
     var longRangeForecasts = [LongRangeForecast]()
     var hourlyForecast: HourlyForecast!
     var hourlyForecasts = [HourlyForecast]()
+    var favourited = false
     
     
     private var _segueData: SegueData!
@@ -47,6 +50,8 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         tableView.dataSource = self
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        setFavouritesIcon()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -145,6 +150,8 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         
     }
     
+    
+    
 
     func updateCurrentWeatherUI(currentWeather: CurrentWeather) {
         cityNameLbl.text = segueData.cityName
@@ -156,12 +163,24 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         dayLowTempLbl.text = "\(Int(currentWeather.lowTemp))"
     }
     
+    
     func saveFavouritesData() {
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(Singleton.sharedInstance.favouritesArray, toFile: Favourites.ArchiveURL.path)
         if isSuccessfulSave {
-            os_log("Meals successfully saved.", log: OSLog.default, type: .debug)
+            os_log("Favourites successfully saved.", log: OSLog.default, type: .debug)
         } else {
-            os_log("Failed to save meals...", log: OSLog.default, type: .error)
+            os_log("Failed to save Favourites...", log: OSLog.default, type: .error)
+        }
+    }
+    
+    
+    func setFavouritesIcon() {
+        let array = Singleton.sharedInstance.favouritesArray
+        for obj in array {
+            if obj.cityName.contains("\(segueData.cityName)") {
+                favourited = true
+                favouritesBtn.setImage(UIImage(named: "star-filled"), for: .normal)
+            }
         }
     }
     
@@ -171,12 +190,28 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         dismiss(animated: true, completion: nil)
     }
 
+    
     @IBAction func favouritesButtonPressed(_ sender: Any) {
-        
         let favs = Favourites(cityName: segueData.cityName, latitude: segueData.latitude, longitude: segueData.longitude)
-        Singleton.sharedInstance.favouritesArray.append(favs)
-        saveFavouritesData()
         
+        if favourited == true {
+            for obj in Singleton.sharedInstance.favouritesArray {
+                if obj.cityName.contains("\(segueData.cityName)") {
+                    if let index = Singleton.sharedInstance.favouritesArray.index(of: obj) {
+                        Singleton.sharedInstance.favouritesArray.remove(at: index)
+                        print("Trevor: remove index")
+                    }
+                }
+            }
+            saveFavouritesData()
+            favourited = false
+            favouritesBtn.setImage(UIImage(named: "Star"), for: .normal)
+        } else {
+            Singleton.sharedInstance.favouritesArray.append(favs)
+            saveFavouritesData()
+            favourited = true
+            favouritesBtn.setImage(UIImage(named: "star-filled"), for: .normal)
+        }
         
     }
 

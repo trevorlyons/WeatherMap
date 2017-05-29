@@ -806,6 +806,7 @@
                         <outlet property="dateLbl" destination="NKQ-Pr-vdA" id="O8c-Q3-eRC"/>
                         <outlet property="dayHighTempLbl" destination="XK3-cr-AvF" id="WiB-fv-lQx"/>
                         <outlet property="dayLowTempLbl" destination="DIs-Dc-eFl" id="PhA-gh-7zR"/>
+                        <outlet property="favouritesBtn" destination="VvP-5l-DRT" id="KBE-t8-by2"/>
                         <outlet property="tableView" destination="H88-WK-gC7" id="xVL-4H-7RK"/>
                     </connections>
                 </viewController>
