@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -107,6 +107,30 @@
                                     <constraint firstItem="kPA-J4-K49" firstAttribute="centerX" secondItem="EVN-gq-LLQ" secondAttribute="centerX" id="h5E-Tt-2bm"/>
                                 </constraints>
                             </view>
+                            <searchBar contentMode="redraw" barStyle="black" searchBarStyle="minimal" placeholder="Search by city name" translatesAutoresizingMaskIntoConstraints="NO" id="LoF-MU-BfP">
+                                <rect key="frame" x="0.0" y="60" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="gnj-aW-vhl"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vp1-3h-Blr">
+                                <rect key="frame" x="16" y="104" width="343" height="150"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="8Ca-82-ljN"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" id="MVl-mb-iKq">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MVl-mb-iKq" id="qZ9-St-jEb">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -115,16 +139,24 @@
                             <constraint firstItem="1Al-M5-Jn6" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="9hj-O6-jL1"/>
                             <constraint firstItem="EVN-gq-LLQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="A3u-C8-Ozp"/>
                             <constraint firstItem="oao-x0-zHs" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="B6C-8k-sh1"/>
+                            <constraint firstItem="Vp1-3h-Blr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="CdI-B3-DMX"/>
+                            <constraint firstItem="Vp1-3h-Blr" firstAttribute="top" secondItem="LoF-MU-BfP" secondAttribute="bottom" id="Iu8-gb-4ac"/>
                             <constraint firstItem="xOJ-bL-BJt" firstAttribute="centerX" secondItem="ZzG-XE-Q65" secondAttribute="centerX" id="OoG-UG-hL4"/>
                             <constraint firstAttribute="trailing" secondItem="oao-x0-zHs" secondAttribute="trailing" id="Wfp-j8-eHQ"/>
+                            <constraint firstItem="Vp1-3h-Blr" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="ebd-6W-sIF"/>
+                            <constraint firstAttribute="trailing" secondItem="LoF-MU-BfP" secondAttribute="trailing" id="oQN-o8-tcg"/>
                             <constraint firstAttribute="trailing" secondItem="EVN-gq-LLQ" secondAttribute="trailing" id="owp-ub-AYR"/>
+                            <constraint firstItem="LoF-MU-BfP" firstAttribute="top" secondItem="1Al-M5-Jn6" secondAttribute="bottom" id="pns-Ws-XaF"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="EVN-gq-LLQ" secondAttribute="bottom" id="qOg-3Z-jac"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="oao-x0-zHs" secondAttribute="bottom" id="tHX-Do-poM"/>
                             <constraint firstAttribute="trailing" secondItem="1Al-M5-Jn6" secondAttribute="trailing" id="tez-8d-Thx"/>
+                            <constraint firstItem="LoF-MU-BfP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="xMw-gF-7qJ"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="oao-x0-zHs" id="pbp-ge-9iE"/>
+                        <outlet property="searchBar" destination="LoF-MU-BfP" id="fLz-QL-kao"/>
+                        <outlet property="tableView" destination="Vp1-3h-Blr" id="nC4-ao-C4N"/>
                         <segue destination="DP8-Ry-I28" kind="presentation" identifier="selectedCity" modalPresentationStyle="overCurrentContext" id="HaH-6G-M3F"/>
                     </connections>
                 </viewController>
@@ -922,6 +954,6 @@
         <image name="Star" width="23" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Bcs-JS-6t0"/>
+        <segue reference="HaH-6G-M3F"/>
     </inferredMetricsTieBreakers>
 </document>

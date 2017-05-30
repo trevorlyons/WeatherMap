@@ -11,10 +11,11 @@ import MapKit
 import Alamofire
 import CoreLocation
 
-class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
-    
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var tableView: UITableView!
     
     lazy var slideInTransitioningDelegate = SlideInPresentationManager()
     
@@ -24,11 +25,17 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     var mapUrl: String!
     var mapAnnnotation: MapAnnotation!
     var mapAnnotations = [MapAnnotation]()
+    var matchingItems = [MKMapItem]()
+    var selectedPin: MKPlacemark? = nil
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         mapView.delegate = self
+        searchBar.delegate = self
+        tableView.dataSource = self
+        tableView.delegate = self
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -37,6 +44,8 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         
         
         loadFavouritesData()
+        searchBar.isHidden = true
+        tableView.isHidden = true
     
     }
     
@@ -176,6 +185,64 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     
     
     
+    // Search TableView
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath) as UITableViewCell
+        let selectedItem = matchingItems[indexPath.row].placemark
+        cell.textLabel?.text = selectedItem.name
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return matchingItems.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedItem = matchingItems[indexPath.row].placemark
+        dropPinZoomIn(placemark: selectedItem)
+        tableView.isHidden = true
+        searchBar.isHidden = true
+        searchBar.text = ""
+    }
+    
+    
+    // SearchBar
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        tableView.isHidden = false
+        
+        guard
+            let mapView = mapView,
+            let searchBarText = searchBar.text
+            else { return }
+        let request = MKLocalSearchRequest()
+        request.naturalLanguageQuery = searchBarText
+        request.region = mapView.region
+        let search = MKLocalSearch(request: request)
+        search.start { response, _ in
+            guard let response = response else { return }
+            self.matchingItems = response.mapItems
+            self.tableView.reloadData()
+        }
+    }
+    
+    
+    func dropPinZoomIn(placemark:MKPlacemark){
+        // cache the pin
+        selectedPin = placemark
+        // clear existing pins
+        mapView.removeAnnotations(mapView.annotations)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = placemark.coordinate
+        annotation.title = placemark.name
+        if let city = placemark.locality,
+            let state = placemark.administrativeArea {
+            annotation.subtitle = "\(city) \(state)"
+        }
+        mapView.addAnnotation(annotation)
+        let span = MKCoordinateSpanMake(1.0, 1.0)
+        let region = MKCoordinateRegionMake(placemark.coordinate, span)
+        mapView.setRegion(region, animated: true)
+    }
     
     
     
@@ -219,8 +286,25 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     
 
     @IBAction func searchBtnPressed(_ sender: Any) {
+        if searchBar.isHidden == true {
+            searchBar.isHidden = false
+        } else {
+            searchBar.isHidden = true
+            tableView.isHidden = true
+        }
     }
     
     
+}
+
+
+extension FavouritesVC {
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+//        let selectedItem = matchingItems[indexPath.row].placemark
+//        dropPinZoomIn(placemark: selectedItem)
+        
+        // Need protocol on dropPinZoomIn function
+        // Make matching Items array a Singleton to share everywhere
+    }
 }
 
