@@ -142,7 +142,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
 
-        let send = SegueData(cityName: ((view.annotation?.title)!)!, temperature: ((view.annotation?.subtitle)!)!, latitude: (view.annotation?.coordinate.latitude)!, longitude: (view.annotation?.coordinate.longitude)!)
+        let send = SegueData(cityName: ((view.annotation?.title)!)!, latitude: (view.annotation?.coordinate.latitude)!, longitude: (view.annotation?.coordinate.longitude)!)
         performSegue(withIdentifier: "selectedCity", sender: send)
     }
     
@@ -207,6 +207,10 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         if let favouritesData = NSKeyedUnarchiver.unarchiveObject(withFile: Favourites.ArchiveURL.path) as? [Favourites] {
             Singleton.sharedInstance.favouritesArray = favouritesData
         }
+    }
+    
+    
+    @IBAction func unwindToWeatherMapVC(segue: UIStoryboardSegue) {
     }
     
 

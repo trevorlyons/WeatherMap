@@ -91,5 +91,9 @@ private extension SlideInPresentationController {
     
     dynamic func handleTap(recognizer: UITapGestureRecognizer) {
         presentingViewController.dismiss(animated: true)
+        
+        
+        
+        
     }
 }
