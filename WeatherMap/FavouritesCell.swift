@@ -10,14 +10,11 @@ import UIKit
 
 class FavouritesCell: UITableViewCell {
     
-    @IBOutlet weak var cityNameButtonLbl: UIButton!
+
+    @IBOutlet weak var favouritesLbl: UILabel!
 
     
     func configureCell(favourites: Favourites) {
-        cityNameButtonLbl.setTitle(favourites.cityName, for: .normal)
-    }
-    
-    @IBAction func cityNameBtnPressed(_ sender: Any) {
-        
+        favouritesLbl.text = favourites.cityName
     }
 }

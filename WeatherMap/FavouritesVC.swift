@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 class FavouritesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -42,16 +43,43 @@ class FavouritesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         return Singleton.sharedInstance.favouritesArray.count
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cellDict = Singleton.sharedInstance.favouritesArray[indexPath.row]
+        let send = SegueData(cityName: cellDict.cityName, latitude: cellDict.latitude, longitude: cellDict.longitude)
+        self.performSegue(withIdentifier: "favouritesCityWeather", sender: send)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            Singleton.sharedInstance.favouritesArray.remove(at: indexPath.row)
+            self.tableView.reloadData()
+            saveFavouritesData()
+        }
+    }
+    
+    
+    
+    func saveFavouritesData() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(Singleton.sharedInstance.favouritesArray, toFile: Favourites.ArchiveURL.path)
+        if isSuccessfulSave {
+            os_log("Favourites successfully saved.", log: OSLog.default, type: .debug)
+        } else {
+            os_log("Failed to save Favourites...", log: OSLog.default, type: .error)
+        }
+    }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? CityWeatherVC {
+            if let x = sender as? SegueData {
+                controller.segueData = x
+            }
+            
             slideInTransitioningDelegate.direction = .bottom
             controller.transitioningDelegate = slideInTransitioningDelegate
             controller.modalPresentationStyle = .custom
         }
     }
-    
     
     
     

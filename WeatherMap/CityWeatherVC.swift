@@ -187,7 +187,8 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     
     @IBAction func backButtonPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        //dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "unwindToWeatherMapVC", sender: self)
     }
 
     

@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -350,7 +351,7 @@
                                     <constraint firstItem="6vc-dc-lQP" firstAttribute="top" secondItem="6eU-MB-x1C" secondAttribute="top" id="wpm-ea-Q1G"/>
                                 </constraints>
                             </scrollView>
-                            <view opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QgC-rb-BEH" userLabel="Header">
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QgC-rb-BEH" userLabel="Header">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="js4-BV-rVC">
@@ -415,7 +416,7 @@
                                 <rect key="frame" x="0.0" y="40" width="375" height="860"/>
                                 <color key="backgroundColor" red="0.80000000000000004" green="0.88235294119999996" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XkB-bc-mGa" userLabel="Header">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XkB-bc-mGa" userLabel="Header">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zn0-Zc-U3O">
@@ -808,9 +809,11 @@
                         <outlet property="dayLowTempLbl" destination="DIs-Dc-eFl" id="PhA-gh-7zR"/>
                         <outlet property="favouritesBtn" destination="VvP-5l-DRT" id="KBE-t8-by2"/>
                         <outlet property="tableView" destination="H88-WK-gC7" id="xVL-4H-7RK"/>
+                        <segue destination="rHs-uK-iwK" kind="unwind" identifier="unwindToWeatherMapVC" unwindAction="unwindToWeatherMapVCWithSegue:" id="Et8-F0-Ll5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GAf-bg-9Pr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="rHs-uK-iwK" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="664" y="-226"/>
         </scene>
@@ -826,7 +829,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tvT-17-6fB" userLabel="Header">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tvT-17-6fB" userLabel="Header">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saved Cities" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GRJ-Zn-YXs">
@@ -862,34 +865,29 @@
                                 <color key="backgroundColor" red="0.80000000000000004" green="0.88235294119999996" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.80000000000000004" green="0.88235294119999996" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="favouritesCell" id="ph4-z6-Neu" customClass="FavouritesCell" customModule="WeatherMap" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="favouritesCell" id="ph4-z6-Neu" customClass="FavouritesCell" customModule="WeatherMap" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ph4-z6-Neu" id="lVK-gg-dLo">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iDl-b1-81B">
-                                                    <rect key="frame" x="44" y="3" width="83" height="36"/>
-                                                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
-                                                    <state key="normal" title="City Name">
-                                                        <color key="titleColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="cityNameBtnPressed:" destination="ph4-z6-Neu" eventType="touchUpInside" id="bqN-jV-WJt"/>
-                                                        <segue destination="DP8-Ry-I28" kind="presentation" id="HMt-E6-uGq"/>
-                                                    </connections>
-                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tmh-QR-YqU">
+                                                    <rect key="frame" x="52" y="10" width="43" height="23.5"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                                                    <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.80000000000000004" green="0.88235294119999996" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstItem="iDl-b1-81B" firstAttribute="leading" secondItem="lVK-gg-dLo" secondAttribute="leading" constant="44" id="0FE-h5-2Hx"/>
-                                                <constraint firstItem="iDl-b1-81B" firstAttribute="centerY" secondItem="lVK-gg-dLo" secondAttribute="centerY" id="UI6-EJ-KfM"/>
+                                                <constraint firstItem="Tmh-QR-YqU" firstAttribute="centerY" secondItem="lVK-gg-dLo" secondAttribute="centerY" id="VIN-Wm-3Q1"/>
+                                                <constraint firstItem="Tmh-QR-YqU" firstAttribute="leading" secondItem="lVK-gg-dLo" secondAttribute="leadingMargin" constant="44" id="e0A-Gw-VFQ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.80000000000000004" green="0.88235294119999996" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <outlet property="cityNameButtonLbl" destination="iDl-b1-81B" id="idW-Em-RaS"/>
+                                            <outlet property="favouritesLbl" destination="Tmh-QR-YqU" id="NyT-cU-2WL"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -908,6 +906,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="BEa-QR-d8Y" id="xSx-06-9q0"/>
+                        <segue destination="DP8-Ry-I28" kind="presentation" identifier="favouritesCityWeather" animates="NO" modalPresentationStyle="overCurrentContext" id="Bcs-JS-6t0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KIy-bE-DCS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -923,6 +922,6 @@
         <image name="Star" width="23" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="HMt-E6-uGq"/>
+        <segue reference="Bcs-JS-6t0"/>
     </inferredMetricsTieBreakers>
 </document>

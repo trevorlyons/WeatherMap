@@ -11,7 +11,7 @@ import Foundation
 class SegueData {
     
     private var _cityName: String!
-    private var _temperature: String!
+    //private var _temperature: String!
     private var _latitude: Double!
     private var _longitude: Double!
     
@@ -19,9 +19,9 @@ class SegueData {
         return _cityName
     }
     
-    var temperature: String {
-        return _temperature
-    }
+//    var temperature: String {
+//        return _temperature
+//    }
     
     var latitude: Double {
         return _latitude
@@ -32,9 +32,9 @@ class SegueData {
     }
     
     
-    init(cityName: String, temperature: String, latitude: Double, longitude: Double) {
+    init(cityName: String, latitude: Double, longitude: Double) {
         _cityName = cityName
-        _temperature = temperature
+//        _temperature = temperature
         _latitude = latitude
         _longitude = longitude
     }
