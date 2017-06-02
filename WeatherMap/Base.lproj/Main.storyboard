@@ -95,7 +95,7 @@
                                         <rect key="frame" x="16" y="8.5" width="23" height="22"/>
                                         <state key="normal" image="Star"/>
                                         <connections>
-                                            <segue destination="x8W-Xa-fpW" kind="presentation" id="Rwo-HL-Db2"/>
+                                            <action selector="favouritesBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rHs-2J-8Ro"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -158,6 +158,7 @@
                         <outlet property="searchBar" destination="LoF-MU-BfP" id="fLz-QL-kao"/>
                         <outlet property="tableView" destination="Vp1-3h-Blr" id="nC4-ao-C4N"/>
                         <segue destination="DP8-Ry-I28" kind="presentation" identifier="selectedCity" modalPresentationStyle="overCurrentContext" id="HaH-6G-M3F"/>
+                        <segue destination="x8W-Xa-fpW" kind="presentation" identifier="toFavourites" modalPresentationStyle="overCurrentContext" id="n6U-Bg-VFf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -847,7 +848,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GAf-bg-9Pr" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="rHs-uK-iwK" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="664" y="-226"/>
+            <point key="canvasLocation" x="663" y="-285"/>
         </scene>
         <!--FavouritesVC-->
         <scene sceneID="0bj-XC-OkE">
