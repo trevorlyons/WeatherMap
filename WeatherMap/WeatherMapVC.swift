@@ -12,7 +12,7 @@ import Alamofire
 import CoreLocation
 
 
-class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, HandleMapPan {
+class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, HandleMapPan, MKLocalSearchCompleterDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -31,6 +31,10 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     var newPin: Favourites!
     var favouritesVC: FavouritesVC!
     
+    var searchCompleter = MKLocalSearchCompleter()
+    var searchResults = [MKLocalSearchCompletion]()
+    var matchingItem = MKMapItem()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +43,10 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         searchBar.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
+        
+        
+        searchCompleter.delegate = self
+        
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -191,18 +199,47 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     // Search TableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath) as UITableViewCell
-        let selectedItem = matchingItems[indexPath.row].placemark
-        cell.textLabel?.text = selectedItem.name
+        
+        let selectedItem = searchResults[indexPath.row]
+        
+        if selectedItem.subtitle != "" {
+            cell.textLabel?.text = ""
+        } else {
+            cell.textLabel?.text = selectedItem.title
+        }
         return cell
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return matchingItems.count
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+
+        let selectedItem = searchResults[indexPath.row]
+        if selectedItem.subtitle != "" {
+            return 0
+        }
+        return 40
     }
     
+    
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return searchResults.count
+    }
+    
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedItem = matchingItems[indexPath.row].placemark
-        dropPinZoomIn(placemark: selectedItem)
+        
+        let completion = searchResults[indexPath.row]
+        let request = MKLocalSearchRequest(completion: completion)
+        let search = MKLocalSearch(request: request)
+        search.start { response, _ in
+            guard let response = response else { return }
+
+            let selectedItem = response.mapItems[0].placemark
+            self.dropPinZoomIn(placemark: selectedItem)
+        }
         tableView.isHidden = true
         searchBar.isHidden = true
         searchBar.text = ""
@@ -212,21 +249,34 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     // SearchBar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         tableView.isHidden = false
-        
-        guard
-            let mapView = mapView,
-            let searchBarText = searchBar.text
-            else { return }
-        let request = MKLocalSearchRequest()
-        request.naturalLanguageQuery = searchBarText
-        request.region = mapView.region
-        let search = MKLocalSearch(request: request)
-        search.start { response, _ in
-            guard let response = response else { return }
-            self.matchingItems = response.mapItems
+
+        if !searchText.isEmpty {
+            searchCompleter.queryFragment = searchText
+            searchCompleter.filterType = .locationsOnly
+        } else {
+            tableView.isHidden = true
+        }
+    }
+    
+    
+    
+    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        self.searchResults = completer.results
+        DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
+    
+    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
+        
+        print(error.localizedDescription)
+    }
+    
+    
+    
+    
+    
+    
     
     
     func dropPinZoomIn(placemark:MKPlacemark){
@@ -311,6 +361,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         } else {
             searchBar.isHidden = true
             tableView.isHidden = true
+            searchBar.text = ""
         }
     }
     
