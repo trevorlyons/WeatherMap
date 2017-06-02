@@ -9,18 +9,22 @@
 import UIKit
 import os.log
 
+protocol HandleMapPan {
+    func dropPinAndPan(location: Favourites)
+}
+
 class FavouritesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     
     lazy var slideInTransitioningDelegate = SlideInPresentationManager()
+    var mapPanDelegate: HandleMapPan!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
-
     }
     
     
@@ -45,6 +49,7 @@ class FavouritesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cellDict = Singleton.sharedInstance.favouritesArray[indexPath.row]
+        mapPanDelegate!.dropPinAndPan(location: cellDict)
         let send = SegueData(cityName: cellDict.cityName, latitude: cellDict.latitude, longitude: cellDict.longitude)
         self.performSegue(withIdentifier: "favouritesCityWeather", sender: send)
     }
@@ -56,7 +61,6 @@ class FavouritesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             saveFavouritesData()
         }
     }
-    
     
     
     func saveFavouritesData() {

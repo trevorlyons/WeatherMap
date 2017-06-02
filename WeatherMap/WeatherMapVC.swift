@@ -11,7 +11,8 @@ import MapKit
 import Alamofire
 import CoreLocation
 
-class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
+
+class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, HandleMapPan {
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -27,6 +28,8 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     var mapAnnotations = [MapAnnotation]()
     var matchingItems = [MKMapItem]()
     var selectedPin: MKPlacemark? = nil
+    var newPin: Favourites!
+    var favouritesVC: FavouritesVC!
     
     
     override func viewDidLoad() {
@@ -234,10 +237,10 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         let annotation = MKPointAnnotation()
         annotation.coordinate = placemark.coordinate
         annotation.title = placemark.name
-        if let city = placemark.locality,
-            let state = placemark.administrativeArea {
-            annotation.subtitle = "\(city) \(state)"
-        }
+//        if let city = placemark.locality,
+//            let state = placemark.administrativeArea {
+//            annotation.subtitle = "\(city) \(state)"
+//        }
         mapView.addAnnotation(annotation)
         let span = MKCoordinateSpanMake(1.0, 1.0)
         let region = MKCoordinateRegionMake(placemark.coordinate, span)
@@ -247,6 +250,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if let controller = segue.destination as? SettingsVC {
             slideInTransitioningDelegate.direction = .bottom
             controller.transitioningDelegate = slideInTransitioningDelegate
@@ -266,6 +270,8 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
             slideInTransitioningDelegate.direction = .bottom
             controller.transitioningDelegate = slideInTransitioningDelegate
             controller.modalPresentationStyle = .custom
+            
+            controller.mapPanDelegate = self
         }
     }
     
@@ -274,6 +280,20 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         if let favouritesData = NSKeyedUnarchiver.unarchiveObject(withFile: Favourites.ArchiveURL.path) as? [Favourites] {
             Singleton.sharedInstance.favouritesArray = favouritesData
         }
+    }
+    
+    
+    func dropPinAndPan(location: Favourites) {
+        self.newPin = location
+        mapView.removeAnnotations(mapView.annotations)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude)
+        annotation.title = location.cityName
+        mapView.addAnnotation(annotation)
+        let span = MKCoordinateSpanMake(1.0, 1.0)
+        let region = MKCoordinateRegionMake(annotation.coordinate, span)
+        mapView.setRegion(region, animated: true)
+        
     }
     
     
@@ -294,17 +314,8 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         }
     }
     
-    
-}
-
-
-extension FavouritesVC {
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//        let selectedItem = matchingItems[indexPath.row].placemark
-//        dropPinZoomIn(placemark: selectedItem)
-        
-        // Need protocol on dropPinZoomIn function
-        // Make matching Items array a Singleton to share everywhere
+    @IBAction func favouritesBtnPressed(_ sender: Any) {
+        performSegue(withIdentifier: "toFavourites", sender: self)
     }
 }
 

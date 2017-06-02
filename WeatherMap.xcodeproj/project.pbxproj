@@ -109,12 +109,11 @@
 				8CA74A8C1EC063610082568D /* CurrentWeather.swift */,
 				8C321B8F1EC1A2D9009B9EB4 /* LongRangeForecast.swift */,
 				8C321B911EC1AB98009B9EB4 /* HourlyForecast.swift */,
+				8C271D401ED30C5B00803A36 /* Favourites.swift */,
 				8C9372ED1EC4D05400BFDBD9 /* MapAnnotation.swift */,
 				8C9372F11EC5EFEE00BFDBD9 /* SegueData.swift */,
 				8CA74A8E1EC06D8E0082568D /* Constants.swift */,
 				8C9372E91EC4496A00BFDBD9 /* Location.swift */,
-				8C9372EF1EC5A5D500BFDBD9 /* ZoomLevel.swift */,
-				8C271D401ED30C5B00803A36 /* Favourites.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -130,6 +129,7 @@
 		8C13BF1D1EBCB11300C078A8 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				8C9372EF1EC5A5D500BFDBD9 /* ZoomLevel.swift */,
 				8C13BF1B1EBCACBF00C078A8 /* SlideInPresentationManager.swift */,
 				8C13BF1E1EBCB14100C078A8 /* SlideInPresentationController.swift */,
 			);
