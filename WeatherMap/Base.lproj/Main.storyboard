@@ -24,6 +24,10 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="oao-x0-zHs">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Rhj-dh-Ius" appends="YES" id="ldp-Qe-KEO"/>
+                                </connections>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Al-M5-Jn6">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -107,30 +111,66 @@
                                     <constraint firstItem="kPA-J4-K49" firstAttribute="centerX" secondItem="EVN-gq-LLQ" secondAttribute="centerX" id="h5E-Tt-2bm"/>
                                 </constraints>
                             </view>
-                            <searchBar contentMode="redraw" barStyle="black" searchBarStyle="minimal" placeholder="Search by city name" translatesAutoresizingMaskIntoConstraints="NO" id="LoF-MU-BfP">
+                            <searchBar clipsSubviews="YES" contentMode="redraw" placeholder="Search by city name" translatesAutoresizingMaskIntoConstraints="NO" id="LoF-MU-BfP" customClass="SearchBarView" customModule="WeatherMap" customModuleProvider="target" propertyAccessControl="none">
                                 <rect key="frame" x="0.0" y="60" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="gnj-aW-vhl"/>
                                 </constraints>
+                                <color key="tintColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.28627450980000002" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="searchField.textColor">
+                                        <color key="value" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vp1-3h-Blr">
-                                <rect key="frame" x="16" y="104" width="343" height="150"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tLV-Y4-ot3" customClass="SearchClippingView" customModule="WeatherMap" customModuleProvider="target">
+                                <rect key="frame" x="16" y="104" width="343" height="198"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vp1-3h-Blr" customClass="SearchTableView" customModule="WeatherMap" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="160"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="160" id="fKn-B0-clK"/>
+                                        </constraints>
+                                        <color key="separatorColor" red="0.28627450980000002" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                        <inset key="separatorInset" minX="35" minY="0.0" maxX="35" maxY="0.0"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" id="MVl-mb-iKq" customClass="SearchCell" customModule="WeatherMap" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="343" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MVl-mb-iKq" id="qZ9-St-jEb">
+                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iuq-fH-LmL">
+                                                            <rect key="frame" x="33" y="12" width="68" height="19.5"/>
+                                                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14"/>
+                                                            <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="Iuq-fH-LmL" firstAttribute="centerY" secondItem="qZ9-St-jEb" secondAttribute="centerY" id="BfR-gm-lEh"/>
+                                                        <constraint firstItem="Iuq-fH-LmL" firstAttribute="leading" secondItem="qZ9-St-jEb" secondAttribute="leadingMargin" constant="25" id="eCf-4u-iRh"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <connections>
+                                                    <outlet property="cityNameLbl" destination="Iuq-fH-LmL" id="nsG-83-oVQ"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="8Ca-82-ljN"/>
+                                    <constraint firstItem="Vp1-3h-Blr" firstAttribute="leading" secondItem="tLV-Y4-ot3" secondAttribute="leading" id="Hl4-1n-Ne6"/>
+                                    <constraint firstAttribute="height" constant="198" id="J2o-dj-F1y"/>
+                                    <constraint firstItem="Vp1-3h-Blr" firstAttribute="top" secondItem="tLV-Y4-ot3" secondAttribute="top" id="Uvl-KH-ACj"/>
+                                    <constraint firstAttribute="trailing" secondItem="Vp1-3h-Blr" secondAttribute="trailing" id="aMH-lJ-Ub4"/>
                                 </constraints>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" id="MVl-mb-iKq">
-                                        <rect key="frame" x="0.0" y="28" width="343" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MVl-mb-iKq" id="qZ9-St-jEb">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -139,11 +179,11 @@
                             <constraint firstItem="1Al-M5-Jn6" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="9hj-O6-jL1"/>
                             <constraint firstItem="EVN-gq-LLQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="A3u-C8-Ozp"/>
                             <constraint firstItem="oao-x0-zHs" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="B6C-8k-sh1"/>
-                            <constraint firstItem="Vp1-3h-Blr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="CdI-B3-DMX"/>
-                            <constraint firstItem="Vp1-3h-Blr" firstAttribute="top" secondItem="LoF-MU-BfP" secondAttribute="bottom" id="Iu8-gb-4ac"/>
+                            <constraint firstItem="tLV-Y4-ot3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Deo-aK-Xbv"/>
+                            <constraint firstItem="tLV-Y4-ot3" firstAttribute="top" secondItem="LoF-MU-BfP" secondAttribute="bottom" id="Dfl-t1-2TD"/>
                             <constraint firstItem="xOJ-bL-BJt" firstAttribute="centerX" secondItem="ZzG-XE-Q65" secondAttribute="centerX" id="OoG-UG-hL4"/>
                             <constraint firstAttribute="trailing" secondItem="oao-x0-zHs" secondAttribute="trailing" id="Wfp-j8-eHQ"/>
-                            <constraint firstItem="Vp1-3h-Blr" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="ebd-6W-sIF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tLV-Y4-ot3" secondAttribute="trailing" id="bgU-82-HNA"/>
                             <constraint firstAttribute="trailing" secondItem="LoF-MU-BfP" secondAttribute="trailing" id="oQN-o8-tcg"/>
                             <constraint firstAttribute="trailing" secondItem="EVN-gq-LLQ" secondAttribute="trailing" id="owp-ub-AYR"/>
                             <constraint firstItem="LoF-MU-BfP" firstAttribute="top" secondItem="1Al-M5-Jn6" secondAttribute="bottom" id="pns-Ws-XaF"/>
@@ -156,12 +196,14 @@
                     <connections>
                         <outlet property="mapView" destination="oao-x0-zHs" id="pbp-ge-9iE"/>
                         <outlet property="searchBar" destination="LoF-MU-BfP" id="fLz-QL-kao"/>
+                        <outlet property="searchClipping" destination="tLV-Y4-ot3" id="IwF-LB-SKN"/>
                         <outlet property="tableView" destination="Vp1-3h-Blr" id="nC4-ao-C4N"/>
                         <segue destination="DP8-Ry-I28" kind="presentation" identifier="selectedCity" modalPresentationStyle="overCurrentContext" id="HaH-6G-M3F"/>
                         <segue destination="x8W-Xa-fpW" kind="presentation" identifier="toFavourites" modalPresentationStyle="overCurrentContext" id="n6U-Bg-VFf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="Rhj-dh-Ius"/>
             </objects>
             <point key="canvasLocation" x="-127.2" y="123.68815592203899"/>
         </scene>

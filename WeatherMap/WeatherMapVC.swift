@@ -17,6 +17,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchClipping: SearchClippingView!
     
     lazy var slideInTransitioningDelegate = SlideInPresentationManager()
     
@@ -33,7 +34,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     
     var searchCompleter = MKLocalSearchCompleter()
     var searchResults = [MKLocalSearchCompletion]()
-    var matchingItem = MKMapItem()
+
     
     
     override func viewDidLoad() {
@@ -43,10 +44,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         searchBar.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
-        
-        
         searchCompleter.delegate = self
-        
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -57,15 +55,18 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         loadFavouritesData()
         searchBar.isHidden = true
         tableView.isHidden = true
-    
+        searchClipping.isHidden = true
     }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         locationAuthStatus()
         
+        tableView.frame = CGRect(x: tableView.frame.origin.x, y: tableView.frame.origin.y, width: tableView.frame.size.width, height: tableView.contentSize.height)
     }
+
     
     func locationAuthStatus() {
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
@@ -198,21 +199,21 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     
     // Search TableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath) as UITableViewCell
-        
-        let selectedItem = searchResults[indexPath.row]
-        
-        if selectedItem.subtitle != "" {
-            cell.textLabel?.text = ""
-        } else {
-            cell.textLabel?.text = selectedItem.title
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath) as? SearchCell {
+            let selectedItem = searchResults[indexPath.row]
+            
+            if selectedItem.subtitle != "" {
+                cell.textLabel?.text = ""
+            } else {
+                cell.configureCell(selectedItem: selectedItem)
+                return cell
+            }
         }
-        return cell
+        return SearchCell()
     }
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
         let selectedItem = searchResults[indexPath.row]
         if selectedItem.subtitle != "" {
             return 0
@@ -242,6 +243,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         }
         tableView.isHidden = true
         searchBar.isHidden = true
+        searchClipping.isHidden = true
         searchBar.text = ""
     }
     
@@ -249,21 +251,22 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     // SearchBar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         tableView.isHidden = false
+        searchClipping.isHidden = false
 
         if !searchText.isEmpty {
             searchCompleter.queryFragment = searchText
             searchCompleter.filterType = .locationsOnly
         } else {
             tableView.isHidden = true
+            searchClipping.isHidden = true
         }
     }
-    
-    
     
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         self.searchResults = completer.results
         DispatchQueue.main.async {
             self.tableView.reloadData()
+            self.tableView.frame = CGRect(x: self.tableView.frame.origin.x, y: self.tableView.frame.origin.y, width: self.tableView.frame.size.width, height: self.tableView.contentSize.height)
         }
     }
     
@@ -361,6 +364,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         } else {
             searchBar.isHidden = true
             tableView.isHidden = true
+            searchClipping.isHidden = true
             searchBar.text = ""
         }
     }
