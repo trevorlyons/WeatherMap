@@ -66,6 +66,8 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     func downloadApiData(completed: DownloadComplete) {
         
         let currentWeatherUrl = URL(string: "\(darkSkyUrl)\(segueData.latitude),\(segueData.longitude)?units=si")!
+        print(currentWeatherUrl)
+        
         Alamofire.request(currentWeatherUrl).responseJSON { response in
             let result = response.result
             
