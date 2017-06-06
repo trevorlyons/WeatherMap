@@ -27,6 +27,8 @@
 		8C9372F01EC5A5D500BFDBD9 /* ZoomLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9372EF1EC5A5D500BFDBD9 /* ZoomLevel.swift */; };
 		8C9372F21EC5EFEE00BFDBD9 /* SegueData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9372F11EC5EFEE00BFDBD9 /* SegueData.swift */; };
 		8CA6EDE41EE33A860075FC66 /* SearchClippingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6EDE31EE33A860075FC66 /* SearchClippingView.swift */; };
+		8CA6EDE61EE45C310075FC66 /* RoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6EDE51EE45C310075FC66 /* RoundView.swift */; };
+		8CA6EE061EE6EFE60075FC66 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6EE051EE6EFE60075FC66 /* CustomAnnotation.swift */; };
 		8CA74A8D1EC063610082568D /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA74A8C1EC063610082568D /* CurrentWeather.swift */; };
 		8CA74A8F1EC06D8E0082568D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA74A8E1EC06D8E0082568D /* Constants.swift */; };
 		8CE494DD1EBDD36A00A26749 /* TopBtmBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE494DC1EBDD36A00A26749 /* TopBtmBorderView.swift */; };
@@ -63,6 +65,8 @@
 		8C9372EF1EC5A5D500BFDBD9 /* ZoomLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomLevel.swift; sourceTree = "<group>"; };
 		8C9372F11EC5EFEE00BFDBD9 /* SegueData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueData.swift; sourceTree = "<group>"; };
 		8CA6EDE31EE33A860075FC66 /* SearchClippingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchClippingView.swift; sourceTree = "<group>"; };
+		8CA6EDE51EE45C310075FC66 /* RoundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundView.swift; sourceTree = "<group>"; };
+		8CA6EE051EE6EFE60075FC66 /* CustomAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		8CA74A8C1EC063610082568D /* CurrentWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
 		8CA74A8E1EC06D8E0082568D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8CE494DC1EBDD36A00A26749 /* TopBtmBorderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBtmBorderView.swift; sourceTree = "<group>"; };
@@ -106,11 +110,12 @@
 				8CE494DE1EBDDE1900A26749 /* BtmBorderView.swift */,
 				8CF09FAE1EE1E25100CD5C4F /* SearchTableView.swift */,
 				8CF09FB01EE1E86500CD5C4F /* SearchBarView.swift */,
+				8CA6EDE31EE33A860075FC66 /* SearchClippingView.swift */,
+				8CA6EDE51EE45C310075FC66 /* RoundView.swift */,
 				8CE494E01EBF18F500A26749 /* LongRangeForecastCell.swift */,
 				8CE494E21EBF191800A26749 /* HourlyForecastCell.swift */,
 				8C271D3E1ED30B1B00803A36 /* FavouritesCell.swift */,
 				8CF09FB21EE1F37F00CD5C4F /* SearchCell.swift */,
-				8CA6EDE31EE33A860075FC66 /* SearchClippingView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -126,6 +131,7 @@
 				8C9372F11EC5EFEE00BFDBD9 /* SegueData.swift */,
 				8CA74A8E1EC06D8E0082568D /* Constants.swift */,
 				8C9372E91EC4496A00BFDBD9 /* Location.swift */,
+				8CA6EE051EE6EFE60075FC66 /* CustomAnnotation.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -336,6 +342,7 @@
 				8C45E7161EBA2437006E6B91 /* WeatherMapVC.swift in Sources */,
 				8CF09FB31EE1F37F00CD5C4F /* SearchCell.swift in Sources */,
 				8C45E7141EBA2437006E6B91 /* AppDelegate.swift in Sources */,
+				8CA6EE061EE6EFE60075FC66 /* CustomAnnotation.swift in Sources */,
 				8C271D3D1ED308B300803A36 /* FavouritesVC.swift in Sources */,
 				8C9372EA1EC4496A00BFDBD9 /* Location.swift in Sources */,
 				8C321B921EC1AB98009B9EB4 /* HourlyForecast.swift in Sources */,
@@ -348,6 +355,7 @@
 				8CE494DD1EBDD36A00A26749 /* TopBtmBorderView.swift in Sources */,
 				8C9372F21EC5EFEE00BFDBD9 /* SegueData.swift in Sources */,
 				8CF09FAF1EE1E25100CD5C4F /* SearchTableView.swift in Sources */,
+				8CA6EDE61EE45C310075FC66 /* RoundView.swift in Sources */,
 				8C321B901EC1A2D9009B9EB4 /* LongRangeForecast.swift in Sources */,
 				8CA74A8F1EC06D8E0082568D /* Constants.swift in Sources */,
 			);

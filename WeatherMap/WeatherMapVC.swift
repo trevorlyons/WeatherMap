@@ -35,6 +35,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     var searchCompleter = MKLocalSearchCompleter()
     var searchResults = [MKLocalSearchCompletion]()
 
+
     
     
     override func viewDidLoad() {
@@ -56,6 +57,18 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         searchBar.isHidden = true
         tableView.isHidden = true
         searchClipping.isHidden = true
+        
+        
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(pressScreenDropPin(gesture:)))
+        longPressGesture.minimumPressDuration = 1.0
+        self.mapView.addGestureRecognizer(longPressGesture)
+        
+        
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
+        
+//        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
     }
     
     
@@ -100,6 +113,10 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         }
     }
     
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        annotate()
+    }
+    
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         var apiScale = "9"
         
@@ -132,37 +149,48 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         self.mapUrl = "http://api.openweathermap.org/data/2.5/box/city?bbox=\(Location.sharedInstance.lowerLeftLongitude!),\(Location.sharedInstance.lowerLeftLatitude!),\(Location.sharedInstance.upperRightLongitude!),\(Location.sharedInstance.upperRightLatitude!),\(apiScale)&appid=***REMOVED***"
 
         downloadMapWeatherApi {
-            
-            annotate()
+            //annotate()
             self.mapAnnotations = []
         }
     }
     
     
-//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//        if annotation is MKUserLocation {
-//            return nil
-//        }
-//        let reuseID = "location"
-//        var av = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID)
-//        
-//        if av != nil {
-//            av?.annotation = annotation
-//        } else {
-//            av = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
-//            av?.image = UIImage(named: annotation.subtitle!!)
-//        }
-//        return av
-//    }
-    
-    
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            return nil
+        }
+        let reuseId = "reuseId"
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
+        if annotationView == nil {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            annotationView?.canShowCallout = false
+            annotationView?.centerOffset = CGPoint(x: 0.0, y: -20.0)
+            let lbl = UILabel(frame: CGRect(x: 12, y: 27, width: 30, height: 30))
+            lbl.textColor = .gray
+            lbl.textAlignment = .center
+            lbl.alpha = 1.0
+            lbl.tag = 42
+            annotationView?.frame = lbl.frame
+            annotationView?.addSubview(lbl)
+            let weatherImg = UIImageView(frame: CGRect(x: 12, y: 5, width: 30, height: 30))
+            weatherImg.tag = 43
+            annotationView?.frame = weatherImg.frame
+            annotationView?.addSubview(weatherImg)
+        } else {
+            annotationView?.annotation = annotation
+        }
+        let customPointAnnotation = annotation as! CustomAnnotation
+        let lbl = annotationView?.viewWithTag(42) as! UILabel
+        lbl.text = customPointAnnotation.attribute!
+        let weatherImg = annotationView?.viewWithTag(43) as! UIImageView
+        weatherImg.image = UIImage(named: "clear-day")
+        annotationView?.image = UIImage(named: "location") //annotation.subtitle to annotate by weatherType
+        return annotationView
     }
     
     
+    
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-
         let send = SegueData(cityName: ((view.annotation?.title)!)!, latitude: (view.annotation?.coordinate.latitude)!, longitude: (view.annotation?.coordinate.longitude)!)
         performSegue(withIdentifier: "selectedCity", sender: send)
     }
@@ -187,9 +215,10 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     
     func annotate() {
         for location in self.mapAnnotations {
-            let annotation = MKPointAnnotation()
+            let annotation = CustomAnnotation()
             annotation.title = location.cityName
-            annotation.subtitle = location.weatherType
+            annotation.subtitle = "\(Int(location.temperature))°"
+            annotation.attribute = location.weatherType
             annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
             mapView.addAnnotation(annotation)
         }
@@ -287,17 +316,72 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         selectedPin = placemark
         // clear existing pins
         mapView.removeAnnotations(mapView.annotations)
-        let annotation = MKPointAnnotation()
+        let annotation = CustomAnnotation()
         annotation.coordinate = placemark.coordinate
         annotation.title = placemark.name
-//        if let city = placemark.locality,
-//            let state = placemark.administrativeArea {
-//            annotation.subtitle = "\(city) \(state)"
-//        }
+        annotation.subtitle = "location"
+        annotation.attribute = ""
         mapView.addAnnotation(annotation)
         let span = MKCoordinateSpanMake(1.0, 1.0)
         let region = MKCoordinateRegionMake(placemark.coordinate, span)
         mapView.setRegion(region, animated: true)
+    }
+    
+    
+    func dropPinAndPan(location: Favourites) {
+        self.newPin = location
+        mapView.removeAnnotations(mapView.annotations)
+        let annotation = CustomAnnotation()
+        annotation.coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude)
+        annotation.title = location.cityName
+        annotation.subtitle = "location"
+        annotation.attribute = ""
+        mapView.addAnnotation(annotation)
+        let span = MKCoordinateSpanMake(1.0, 1.0)
+        let region = MKCoordinateRegionMake(annotation.coordinate, span)
+        mapView.setRegion(region, animated: true)
+        
+    }
+    
+    
+    
+    func pressScreenDropPin(gesture: UIGestureRecognizer) {
+        if gesture.state == .ended {
+            let touchPoint = gesture.location(in: mapView)
+            let newCoordinates = mapView.convert(touchPoint, toCoordinateFrom: mapView)
+            let annotation = CustomAnnotation()
+            annotation.coordinate = newCoordinates
+            
+            CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: newCoordinates.latitude, longitude: newCoordinates.longitude), completionHandler: { (placemark, error) -> Void in
+                if error != nil {
+                    print("Reverse geocoder failed with error" + (error?.localizedDescription)!)
+                    return
+                }
+                
+                if (placemark?.count)! > 0 {
+                    let pm = placemark?[0]
+                    
+                    if pm?.ocean != nil {
+                        print("No ocean weather")
+                    } else if pm?.locality == nil {
+                        annotation.title = pm?.name
+                        annotation.subtitle = "location"
+                        annotation.attribute = ""
+                        self.mapView.addAnnotation(annotation)
+                    } else {
+                        annotation.title = pm?.locality
+                        annotation.subtitle = "location"
+                        annotation.attribute = ""
+                        self.mapView.addAnnotation(annotation)
+                    }
+                }
+                else {
+                    annotation.title = "Unknown Place"
+                    self.mapView.addAnnotation(annotation)
+                    print("Problem with the data received from geocoder")
+                }
+            })
+        }
     }
     
     
@@ -336,18 +420,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     
-    func dropPinAndPan(location: Favourites) {
-        self.newPin = location
-        mapView.removeAnnotations(mapView.annotations)
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude)
-        annotation.title = location.cityName
-        mapView.addAnnotation(annotation)
-        let span = MKCoordinateSpanMake(1.0, 1.0)
-        let region = MKCoordinateRegionMake(annotation.coordinate, span)
-        mapView.setRegion(region, animated: true)
-        
-    }
+
     
     
     @IBAction func unwindToWeatherMapVC(segue: UIStoryboardSegue) {
@@ -367,6 +440,10 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
             searchClipping.isHidden = true
             searchBar.text = ""
         }
+    }
+    
+    @IBAction func locateBtnPressed(_ sender: Any) {
+        centerMapOnLocation(location: currentLocation)
     }
     
     @IBAction func favouritesBtnPressed(_ sender: Any) {

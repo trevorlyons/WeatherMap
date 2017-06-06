@@ -25,9 +25,6 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="oao-x0-zHs">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Rhj-dh-Ius" appends="YES" id="ldp-Qe-KEO"/>
-                                </connections>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Al-M5-Jn6">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -75,42 +72,6 @@
                                     <constraint firstAttribute="height" constant="60" id="kAa-z2-Kc5"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EVN-gq-LLQ">
-                                <rect key="frame" x="0.0" y="627" width="375" height="40"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" alignment="center" spacing="-2" translatesAutoresizingMaskIntoConstraints="NO" id="kPA-J4-K49">
-                                        <rect key="frame" x="65.5" y="2.5" width="244.5" height="35.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a city for current forecast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19o-9D-ZtP">
-                                                <rect key="frame" x="0.0" y="0.0" width="244.5" height="23.5"/>
-                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or zoom and pan to find more" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VC6-HL-MU5">
-                                                <rect key="frame" x="53.5" y="21.5" width="137.5" height="14"/>
-                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="10"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xOJ-bL-BJt">
-                                        <rect key="frame" x="16" y="8.5" width="23" height="22"/>
-                                        <state key="normal" image="Star"/>
-                                        <connections>
-                                            <action selector="favouritesBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rHs-2J-8Ro"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.28627450980000002" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="xOJ-bL-BJt" firstAttribute="centerY" secondItem="EVN-gq-LLQ" secondAttribute="centerY" id="2bO-Zg-2v2"/>
-                                    <constraint firstItem="kPA-J4-K49" firstAttribute="centerY" secondItem="EVN-gq-LLQ" secondAttribute="centerY" id="Ioz-Rj-47S"/>
-                                    <constraint firstAttribute="height" constant="40" id="dlT-yC-CJO"/>
-                                    <constraint firstItem="kPA-J4-K49" firstAttribute="centerX" secondItem="EVN-gq-LLQ" secondAttribute="centerX" id="h5E-Tt-2bm"/>
-                                </constraints>
-                            </view>
                             <searchBar clipsSubviews="YES" contentMode="redraw" placeholder="Search by city name" translatesAutoresizingMaskIntoConstraints="NO" id="LoF-MU-BfP" customClass="SearchBarView" customModule="WeatherMap" customModuleProvider="target" propertyAccessControl="none">
                                 <rect key="frame" x="0.0" y="60" width="375" height="44"/>
                                 <constraints>
@@ -141,7 +102,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="343" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MVl-mb-iKq" id="qZ9-St-jEb">
-                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iuq-fH-LmL">
@@ -171,26 +132,64 @@
                                     <constraint firstAttribute="trailing" secondItem="Vp1-3h-Blr" secondAttribute="trailing" id="aMH-lJ-Ub4"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EVN-gq-LLQ" customClass="RoundView" customModule="WeatherMap" customModuleProvider="target">
+                                <rect key="frame" x="16" y="597" width="50" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xOJ-bL-BJt">
+                                        <rect key="frame" x="13.5" y="12.5" width="23" height="24"/>
+                                        <state key="normal" image="Star"/>
+                                        <connections>
+                                            <action selector="favouritesBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rHs-2J-8Ro"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.28627450980000002" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="PkO-Aq-Ulm"/>
+                                    <constraint firstAttribute="height" constant="50" id="Zl7-fi-2wt"/>
+                                    <constraint firstItem="xOJ-bL-BJt" firstAttribute="centerX" secondItem="EVN-gq-LLQ" secondAttribute="centerX" id="eTE-KU-uoo"/>
+                                    <constraint firstItem="xOJ-bL-BJt" firstAttribute="centerY" secondItem="EVN-gq-LLQ" secondAttribute="centerY" id="wfC-Hx-gBX"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dIj-ho-I1V" customClass="RoundView" customModule="WeatherMap" customModuleProvider="target">
+                                <rect key="frame" x="16" y="527" width="50" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Svb-Z2-My4">
+                                        <rect key="frame" x="14" y="12" width="22" height="26"/>
+                                        <state key="normal" image="Locate"/>
+                                        <connections>
+                                            <action selector="locateBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4XI-2j-NGI"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.28627450980000002" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Svb-Z2-My4" firstAttribute="centerX" secondItem="dIj-ho-I1V" secondAttribute="centerX" id="YgO-HJ-dz2"/>
+                                    <constraint firstAttribute="width" constant="50" id="Zrp-uY-dCw"/>
+                                    <constraint firstItem="Svb-Z2-My4" firstAttribute="centerY" secondItem="dIj-ho-I1V" secondAttribute="centerY" id="fn1-0C-CAk"/>
+                                    <constraint firstAttribute="height" constant="50" id="gmI-7g-cc1"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="1Al-M5-Jn6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="3xx-9L-VLo"/>
                             <constraint firstItem="oao-x0-zHs" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="6F3-CX-muQ"/>
                             <constraint firstItem="1Al-M5-Jn6" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="9hj-O6-jL1"/>
-                            <constraint firstItem="EVN-gq-LLQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="A3u-C8-Ozp"/>
                             <constraint firstItem="oao-x0-zHs" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="B6C-8k-sh1"/>
                             <constraint firstItem="tLV-Y4-ot3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Deo-aK-Xbv"/>
                             <constraint firstItem="tLV-Y4-ot3" firstAttribute="top" secondItem="LoF-MU-BfP" secondAttribute="bottom" id="Dfl-t1-2TD"/>
-                            <constraint firstItem="xOJ-bL-BJt" firstAttribute="centerX" secondItem="ZzG-XE-Q65" secondAttribute="centerX" id="OoG-UG-hL4"/>
                             <constraint firstAttribute="trailing" secondItem="oao-x0-zHs" secondAttribute="trailing" id="Wfp-j8-eHQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="tLV-Y4-ot3" secondAttribute="trailing" id="bgU-82-HNA"/>
+                            <constraint firstItem="EVN-gq-LLQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="mgy-Sj-dEp"/>
                             <constraint firstAttribute="trailing" secondItem="LoF-MU-BfP" secondAttribute="trailing" id="oQN-o8-tcg"/>
-                            <constraint firstAttribute="trailing" secondItem="EVN-gq-LLQ" secondAttribute="trailing" id="owp-ub-AYR"/>
                             <constraint firstItem="LoF-MU-BfP" firstAttribute="top" secondItem="1Al-M5-Jn6" secondAttribute="bottom" id="pns-Ws-XaF"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="EVN-gq-LLQ" secondAttribute="bottom" id="qOg-3Z-jac"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="oao-x0-zHs" secondAttribute="bottom" id="tHX-Do-poM"/>
                             <constraint firstAttribute="trailing" secondItem="1Al-M5-Jn6" secondAttribute="trailing" id="tez-8d-Thx"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="EVN-gq-LLQ" secondAttribute="bottom" constant="20" id="x9c-hT-jLU"/>
                             <constraint firstItem="LoF-MU-BfP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="xMw-gF-7qJ"/>
+                            <constraint firstItem="EVN-gq-LLQ" firstAttribute="top" secondItem="dIj-ho-I1V" secondAttribute="bottom" constant="20" id="ys4-NU-O03"/>
+                            <constraint firstItem="dIj-ho-I1V" firstAttribute="leading" secondItem="EVN-gq-LLQ" secondAttribute="leading" id="zBd-BG-fff"/>
                         </constraints>
                     </view>
                     <connections>
@@ -203,7 +202,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="Rhj-dh-Ius"/>
             </objects>
             <point key="canvasLocation" x="-127.2" y="123.68815592203899"/>
         </scene>
@@ -510,7 +508,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VvP-5l-DRT">
-                                        <rect key="frame" x="327" y="9" width="23" height="22"/>
+                                        <rect key="frame" x="327" y="8" width="23" height="24"/>
                                         <state key="normal" image="Star"/>
                                         <connections>
                                             <action selector="favouritesButtonPressed:" destination="DP8-Ry-I28" eventType="touchUpInside" id="1TJ-ZR-Qwh"/>
@@ -703,7 +701,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="375" height="45"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yS0-wO-Kst" id="OoY-Od-xuP">
-                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="TYT-F5-5xJ">
@@ -944,7 +942,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ph4-z6-Neu" id="lVK-gg-dLo">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tmh-QR-YqU">
@@ -991,10 +989,11 @@
     </scenes>
     <resources>
         <image name="Down Arrow" width="28" height="15"/>
+        <image name="Locate" width="22" height="26"/>
         <image name="Right Arrow" width="8" height="14"/>
         <image name="Search" width="25" height="25"/>
         <image name="Settings Cog" width="25" height="25"/>
-        <image name="Star" width="23" height="21"/>
+        <image name="Star" width="23" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="HaH-6G-M3F"/>
