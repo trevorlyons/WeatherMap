@@ -44,11 +44,3 @@ class Favourites: NSObject, NSCoding {
 }
 
 
-class Singleton {
-    
-    
-    static var sharedInstance = Singleton()
-    private init() {}
-    
-    var favouritesArray = [Favourites]()
-}

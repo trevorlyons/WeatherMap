@@ -22,6 +22,12 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var dayHighTempLbl: UILabel!
     @IBOutlet weak var dayLowTempLbl: UILabel!
     @IBOutlet weak var favouritesBtn: UIButton!
+    @IBOutlet weak var temperatureLbl: UILabel!
+    @IBOutlet weak var apparentTempLbl: UILabel!
+    @IBOutlet weak var precipProbabilityLbl: UILabel!
+    @IBOutlet weak var humidityLbl: UILabel!
+    @IBOutlet weak var windSpeedLbl: UILabel!
+    @IBOutlet weak var pressureLbl: UILabel!
     
     
     var currentWeather: CurrentWeather!
@@ -58,9 +64,7 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         super.viewDidAppear(animated)
         
         
-        downloadApiData {
-            //self.updateCurrentWeatherUI()
-        }
+        downloadApiData {}
     }
 
     func downloadApiData(completed: DownloadComplete) {
@@ -70,13 +74,12 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         Alamofire.request(currentWeatherUrl).responseJSON { response in
             let result = response.result
-            
-            if let array = result.value as? JSONDictionary {
-                let current = CurrentWeather(currentDict: array)
-                self.updateCurrentWeatherUI(currentWeather: current)
-            }
+
             
             if let dict = result.value as? Dictionary<String, AnyObject> {
+                if let offset = dict["offset"] as? Double {
+                    Singleton.sharedInstance.timeZoneOffset = Int(offset) * 3600
+                }
                 
                 if let hourly = dict["hourly"] as? Dictionary<String, AnyObject> {
                     if let data = hourly["data"] as? [Dictionary<String, AnyObject>] {
@@ -87,7 +90,6 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                         }
                         self.collectionView.reloadData()
                     }
-                        
                 }
                 if let daily = dict["daily"] as? Dictionary<String, AnyObject> {
                     if let data = daily["data"] as? [Dictionary<String, AnyObject>] {
@@ -100,6 +102,11 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                         self.tableView.reloadData()
                     }
                 }
+            }
+            
+            if let array = result.value as? JSONDictionary {
+                let current = CurrentWeather(currentDict: array)
+                self.updateCurrentWeatherUI(currentWeather: current)
             }
             
         }
@@ -163,6 +170,30 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         currentWeatherImg.image = UIImage(named: "\(currentWeather.weatherType)L")
         dayHighTempLbl.text = "\(Int(currentWeather.highTemp))"
         dayLowTempLbl.text = "\(Int(currentWeather.lowTemp))"
+        
+        temperatureLbl.text = "\(Int(currentWeather.currentTemp))°"
+        apparentTempLbl.text = "\(Int(currentWeather.apparentTemp))°"
+        var precipType: String
+        if currentWeather.precipType == "n/a" {
+            precipType = "rain"
+        } else {
+            precipType = currentWeather.precipType
+        }
+        precipProbabilityLbl.text = "\(Int(currentWeather.precipPropbability * 100))% chance of \(precipType)"
+        humidityLbl.text = "\(Int(currentWeather.humidity * 100))%"
+        var windDirection: String
+        if currentWeather.windDirection >= 0 && currentWeather.windDirection <= 90 {
+            windDirection = "NE"
+        } else if currentWeather.windDirection > 90 && currentWeather.windDirection <= 180 {
+            windDirection = "SE"
+        } else if currentWeather.windDirection > 180 && currentWeather.windDirection <= 270 {
+            windDirection = "SW"
+        } else {
+            windDirection = "NE"
+        }
+        windSpeedLbl.text = "\(windDirection) at \(currentWeather.windSpeed) km/h"
+        pressureLbl.text = "\(currentWeather.pressure) mb"
+        
     }
     
     

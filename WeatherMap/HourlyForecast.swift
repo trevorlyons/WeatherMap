@@ -57,6 +57,7 @@ extension Date {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "ha"
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: Singleton.sharedInstance.timeZoneOffset)
         return dateFormatter.string(from: self)
     }
 }

@@ -27,6 +27,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     var mapUrl: String!
     var mapAnnnotation: MapAnnotation!
     var mapAnnotations = [MapAnnotation]()
+    var mapAnnotationsWithDuplicates = [MapAnnotation]()
     var matchingItems = [MKMapItem]()
     var selectedPin: MKPlacemark? = nil
     var newPin: Favourites!
@@ -68,7 +69,6 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
         
-//        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
     }
     
     
@@ -114,7 +114,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-        annotate()
+        
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
@@ -133,8 +133,8 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         }
         print(apiScale)
         
-        //let allAnnotations = self.mapView.annotations
-        //self.mapView.removeAnnotations(allAnnotations)
+//        let allAnnotations = self.mapView.annotations
+//        self.mapView.removeAnnotations(allAnnotations)
         
         let latitudeDelta = mapView.region.span.latitudeDelta
         let longitudeDelta = mapView.region.span.longitudeDelta
@@ -147,10 +147,11 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         Location.sharedInstance.upperRightLongitude = (centerCoordLong + (longitudeDelta/2.0))
         
         self.mapUrl = "http://api.openweathermap.org/data/2.5/box/city?bbox=\(Location.sharedInstance.lowerLeftLongitude!),\(Location.sharedInstance.lowerLeftLatitude!),\(Location.sharedInstance.upperRightLongitude!),\(Location.sharedInstance.upperRightLatitude!),\(apiScale)&appid=d9edbc6106170dc5ca87733c4b46128d"
+        
+        print(self.mapUrl)
 
         downloadMapWeatherApi {
-            //annotate()
-            self.mapAnnotations = []
+            annotate()
         }
     }
     
@@ -165,14 +166,17 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             annotationView?.canShowCallout = false
             annotationView?.centerOffset = CGPoint(x: 0.0, y: -20.0)
-            let lbl = UILabel(frame: CGRect(x: 12, y: 27, width: 30, height: 30))
-            lbl.textColor = .gray
+            let lbl = UILabel(frame: CGRect(x: 14, y: 34, width: 30, height: 15))
+//            let lbl = UILabel(frame: CGRect(x: 16, y: 45, width: 30, height: 15))
+            lbl.font = UIFont(name: "AvenirNext-Medium", size: 14)
+            lbl.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 0.8)
             lbl.textAlignment = .center
-            lbl.alpha = 1.0
             lbl.tag = 42
             annotationView?.frame = lbl.frame
             annotationView?.addSubview(lbl)
             let weatherImg = UIImageView(frame: CGRect(x: 12, y: 5, width: 30, height: 30))
+//            let weatherImg = UIImageView(frame: CGRect(x: 14, y: 14, width: 30, height: 30))
+            weatherImg.contentMode = .scaleAspectFit
             weatherImg.tag = 43
             annotationView?.frame = weatherImg.frame
             annotationView?.addSubview(weatherImg)
@@ -180,13 +184,42 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
             annotationView?.annotation = annotation
         }
         let customPointAnnotation = annotation as! CustomAnnotation
+        
+        var weatherIcon: String!
+        if customPointAnnotation.attribute == "01d" {
+            weatherIcon = "clear-day"
+        } else if customPointAnnotation.attribute == "01n" {
+            weatherIcon = "clear-night"
+        } else if customPointAnnotation.attribute == "02d" {
+            weatherIcon = "partly-cloudy-day"
+        } else if customPointAnnotation.attribute == "02n" {
+            weatherIcon = "partly-cloudy-night"
+        } else if customPointAnnotation.attribute == "03d" || customPointAnnotation.attribute == "03n" || customPointAnnotation.attribute == "04d" || customPointAnnotation.attribute == "04n" {
+            weatherIcon = "cloudy"
+        } else if customPointAnnotation.attribute == "09d" || customPointAnnotation.attribute == "09n" || customPointAnnotation.attribute == "10d" || customPointAnnotation.attribute == "10n" || customPointAnnotation.attribute == "11d" || customPointAnnotation.attribute == "11n" {
+            weatherIcon = "rain"
+        } else if customPointAnnotation.attribute == "13d" || customPointAnnotation.attribute == "13n" {
+            weatherIcon = "snow"
+        } else if customPointAnnotation.attribute == "50d" || customPointAnnotation.attribute == "50n" {
+            weatherIcon = "fog"
+        } else {
+            weatherIcon = ""
+        }
+        
         let lbl = annotationView?.viewWithTag(42) as! UILabel
-        lbl.text = customPointAnnotation.attribute!
+        lbl.text = customPointAnnotation.subtitle
         let weatherImg = annotationView?.viewWithTag(43) as! UIImageView
-        weatherImg.image = UIImage(named: "clear-day")
-        annotationView?.image = UIImage(named: "location") //annotation.subtitle to annotate by weatherType
+        weatherImg.image = UIImage(named: weatherIcon)
+        var customPin: String!
+        if customPointAnnotation.subtitle == "" {
+            customPin = "locationDrop"
+        } else {
+            customPin = "location"
+        }
+        annotationView?.image = UIImage(named: customPin)
         return annotationView
     }
+    
     
     
     
@@ -214,6 +247,21 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     
     
     func annotate() {
+//        var seen = Set<String>()
+//        for location in self.mapAnnotations {
+
+//            if !seen.contains(location.cityName) {
+////                self.mapAnnotations.append(location)
+//                seen.insert(location.cityName)
+//                let annotation = CustomAnnotation()
+//                annotation.title = location.cityName
+//                annotation.subtitle = "\(Int(location.temperature))°"
+//                annotation.attribute = location.weatherType
+//                annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+//                mapView.addAnnotation(annotation)
+//            } else {
+//                print("Trevor: woops")
+//            }
         for location in self.mapAnnotations {
             let annotation = CustomAnnotation()
             annotation.title = location.cityName
@@ -221,6 +269,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
             annotation.attribute = location.weatherType
             annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
             mapView.addAnnotation(annotation)
+        
         }
     }
     
@@ -319,7 +368,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         let annotation = CustomAnnotation()
         annotation.coordinate = placemark.coordinate
         annotation.title = placemark.name
-        annotation.subtitle = "location"
+        annotation.subtitle = ""
         annotation.attribute = ""
         mapView.addAnnotation(annotation)
         let span = MKCoordinateSpanMake(1.0, 1.0)
@@ -334,7 +383,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         let annotation = CustomAnnotation()
         annotation.coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude)
         annotation.title = location.cityName
-        annotation.subtitle = "location"
+        annotation.subtitle = ""
         annotation.attribute = ""
         mapView.addAnnotation(annotation)
         let span = MKCoordinateSpanMake(1.0, 1.0)
@@ -365,12 +414,12 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
                         print("No ocean weather")
                     } else if pm?.locality == nil {
                         annotation.title = pm?.name
-                        annotation.subtitle = "location"
+                        annotation.subtitle = ""
                         annotation.attribute = ""
                         self.mapView.addAnnotation(annotation)
                     } else {
                         annotation.title = pm?.locality
-                        annotation.subtitle = "location"
+                        annotation.subtitle = ""
                         annotation.attribute = ""
                         self.mapView.addAnnotation(annotation)
                     }
