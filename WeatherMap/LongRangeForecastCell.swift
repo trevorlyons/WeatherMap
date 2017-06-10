@@ -19,7 +19,15 @@ class LongRangeForecastCell: UITableViewCell {
     @IBOutlet weak var dailyLowTempLbl: UILabel!
     
     func configureCell(longRangeForecast: LongRangeForecast) {
-        currentWeatherImg.image = UIImage(named: longRangeForecast.weatherType)
+        
+        var weatherImg: String!
+        if longRangeForecast.weatherType == "partly-cloudy-night" {
+            weatherImg = "clear-day"
+        } else {
+            weatherImg = longRangeForecast.weatherType
+        }
+        
+        currentWeatherImg.image = UIImage(named: weatherImg)
         dayLbl.text = longRangeForecast.date
         //weatherTypeLbl.text = longRangeForecast.weatherDesc
         precipLbl.text = "\(Int((longRangeForecast.precip)*100))%"

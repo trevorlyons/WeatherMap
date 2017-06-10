@@ -78,10 +78,6 @@ class LongRangeForecast {
         }
         if let date = longWeatherDict["time"] as? Double {
             let unixConvertedDate = Date(timeIntervalSince1970: date)
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .full
-            dateFormatter.dateFormat = "EEEE"
-            dateFormatter.timeStyle = .none
             self._date = unixConvertedDate.dayOfTheWeek()
         }
         if let precip = longWeatherDict["precipProbability"] as? Double {
@@ -106,6 +102,7 @@ extension Date {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE"
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: Singleton.sharedInstance.timeZoneOffset)
         return dateFormatter.string(from: self)
     }
 }
