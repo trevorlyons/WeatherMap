@@ -11,19 +11,6 @@ import MapKit
 
 class CustomAnnotation: MKPointAnnotation {
     
-//    var title: String?
-//    var subtitle: String?
-//    var attribute: String?
-//    var coordinate: CLLocationCoordinate2D
-//    
-//    var annotation: MapAnnotation
-//    
-//    init(annotation: MapAnnotation) {
-//        self.annotation = annotation
-//        
-//        super.init()
-//    }
-    
     var attribute: String?
     
 }

@@ -16,4 +16,7 @@ class Singleton {
     
     var favouritesArray = [Favourites]()
     var timeZoneOffset: Int!
+    var unitSelectedDarkSky: String = "si"
+    var unitSelectedOWM: String = "metric"
+    
 }

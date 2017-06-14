@@ -23,7 +23,7 @@ class SearchTableView: UITableView {
         
         
         //layer.backgroundColor = UIColor(white: 1.0, alpha: 0.85).cgColor
-        layer.backgroundColor = UIColor(red: 187/255, green: 222/255, blue: 251/255, alpha: 0.8).cgColor
+        layer.backgroundColor = UIColor(red: 70/255, green: 80/255, blue: 137/255, alpha: 0.8).cgColor
 //        layer.borderWidth = 3.0
 //        layer.borderColor = UIColor(red: 73/255, green: 144/255, blue: 226/255, alpha: 1).cgColor
     }
