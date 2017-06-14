@@ -14,6 +14,7 @@ class HourlyForecast {
     private var _time: String!
     private var _weatherDesc: String!
     private var _temp: Double!
+    private var _precip: Double!
     
     var time: String {
         if _time == nil {
@@ -36,6 +37,13 @@ class HourlyForecast {
         return _temp
     }
     
+    var precip: Double {
+        if _precip == nil {
+            _precip = 0.0
+        }
+        return _precip
+    }
+    
     init(hourlyDict: Dictionary<String, AnyObject>) {
         
         if let time = hourlyDict["time"] as? Double {
@@ -47,6 +55,9 @@ class HourlyForecast {
         }
         if let temp = hourlyDict["temperature"] as? Double {
             self._temp = temp
+        }
+        if let precip = hourlyDict["precipProbability"] as? Double {
+            self._precip = precip
         }
     }
 }

@@ -35,6 +35,12 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     
     var searchCompleter = MKLocalSearchCompleter()
     var searchResults = [MKLocalSearchCompletion]()
+    
+    var zoomLevelBeforeChange: Double!
+    var lowerLeftLong: Double!
+    var lowerLeftLat: Double!
+    var upperRightLong: Double!
+    var upperRightLat: Double!
 
 
     
@@ -58,6 +64,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         searchBar.isHidden = true
         tableView.isHidden = true
         searchClipping.isHidden = true
+        mapView.isRotateEnabled = false
         
         
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(pressScreenDropPin(gesture:)))
@@ -113,45 +120,59 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         }
     }
     
+    
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-        
+        zoomLevelBeforeChange = ((mapView.getZoomLevel() * 100).rounded() / 100)
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        var apiScale = "9"
-        
+            
+        var apiScale: String
         print("Zoom: \(mapView.getZoomLevel())")
-        if mapView.getZoomLevel() < 2 {
-            mapView.setCenter(coordinate: mapView.centerCoordinate, zoomLevel: 2, animated: true)
-            apiScale = "2"
-        }
-        else if mapView.getZoomLevel() > 9 {
+        
+        if mapView.getZoomLevel() < 5 {
+            mapView.setCenter(coordinate: mapView.centerCoordinate, zoomLevel: 5, animated: true)
+            apiScale = "6"
+        } else if mapView.getZoomLevel() >= 5.0 && mapView.getZoomLevel() < 6.0 {
+            apiScale = "6"
+        } else if mapView.getZoomLevel() >= 6.0 && mapView.getZoomLevel() < 7.5 {
+            apiScale = "7"
+        } else if mapView.getZoomLevel() >= 7.5 && mapView.getZoomLevel() < 8.5 {
+            apiScale = "9"
+        } else if mapView.getZoomLevel() >= 8.5 && mapView.getZoomLevel() <= 9.5 {
+            apiScale = "11"
+        } else if mapView.getZoomLevel() >= 9.5 && mapView.getZoomLevel() <= 10.0 {
             apiScale = "13"
-        }
-        else if mapView.getZoomLevel() >= 10 {
-            mapView.setCenter(coordinate: mapView.centerCoordinate, zoomLevel: 9, animated: true)
+        } else if mapView.getZoomLevel() > 10 {
+            mapView.setCenter(coordinate: mapView.centerCoordinate, zoomLevel: 10, animated: true)
+            apiScale = "13"
+        } else {
+            apiScale = "0"
         }
         print(apiScale)
         
-//        let allAnnotations = self.mapView.annotations
-//        self.mapView.removeAnnotations(allAnnotations)
-        
+        if ((mapView.getZoomLevel() * 100).rounded() / 100) == zoomLevelBeforeChange {
+            print("don't remove annotations")
+        } else {
+            let allAnnotations = self.mapView.annotations
+            self.mapView.removeAnnotations(allAnnotations)
+        }
+
         let latitudeDelta = mapView.region.span.latitudeDelta
         let longitudeDelta = mapView.region.span.longitudeDelta
         let centerCoordLat = mapView.centerCoordinate.latitude
         let centerCoordLong = mapView.centerCoordinate.longitude
         
-        Location.sharedInstance.lowerLeftLatitude = (centerCoordLat - (latitudeDelta/2.0))
-        Location.sharedInstance.lowerLeftLongitude = (centerCoordLong - (longitudeDelta/2.0))
-        Location.sharedInstance.upperRightLatitude = (centerCoordLat + (latitudeDelta/2.0))
-        Location.sharedInstance.upperRightLongitude = (centerCoordLong + (longitudeDelta/2.0))
+        lowerLeftLong = (centerCoordLong - (longitudeDelta / 2))
+        lowerLeftLat = (centerCoordLat - (latitudeDelta / 2))
+        upperRightLong = (centerCoordLong + (longitudeDelta / 2))
+        upperRightLat = (centerCoordLat + (latitudeDelta / 2))
         
-        self.mapUrl = "http://api.openweathermap.org/data/2.5/box/city?bbox=\(Location.sharedInstance.lowerLeftLongitude!),\(Location.sharedInstance.lowerLeftLatitude!),\(Location.sharedInstance.upperRightLongitude!),\(Location.sharedInstance.upperRightLatitude!),\(apiScale)&appid=***REMOVED***"
-        
-        print(self.mapUrl)
+        mapUrl = "http://api.openweathermap.org/data/2.5/box/city?bbox=\(lowerLeftLong!),\(lowerLeftLat!),\(upperRightLong!),\(upperRightLat!),\(apiScale)&appid=***REMOVED***&units=\(Singleton.sharedInstance.unitSelectedOWM)"
 
         downloadMapWeatherApi {
             annotate()
+            self.mapAnnotations = []
         }
     }
     
@@ -219,8 +240,6 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         annotationView?.image = UIImage(named: customPin)
         return annotationView
     }
-    
-    
     
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
@@ -299,9 +318,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         return 40
     }
     
-    
-    
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return searchResults.count
@@ -323,6 +340,13 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         searchBar.isHidden = true
         searchClipping.isHidden = true
         searchBar.text = ""
+    }
+    
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) {
+            cell.separatorInset.right = cell.bounds.size.width
+        }
     }
     
     

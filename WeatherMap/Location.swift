@@ -17,10 +17,4 @@ class Location {
     var latitude: Double!
     var longitude: Double!
 
-    var upperRightLatitude: Double!
-    var upperRightLongitude: Double!
-    var lowerLeftLatitude: Double!
-    var lowerLeftLongitude: Double!
-    
-
 }

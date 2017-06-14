@@ -20,7 +20,7 @@ final class SlideInPresentationController: UIPresentationController {
         frame.size = size(forChildContentContainer: presentedViewController, withParentContainerSize: containerView!.bounds.size)
         switch direction {
         case .right:
-            frame.origin.x = containerView!.frame.width*(1.0/3.0)
+            frame.origin.y = containerView!.frame.height*(1.0/3.0)
         case .bottom:
             frame.origin.y = containerView!.frame.height*(1.0/3.0)
         default:
@@ -69,7 +69,7 @@ final class SlideInPresentationController: UIPresentationController {
     override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
         switch direction {
         case .left, .right:
-            return CGSize(width: parentSize.width*(2.0/3.0), height: parentSize.height)
+            return CGSize(width: parentSize.width, height: parentSize.height*(2.0/3.0))
         case .bottom, .top:
             return CGSize(width: parentSize.width, height: parentSize.height*(2.0/3.0))
         }
@@ -91,9 +91,7 @@ private extension SlideInPresentationController {
     
     dynamic func handleTap(recognizer: UITapGestureRecognizer) {
         presentingViewController.dismiss(animated: true)
-        
-        
-        
+
         
     }
 }

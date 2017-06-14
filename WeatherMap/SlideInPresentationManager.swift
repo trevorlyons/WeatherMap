@@ -17,7 +17,7 @@ enum PresentationDirection {
 
 class SlideInPresentationManager: NSObject {
     
-    var direction = PresentationDirection.bottom
+    var direction = PresentationDirection.right
 
 }
 

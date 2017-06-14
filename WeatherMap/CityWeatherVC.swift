@@ -28,6 +28,8 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var humidityLbl: UILabel!
     @IBOutlet weak var windSpeedLbl: UILabel!
     @IBOutlet weak var pressureLbl: UILabel!
+    @IBOutlet weak var highTempImg: UIImageView!
+    @IBOutlet weak var lowTempImg: UIImageView!
     
     
     var currentWeather: CurrentWeather!
@@ -69,7 +71,7 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
 
     func downloadApiData(completed: DownloadComplete) {
         
-        let currentWeatherUrl = URL(string: "\(darkSkyUrl)\(segueData.latitude),\(segueData.longitude)?units=si")!
+        let currentWeatherUrl = URL(string: "\(darkSkyUrl)\(segueData.latitude),\(segueData.longitude)?units=\(Singleton.sharedInstance.unitSelectedDarkSky)")!
         print(currentWeatherUrl)
         
         Alamofire.request(currentWeatherUrl).responseJSON { response in
@@ -135,6 +137,17 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         return longRangeForecasts.count
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) {
+            cell.separatorInset.right = cell.bounds.size.width
+        }
+        
+        if indexPath.row == indexPath[0] {
+            
+        }
+    }
+    
+    
     
     // collectionView - hourly forecast
     
@@ -163,13 +176,21 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
 
     func updateCurrentWeatherUI(currentWeather: CurrentWeather) {
-        cityNameLbl.text = segueData.cityName
+        cityNameLbl.text = segueData.cityName.capitalized
+        cityNameLbl.isHidden = false
         dateLbl.text = currentWeather.date
+        dateLbl.isHidden = false
         currentTempLbl.text = "\(Int(currentWeather.currentTemp))°"
+        currentTempLbl.isHidden = false
         currentWeatherType.text = currentWeather.weatherDesc
+        currentWeatherType.isHidden = false
         currentWeatherImg.image = UIImage(named: "\(currentWeather.weatherType)L")
         dayHighTempLbl.text = "\(Int(currentWeather.highTemp))"
+        dayHighTempLbl.isHidden = false
+        highTempImg.isHidden = false
         dayLowTempLbl.text = "\(Int(currentWeather.lowTemp))"
+        dayLowTempLbl.isHidden = false
+        lowTempImg.isHidden = false
         
         temperatureLbl.text = "\(Int(currentWeather.currentTemp))°"
         apparentTempLbl.text = "\(Int(currentWeather.apparentTemp))°"
