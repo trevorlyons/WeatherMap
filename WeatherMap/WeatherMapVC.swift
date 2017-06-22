@@ -41,6 +41,8 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     var lowerLeftLat: Double!
     var upperRightLong: Double!
     var upperRightLat: Double!
+    
+    let defaults = UserDefaults.standard
 
 
     
@@ -76,6 +78,9 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
         
+        defaults.register(defaults: ["DarkSky" : "si"])
+        defaults.register(defaults: ["OWM" : "metric"])
+        loadUserDefaults()
     }
     
     
@@ -85,6 +90,12 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         locationAuthStatus()
         
         tableView.frame = CGRect(x: tableView.frame.origin.x, y: tableView.frame.origin.y, width: tableView.frame.size.width, height: tableView.contentSize.height)
+    }
+    
+    
+    func loadUserDefaults() {
+        Singleton.sharedInstance.unitSelectedDarkSky = defaults.string(forKey: "DarkSky")!
+        Singleton.sharedInstance.unitSelectedOWM = defaults.string(forKey: "OWM")!
     }
 
     

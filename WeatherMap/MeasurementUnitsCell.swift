@@ -20,7 +20,6 @@ class MeasurementUnitsCell: UITableViewCell {
         } else {
             unitsTypeLbl.text = "Imperial"
         }
-        
     }
 
 

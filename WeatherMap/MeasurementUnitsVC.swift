@@ -8,10 +8,9 @@
 
 import UIKit
 
-//extension Notification.Name {
-//    static let reload = Notification.Name("reload")
-//}
-
+extension Notification.Name {
+    static let reload = Notification.Name("reload")
+}
 
 class MeasurementUnitsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -22,9 +21,7 @@ class MeasurementUnitsVC: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        UserDefaults.standard.register(defaults: ["setMetric" : true])
-//        UserDefaults.standard.register(defaults: ["setImperial" : false])
-//        readDefaults()
+
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -33,6 +30,10 @@ class MeasurementUnitsVC: UIViewController, UITableViewDataSource, UITableViewDe
         let row2 = Units(unitName: "Imperial", selector: false)
         units.append(row1)
         units.append(row2)
+        
+        UserDefaults.standard.register(defaults: ["setMetric" : true])
+        UserDefaults.standard.register(defaults: ["setImperial" : false])
+        readDefaults()
         
     }
 
@@ -64,18 +65,21 @@ class MeasurementUnitsVC: UIViewController, UITableViewDataSource, UITableViewDe
             Singleton.sharedInstance.unitSelectedDarkSky = "si"
             Singleton.sharedInstance.unitSelectedOWM = "metric"
             tableView.reloadData()
+            defaults.set("si", forKey: "DarkSky")
+            defaults.set("metric", forKey: "OWM")
             defaults.set(true, forKey: "setMetric")
             defaults.set(false, forKey: "setImperial")
-            //NotificationCenter.default.post(name: .reload, object: nil)
         } else if indexPath.row == 1 {
             self.units[0].selector = false
             self.units[1].selector = true
             Singleton.sharedInstance.unitSelectedDarkSky = "us"
             Singleton.sharedInstance.unitSelectedOWM = "imperial"
             tableView.reloadData()
+            defaults.set("us", forKey: "DarkSky")
+            defaults.set("imperial", forKey: "OWM")
             defaults.set(false, forKey: "setMetric")
             defaults.set(true, forKey: "setImperial")
-            //NotificationCenter.default.post(name: .reload, object: nil)
+            
         }
         
     }
@@ -83,8 +87,11 @@ class MeasurementUnitsVC: UIViewController, UITableViewDataSource, UITableViewDe
     func readDefaults() {
         self.units[0].selector = defaults.bool(forKey: "setMetric")
         self.units[1].selector = defaults.bool(forKey: "setImperial")
-        
     }
-
-
+    
+    @IBAction func backBtnPressed(_ sender: Any) {
+        performSegue(withIdentifier: "unwindSegueToSettings", sender: self)
+        NotificationCenter.default.post(name: .reload, object: nil)
+    }
 }
+
