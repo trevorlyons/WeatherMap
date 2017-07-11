@@ -80,6 +80,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         
         defaults.register(defaults: ["DarkSky" : "si"])
         defaults.register(defaults: ["OWM" : "metric"])
+        defaults.register(defaults: ["Language" : "English"])
         loadUserDefaults()
     }
     
@@ -96,6 +97,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     func loadUserDefaults() {
         Singleton.sharedInstance.unitSelectedDarkSky = defaults.string(forKey: "DarkSky")!
         Singleton.sharedInstance.unitSelectedOWM = defaults.string(forKey: "OWM")!
+        Singleton.sharedInstance.languageSelected = defaults.string(forKey: "Language")!
     }
 
     
@@ -198,7 +200,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             annotationView?.canShowCallout = false
             annotationView?.centerOffset = CGPoint(x: 0.0, y: -20.0)
-            let lbl = UILabel(frame: CGRect(x: 14, y: 34, width: 30, height: 15))
+            let lbl = UILabel(frame: CGRect(x: 12, y: 34, width: 35, height: 15))
 //            let lbl = UILabel(frame: CGRect(x: 16, y: 45, width: 30, height: 15))
             lbl.font = UIFont(name: "AvenirNext-Medium", size: 14)
             lbl.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 0.8)
@@ -208,7 +210,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
             annotationView?.addSubview(lbl)
             let weatherImg = UIImageView(frame: CGRect(x: 12, y: 5, width: 30, height: 30))
 //            let weatherImg = UIImageView(frame: CGRect(x: 14, y: 14, width: 30, height: 30))
-            weatherImg.contentMode = .scaleAspectFit
+            weatherImg.contentMode = .center
             weatherImg.tag = 43
             annotationView?.frame = weatherImg.frame
             annotationView?.addSubview(weatherImg)
