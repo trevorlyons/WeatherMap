@@ -17,13 +17,12 @@ class UnitsCell: UITableViewCell {
     func configureCell(units: Units) {
         
         unitSelectLbl.text = units.unitName
+        
         var setSelected: String
         if units.selector == true {
             setSelected = "selected"
-
         } else {
             setSelected = "unselected"
-
         }
         selectorImg.image = UIImage(named: setSelected)
     }

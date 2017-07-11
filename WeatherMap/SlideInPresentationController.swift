@@ -93,6 +93,8 @@ private extension SlideInPresentationController {
         
         if let presenter = presentedViewController as? MeasurementUnitsVC {
             presenter.performSegue(withIdentifier: "unwindSegueToSettings", sender: MeasurementUnitsVC())
+        } else if let presenter = presentedViewController as? LanguageVC {
+            presenter.performSegue(withIdentifier: "unwindSegueToSettings", sender: LanguageVC())
         } else if let presenter = presentedViewController as? CityWeatherVC {
             presenter.performSegue(withIdentifier: "unwindToWeatherMapVC", sender: CityWeatherVC())
         } else {
