@@ -74,8 +74,9 @@ class LanguageVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         self.languages[0].selector = defaults.bool(forKey: "setEnglish")
         self.languages[1].selector = defaults.bool(forKey: "setSpanish")
     }
-
-    @IBAction func backBtnPressed(_ sender: Any) {
+    
+    @IBAction func backPressed(_ sender: UITapGestureRecognizer) {
         performSegue(withIdentifier: "unwindSegueToSettings", sender: self)
     }
+    
 }

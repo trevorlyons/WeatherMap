@@ -55,6 +55,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         tableView.dataSource = self
         tableView.delegate = self
         searchCompleter.delegate = self
+        self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 1))
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -70,7 +71,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         
         
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(pressScreenDropPin(gesture:)))
-        longPressGesture.minimumPressDuration = 1.0
+        longPressGesture.minimumPressDuration = 0.5
         self.mapView.addGestureRecognizer(longPressGesture)
         
         
@@ -512,12 +513,11 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     @IBAction func unwindToWeatherMapVC(segue: UIStoryboardSegue) {
     }
     
-
-    @IBAction func settingsBtnPressed(_ sender: Any) {
+    @IBAction func settingsPressed(_ sender: UITapGestureRecognizer) {
+        performSegue(withIdentifier: "settings", sender: self)
     }
     
-
-    @IBAction func searchBtnPressed(_ sender: Any) {
+    @IBAction func searchPressed(_ sender: UITapGestureRecognizer) {
         if searchBar.isHidden == true {
             searchBar.isHidden = false
         } else {
@@ -528,11 +528,12 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         }
     }
     
-    @IBAction func locateBtnPressed(_ sender: Any) {
+    @IBAction func locatePressed(_ sender: UITapGestureRecognizer) {
         centerMapOnLocation(location: currentLocation)
     }
+
     
-    @IBAction func favouritesBtnPressed(_ sender: Any) {
+    @IBAction func favouritesPressed(_ sender: UITapGestureRecognizer) {
         performSegue(withIdentifier: "toFavourites", sender: self)
     }
 }

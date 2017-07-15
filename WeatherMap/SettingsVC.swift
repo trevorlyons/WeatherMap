@@ -54,12 +54,27 @@ class SettingsVC: UIViewController, MFMailComposeViewControllerDelegate {
         }
     }
     
+    func rateApp(appId: String, completion: @escaping ((_ success: Bool)->())) {
+        guard let url = URL(string : "itms-apps://itunes.apple.com/app/" + appId + "?action=write-review&mt=8") else {
+            completion(false)
+            return
+        }
+        guard #available(iOS 10, *) else {
+            completion(UIApplication.shared.openURL(url))
+            return
+        }
+        UIApplication.shared.open(url, options: [:], completionHandler: completion)
+    }
+    
     
     @IBAction func acknoledgementsPressed(_ sender: UITapGestureRecognizer) {
         performSegue(withIdentifier: "acknowledgementsSegue", sender: self)
     }
     
     @IBAction func rateAppPressed(_ sender: UITapGestureRecognizer) {
+        rateApp(appId: "id959379869") { success in
+            print("RateApp \(success)")
+        }
     }
     
     @IBAction func feedbackPressed(_ sender: UITapGestureRecognizer) {
