@@ -1,12 +1,15 @@
 PODS:
   - Alamofire (4.4.0)
+  - Google-Mobile-Ads-SDK (7.21.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.4)
+  - Google-Mobile-Ads-SDK
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Google-Mobile-Ads-SDK: 4a6f1b43c8cc0e1e95a3b59d9f52a01671c6f9f3
 
-PODFILE CHECKSUM: 26cf365493edf5d6c1364bc3cf38046a533608d9
+PODFILE CHECKSUM: 4f37d963ababe0553ba889d9562f2e6f4794b74c
 
 COCOAPODS: 1.2.0

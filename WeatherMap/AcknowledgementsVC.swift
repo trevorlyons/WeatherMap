@@ -12,12 +12,12 @@ class AcknowledgementsVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
     }
 
-    @IBAction func backBtnPressed(_ sender: Any) {
+    
+    @IBAction func backPressed(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }
+    
 
 }

@@ -9,9 +9,12 @@
 import UIKit
 import Alamofire
 import os.log
+import GoogleMobileAds
 
 class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
 
+
+    @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var cityNameLbl: UILabel!
@@ -58,8 +61,15 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         tableView.dataSource = self
         collectionView.delegate = self
         collectionView.dataSource = self
+        self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 1))
         
         setFavouritesIcon()
+        
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        
+        let request = GADRequest()
+        bannerView.load(request)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -270,4 +280,13 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         
     }
 
+    @IBAction func darkSkyLogoPressed(_ sender: UITapGestureRecognizer) {
+        let url = URL(string: "https://darksky.net/poweredby/")
+        
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url!)
+        }
+    }
 }

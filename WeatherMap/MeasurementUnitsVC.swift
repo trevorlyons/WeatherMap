@@ -8,9 +8,6 @@
 
 import UIKit
 
-extension Notification.Name {
-    static let reload = Notification.Name("reload")
-}
 
 class MeasurementUnitsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -25,6 +22,7 @@ class MeasurementUnitsVC: UIViewController, UITableViewDataSource, UITableViewDe
         
         tableView.dataSource = self
         tableView.delegate = self
+        self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 1))
         
         let row1 = Units(unitName: "Metric", selector: true)
         let row2 = Units(unitName: "Imperial", selector: false)
@@ -89,9 +87,9 @@ class MeasurementUnitsVC: UIViewController, UITableViewDataSource, UITableViewDe
         self.units[1].selector = defaults.bool(forKey: "setImperial")
     }
     
-    @IBAction func backBtnPressed(_ sender: Any) {
+    
+    @IBAction func backPressed(_ sender: UITapGestureRecognizer) {
         performSegue(withIdentifier: "unwindSegueToSettings", sender: self)
-        NotificationCenter.default.post(name: .reload, object: nil)
     }
 }
 
