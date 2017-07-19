@@ -9,7 +9,7 @@
 import UIKit
 import MessageUI
 
-class SettingsVC: UIViewController, MFMailComposeViewControllerDelegate {
+class SettingsVC: UIViewController, MFMailComposeViewControllerDelegate, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var unitTypeLbl: UILabel!
     @IBOutlet weak var langSelectedLbl: UILabel!
@@ -41,17 +41,33 @@ class SettingsVC: UIViewController, MFMailComposeViewControllerDelegate {
             slideInTransitioningDelegate.direction = .right
             controller.transitioningDelegate = slideInTransitioningDelegate
             controller.modalPresentationStyle = .custom
-        }
-        if let controller = segue.destination as? AcknowledgementsVC {
+        } else if let controller = segue.destination as? AcknowledgementsVC {
             slideInTransitioningDelegate.direction = .right
             controller.transitioningDelegate = slideInTransitioningDelegate
             controller.modalPresentationStyle = .custom
-        }
-        if let controller = segue.destination as? LanguageVC {
+        } else if let controller = segue.destination as? LanguageVC {
             slideInTransitioningDelegate.direction = .right
             controller.transitioningDelegate = slideInTransitioningDelegate
             controller.modalPresentationStyle = .custom
+        } else if let controller = segue.destination as? TutorialVC {
+            let screenSize = UIScreen.main.bounds
+            let screenWidth = screenSize.width
+            let screenHeight = screenSize.height
+            controller.preferredContentSize = CGSize(width: screenWidth*0.9, height: screenHeight*0.7)
+            
+            let popoverController = controller.popoverPresentationController
+            
+            if popoverController != nil {
+                popoverController!.delegate = self
+                popoverController!.sourceView = self.view
+                popoverController!.sourceRect = CGRect(x: self.view.bounds.midX, y: (self.view.bounds.midY)+50, width: 0, height: 0)
+                popoverController!.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+            }
         }
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return .none
     }
     
     func rateApp(appId: String, completion: @escaping ((_ success: Bool)->())) {
@@ -96,6 +112,10 @@ class SettingsVC: UIViewController, MFMailComposeViewControllerDelegate {
 
     @IBAction func backButtonPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func tutorialPressed(_ sender: UITapGestureRecognizer) {
+        performSegue(withIdentifier: "Tutorial", sender: self)
     }
     
     @IBAction func unwindToSettings(segue: UIStoryboardSegue) {
