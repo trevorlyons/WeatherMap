@@ -12,12 +12,13 @@ import Alamofire
 import CoreLocation
 
 
-class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, HandleMapPan, MKLocalSearchCompleterDelegate {
+class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, HandleMapPan, MKLocalSearchCompleterDelegate, UIPopoverPresentationControllerDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchClipping: SearchClippingView!
+    @IBOutlet weak var warningView: RoundedCornerView!
     
     lazy var slideInTransitioningDelegate = SlideInPresentationManager()
     
@@ -25,7 +26,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     var currentLocation: CLLocation!
     var mapHasCenteredOnce = false
     var mapUrl: String!
-    var mapAnnnotation: MapAnnotation!
+    var mapAnnotation: MapAnnotation!
     var mapAnnotations = [MapAnnotation]()
     var mapAnnotationsWithDuplicates = [MapAnnotation]()
     var matchingItems = [MKMapItem]()
@@ -50,6 +51,10 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(statusManager), name: .flagsChanged, object: Network.reachability)
+        updateUserInterface()
+        warningView.isHidden = true
+        
         mapView.delegate = self
         searchBar.delegate = self
         tableView.dataSource = self
@@ -71,7 +76,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         
         
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(pressScreenDropPin(gesture:)))
-        longPressGesture.minimumPressDuration = 0.5
+        longPressGesture.minimumPressDuration = 0.3
         self.mapView.addGestureRecognizer(longPressGesture)
         
         
@@ -83,6 +88,8 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         defaults.register(defaults: ["OWM" : "metric"])
         defaults.register(defaults: ["Language" : "English"])
         loadUserDefaults()
+        
+        
     }
     
     
@@ -92,6 +99,35 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         locationAuthStatus()
         
         tableView.frame = CGRect(x: tableView.frame.origin.x, y: tableView.frame.origin.y, width: tableView.frame.size.width, height: tableView.contentSize.height)
+        
+        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+        if launchedBefore  {
+            print("Not first launch.")
+        } else {
+            print("First launch, setting UserDefault.")
+            performSegue(withIdentifier: "showTutorial", sender: self)
+            UserDefaults.standard.set(true, forKey: "launchedBefore")
+        }
+    }
+    
+    func updateUserInterface() {
+        guard let status = Network.reachability?.status else { return }
+        switch status {
+        case .unreachable:
+            warningView.isHidden = false
+        case .wifi:
+            warningView.isHidden = true
+        case .wwan:
+            warningView.isHidden = true
+        }
+        print("Reachability Summary")
+        print("Status:", status)
+        print("HostName:", Network.reachability?.hostname ?? "nil")
+        print("Reachable:", Network.reachability?.isReachable ?? "nil")
+        print("Wifi:", Network.reachability?.isReachableViaWiFi ?? "nil")
+    }
+    func statusManager(_ notification: NSNotification) {
+        updateUserInterface()
     }
     
     
@@ -135,18 +171,27 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     
+    
+    
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         zoomLevelBeforeChange = ((mapView.getZoomLevel() * 100).rounded() / 100)
+        
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-            
+        
         var apiScale: String
         print("Zoom: \(mapView.getZoomLevel())")
         
-        if mapView.getZoomLevel() < 5 {
-            mapView.setCenter(coordinate: mapView.centerCoordinate, zoomLevel: 5, animated: true)
-            apiScale = "6"
+        if mapView.getZoomLevel() < 2 {
+            mapView.setCenter(coordinate: mapView.centerCoordinate, zoomLevel: 2, animated: true)
+            apiScale = "1"
+        } else if mapView.getZoomLevel() >= 2.0 && mapView.getZoomLevel() < 3.0 {
+            apiScale = "1"
+        } else if mapView.getZoomLevel() >= 3.0 && mapView.getZoomLevel() < 4.0 {
+            apiScale = "3"
+        } else if mapView.getZoomLevel() >= 4.0 && mapView.getZoomLevel() < 5.0 {
+            apiScale = "5"
         } else if mapView.getZoomLevel() >= 5.0 && mapView.getZoomLevel() < 6.0 {
             apiScale = "6"
         } else if mapView.getZoomLevel() >= 6.0 && mapView.getZoomLevel() < 7.5 {
@@ -177,18 +222,18 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         let centerCoordLat = mapView.centerCoordinate.latitude
         let centerCoordLong = mapView.centerCoordinate.longitude
         
-        lowerLeftLong = (centerCoordLong - (longitudeDelta / 2))
-        lowerLeftLat = (centerCoordLat - (latitudeDelta / 2))
-        upperRightLong = (centerCoordLong + (longitudeDelta / 2))
-        upperRightLat = (centerCoordLat + (latitudeDelta / 2))
+        lowerLeftLong = (centerCoordLong - (longitudeDelta) / 2)
+        lowerLeftLat = (centerCoordLat - (latitudeDelta) / 2)
+        upperRightLong = (centerCoordLong + (longitudeDelta) / 2)
+        upperRightLat = (centerCoordLat + (latitudeDelta) / 2)
         
         mapUrl = "http://api.openweathermap.org/data/2.5/box/city?bbox=\(lowerLeftLong!),\(lowerLeftLat!),\(upperRightLong!),\(upperRightLat!),\(apiScale)&appid=***REMOVED***&units=\(Singleton.sharedInstance.unitSelectedOWM)"
-
+        
         downloadMapWeatherApi {
-            annotate()
             self.mapAnnotations = []
         }
     }
+
     
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -272,6 +317,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
                         let annotation = MapAnnotation(locationDict: obj)
                         self.mapAnnotations.append(annotation)
                     }
+                    self.annotate()
                 }
             }
         }
@@ -280,21 +326,6 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     
     
     func annotate() {
-//        var seen = Set<String>()
-//        for location in self.mapAnnotations {
-
-//            if !seen.contains(location.cityName) {
-////                self.mapAnnotations.append(location)
-//                seen.insert(location.cityName)
-//                let annotation = CustomAnnotation()
-//                annotation.title = location.cityName
-//                annotation.subtitle = "\(Int(location.temperature))°"
-//                annotation.attribute = location.weatherType
-//                annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-//                mapView.addAnnotation(annotation)
-//            } else {
-//                print("Trevor: woops")
-//            }
         for location in self.mapAnnotations {
             let annotation = CustomAnnotation()
             annotation.title = location.cityName
@@ -392,10 +423,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     
-    
-    
-    
-    
+
     
     
     func dropPinZoomIn(placemark:MKPlacemark){
@@ -414,7 +442,6 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         mapView.setRegion(region, animated: true)
     }
     
-    
     func dropPinAndPan(location: Favourites) {
         self.newPin = location
         mapView.removeAnnotations(mapView.annotations)
@@ -427,10 +454,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         let span = MKCoordinateSpanMake(1.0, 1.0)
         let region = MKCoordinateRegionMake(annotation.coordinate, span)
         mapView.setRegion(region, animated: true)
-        
     }
-    
-    
     
     func pressScreenDropPin(gesture: UIGestureRecognizer) {
         if gesture.state == .ended {
@@ -444,10 +468,8 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
                     print("Reverse geocoder failed with error" + (error?.localizedDescription)!)
                     return
                 }
-                
                 if (placemark?.count)! > 0 {
                     let pm = placemark?[0]
-                    
                     if pm?.ocean != nil {
                         print("No ocean weather")
                     } else if pm?.locality == nil {
@@ -496,7 +518,25 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
             controller.modalPresentationStyle = .custom
             
             controller.mapPanDelegate = self
+        } else if let controller = segue.destination as? TutorialVC {
+            let screenSize = UIScreen.main.bounds
+            let screenWidth = screenSize.width
+            let screenHeight = screenSize.height
+            controller.preferredContentSize = CGSize(width: screenWidth*0.9, height: screenHeight*0.7)
+            
+            let popoverController = controller.popoverPresentationController
+            
+            if popoverController != nil {
+                popoverController!.delegate = self
+                popoverController!.sourceView = self.view
+                popoverController!.sourceRect = CGRect(x: self.view.bounds.midX, y: (self.view.bounds.midY)+50, width: 0, height: 0)
+                popoverController!.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+            }
         }
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return .none
     }
     
     
