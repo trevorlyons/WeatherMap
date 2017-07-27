@@ -12,5 +12,4 @@ import MapKit
 class CustomAnnotation: MKPointAnnotation {
     
     var attribute: String?
-    
 }

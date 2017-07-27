@@ -32,11 +32,10 @@ class MeasurementUnitsVC: UIViewController, UITableViewDataSource, UITableViewDe
         UserDefaults.standard.register(defaults: ["setMetric" : true])
         UserDefaults.standard.register(defaults: ["setImperial" : false])
         readDefaults()
-        
     }
 
     
-    // tableView
+    // TableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "units", for: indexPath) as? UnitsCell {
@@ -77,16 +76,19 @@ class MeasurementUnitsVC: UIViewController, UITableViewDataSource, UITableViewDe
             defaults.set("imperial", forKey: "OWM")
             defaults.set(false, forKey: "setMetric")
             defaults.set(true, forKey: "setImperial")
-            
         }
-        
     }
+    
+    
+    // Read existing default settings
     
     func readDefaults() {
         self.units[0].selector = defaults.bool(forKey: "setMetric")
         self.units[1].selector = defaults.bool(forKey: "setImperial")
     }
     
+    
+    // Screen press actions
     
     @IBAction func backPressed(_ sender: UITapGestureRecognizer) {
         performSegue(withIdentifier: "unwindSegueToSettings", sender: self)

@@ -14,9 +14,10 @@ class TutorialVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        textView1 = textView1.bounds
     }
+    
+    
+    // Screen press actions
     
     @IBAction func xTapped(_ sender: UITapGestureRecognizer) {
         dismiss(animated: false, completion: nil)

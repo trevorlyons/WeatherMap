@@ -29,9 +29,10 @@ class FavouritesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     
+    // Tableview
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "favouritesCell", for: indexPath) as? FavouritesCell {
-            
             let favourites = Singleton.sharedInstance.favouritesArray[indexPath.row]
             cell.configureCell(favourites: favourites)
             return cell
@@ -64,6 +65,8 @@ class FavouritesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     
+    // Function to save favourites array
+    
     func saveFavouritesData() {
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(Singleton.sharedInstance.favouritesArray, toFile: Favourites.ArchiveURL.path)
         if isSuccessfulSave {
@@ -74,12 +77,13 @@ class FavouritesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     
+    // Override segue transition styles
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? CityWeatherVC {
             if let x = sender as? SegueData {
                 controller.segueData = x
             }
-            
             slideInTransitioningDelegate.direction = .bottom
             controller.transitioningDelegate = slideInTransitioningDelegate
             controller.modalPresentationStyle = .custom
@@ -87,6 +91,7 @@ class FavouritesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     
+    // Screen press actions
     
     @IBAction func backButtonPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)

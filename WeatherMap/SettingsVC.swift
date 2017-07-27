@@ -24,6 +24,8 @@ class SettingsVC: UIViewController, MFMailComposeViewControllerDelegate, UIPopov
     }
     
     
+    // Mail feedback functions
+    
     func configuredMailComposeViewController() -> MFMailComposeViewController {
         let mail = MFMailComposeViewController()
         mail.mailComposeDelegate = self
@@ -35,6 +37,9 @@ class SettingsVC: UIViewController, MFMailComposeViewControllerDelegate, UIPopov
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
     }
+    
+    
+    // Override transition segues
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? MeasurementUnitsVC {
@@ -54,9 +59,7 @@ class SettingsVC: UIViewController, MFMailComposeViewControllerDelegate, UIPopov
             let screenWidth = screenSize.width
             let screenHeight = screenSize.height
             controller.preferredContentSize = CGSize(width: screenWidth*0.9, height: screenHeight*0.7)
-            
             let popoverController = controller.popoverPresentationController
-            
             if popoverController != nil {
                 popoverController!.delegate = self
                 popoverController!.sourceView = self.view
@@ -70,6 +73,9 @@ class SettingsVC: UIViewController, MFMailComposeViewControllerDelegate, UIPopov
         return .none
     }
     
+    
+    // App rating function
+    
     func rateApp(appId: String, completion: @escaping ((_ success: Bool)->())) {
         guard let url = URL(string : "itms-apps://itunes.apple.com/app/" + appId + "?action=write-review&mt=8") else {
             completion(false)
@@ -82,6 +88,8 @@ class SettingsVC: UIViewController, MFMailComposeViewControllerDelegate, UIPopov
         UIApplication.shared.open(url, options: [:], completionHandler: completion)
     }
     
+    
+    // Screen press actions
     
     @IBAction func acknoledgementsPressed(_ sender: UITapGestureRecognizer) {
         performSegue(withIdentifier: "acknowledgementsSegue", sender: self)

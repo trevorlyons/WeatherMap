@@ -13,9 +13,8 @@ typealias DownloadComplete = () -> ()
 typealias JSONDictionary = [String:Any]
 
 let darkSkyUrl = "https://api.darksky.net/forecast/***REMOVED***/"
-let seperator = ","
-
-let CURRENT_WEATHER_URL = "https://api.darksky.net/forecast/***REMOVED***/42.8821,-8.541?units=si"
+let OWMUrl = "http://api.openweathermap.org/data/2.5/box/city?bbox="
+let OWMKey = "&appid=***REMOVED***&units="
 
 
 

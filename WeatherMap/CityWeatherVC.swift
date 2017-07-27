@@ -13,7 +13,6 @@ import GoogleMobileAds
 
 class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
 
-
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
@@ -34,15 +33,12 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var highTempImg: UIImageView!
     @IBOutlet weak var lowTempImg: UIImageView!
     
-    
     var currentWeather: CurrentWeather!
     var longRangeForecast: LongRangeForecast!
     var longRangeForecasts = [LongRangeForecast]()
     var hourlyForecast: HourlyForecast!
     var hourlyForecasts = [HourlyForecast]()
     var favourited = false
-    
-    
     private var _segueData: SegueData!
     var segueData: SegueData {
         get {
@@ -51,8 +47,6 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             _segueData = newValue
         }
     }
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,28 +68,23 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
         downloadApiData {}
     }
 
+    
+    // Download data from API
+    
     func downloadApiData(completed: DownloadComplete) {
-        
         let currentWeatherUrl = URL(string: "\(darkSkyUrl)\(segueData.latitude),\(segueData.longitude)?units=\(Singleton.sharedInstance.unitSelectedDarkSky)")!
-        print(currentWeatherUrl)
         
         Alamofire.request(currentWeatherUrl).responseJSON { response in
             let result = response.result
-
-            
             if let dict = result.value as? Dictionary<String, AnyObject> {
                 if let offset = dict["offset"] as? Double {
                     Singleton.sharedInstance.timeZoneOffset = Int(offset) * 3600
                 }
-                
                 if let hourly = dict["hourly"] as? Dictionary<String, AnyObject> {
                     if let data = hourly["data"] as? [Dictionary<String, AnyObject>] {
-                        
                         for obj in data {
                             let forecast = HourlyForecast(hourlyDict: obj)
                             self.hourlyForecasts.append(forecast)
@@ -105,7 +94,6 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 }
                 if let daily = dict["daily"] as? Dictionary<String, AnyObject> {
                     if let data = daily["data"] as? [Dictionary<String, AnyObject>] {
-                        
                         for obj in data {
                             let forecast = LongRangeForecast(longWeatherDict: obj)
                             self.longRangeForecasts.append(forecast)
@@ -115,25 +103,22 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                     }
                 }
             }
-            
             if let array = result.value as? JSONDictionary {
                 let current = CurrentWeather(currentDict: array)
                 self.updateCurrentWeatherUI(currentWeather: current)
             }
-            
         }
         completed()
-        
     }
     
-    // tableView - long range forecast
+    
+    // TableView - long range forecast
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "longRangeForecastCell", for: indexPath) as? LongRangeForecastCell {
             let forecast = longRangeForecasts[indexPath.row]
             cell.configureCell(longRangeForecast: forecast)
             return cell
-            
         } else {
             return LongRangeForecastCell()
         }
@@ -147,30 +132,17 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         return longRangeForecasts.count
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) {
-            cell.separatorInset.right = cell.bounds.size.width
-        }
-        
-        if indexPath.row == indexPath[0] {
-            
-        }
-    }
     
-    
-    
-    // collectionView - hourly forecast
+    // CollectionView - hourly forecast
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hourlyForecastCell", for: indexPath) as? HourlyForecastCell {
-            
             let forecast = hourlyForecasts[indexPath.row]
             cell.configureCell(hourlyForecast: forecast)
             return cell
         } else {
             return HourlyForecastCell()
         }
-
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -179,12 +151,11 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return hourlyForecasts.count
-        
     }
     
     
+    // Update UI
     
-
     func updateCurrentWeatherUI(currentWeather: CurrentWeather) {
         cityNameLbl.text = segueData.cityName.capitalized
         cityNameLbl.isHidden = false
@@ -201,7 +172,6 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         dayLowTempLbl.text = "\(Int(currentWeather.lowTemp))"
         dayLowTempLbl.isHidden = false
         lowTempImg.isHidden = false
-        
         temperatureLbl.text = "\(Int(currentWeather.currentTemp))°"
         apparentTempLbl.text = "\(Int(currentWeather.apparentTemp))°"
         var precipType: String
@@ -210,7 +180,7 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         } else {
             precipType = currentWeather.precipType
         }
-        precipProbabilityLbl.text = "\(Int(currentWeather.precipPropbability * 100))% chance of \(precipType)"
+        precipProbabilityLbl.text = "Currently, there is a \(Int(currentWeather.precipPropbability * 100))% chance of \(precipType)."
         humidityLbl.text = "\(Int(currentWeather.humidity * 100))%"
         var windDirection: String
         if currentWeather.windDirection >= 0 && currentWeather.windDirection <= 90 {
@@ -222,11 +192,18 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         } else {
             windDirection = "NE"
         }
-        windSpeedLbl.text = "\(windDirection) at \(currentWeather.windSpeed) km/h"
-        pressureLbl.text = "\(currentWeather.pressure) mb"
-        
+        var windSpeedUnits: String
+        if Singleton.sharedInstance.unitSelectedDarkSky == "us" {
+            windSpeedUnits = "mph"
+        } else {
+            windSpeedUnits = "m/s"
+        }
+        windSpeedLbl.text = "\(windDirection) \(Int(currentWeather.windSpeed)) \(windSpeedUnits)"
+        pressureLbl.text = "\(Int(currentWeather.pressure)) mb"
     }
     
+    
+    // Save current location to Favourites functions
     
     func saveFavouritesData() {
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(Singleton.sharedInstance.favouritesArray, toFile: Favourites.ArchiveURL.path)
@@ -236,7 +213,6 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             os_log("Failed to save Favourites...", log: OSLog.default, type: .error)
         }
     }
-    
     
     func setFavouritesIcon() {
         let array = Singleton.sharedInstance.favouritesArray
@@ -249,13 +225,12 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     
+    // Screen press actions
     
     @IBAction func backButtonPressed(_ sender: Any) {
-        //dismiss(animated: true, completion: nil)
         performSegue(withIdentifier: "unwindToWeatherMapVC", sender: self)
     }
 
-    
     @IBAction func favouritesButtonPressed(_ sender: Any) {
         let favs = Favourites(cityName: segueData.cityName, latitude: segueData.latitude, longitude: segueData.longitude)
         
@@ -277,7 +252,6 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             favourited = true
             favouritesBtn.setImage(UIImage(named: "star-filled"), for: .normal)
         }
-        
     }
 
     @IBAction func darkSkyLogoPressed(_ sender: UITapGestureRecognizer) {

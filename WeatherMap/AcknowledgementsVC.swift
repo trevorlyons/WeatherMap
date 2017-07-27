@@ -15,6 +15,8 @@ class AcknowledgementsVC: UIViewController {
     }
 
     
+    // Screen press actions
+    
     @IBAction func backPressed(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }
