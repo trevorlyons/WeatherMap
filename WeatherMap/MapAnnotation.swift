@@ -10,70 +10,30 @@ import Foundation
 
 class MapAnnotation {
     
-    private var _latitude: Double!
-    private var _longitude: Double!
-    private var _cityName: String!
-    private var _temperature: Double!
-    private var _weatherType: String!
+    let latitude: Double
+    let longitude: Double
+    let cityName: String
+    let temperature: Double
+    let weatherType: String
     
-    var latitude: Double {
-        if _latitude == nil {
-            _latitude = 0.0
+    init(locationDict: JSONDictionary) {
+        if let coord = locationDict["coord"] as? JSONDictionary {
+            self.latitude = coord["Lat"] as? Double ?? 0.0
+            self.longitude = coord["Lon"] as? Double ?? 0.0
+        } else {
+            self.latitude = 0.0
+            self.longitude = 0.0
         }
-        return _latitude
-    }
-    
-    var longitude: Double {
-        if _longitude == nil {
-            _longitude = 0.0
+        self.cityName = locationDict["name"] as? String ?? "n/a"
+        if let main = locationDict["main"] as? JSONDictionary {
+            self.temperature = main["temp"] as? Double ?? 0.0
+        } else {
+            self.temperature = 0.0
         }
-        return _longitude
-    }
-    
-    var cityName: String {
-        if _cityName == nil {
-            _cityName = ""
-        }
-        return _cityName
-    }
-    
-    var temperature: Double {
-        if _temperature == nil {
-            _temperature = 0.0
-        }
-        return _temperature
-    }
-    
-    var weatherType: String {
-        if _weatherType == nil {
-            _weatherType = ""
-        }
-        return _weatherType
-    }
-    
-    init(locationDict: Dictionary<String, AnyObject>) {
-        if let coord = locationDict["coord"] as? Dictionary<String, AnyObject> {
-            if let Lat = coord["Lat"] as? Double {
-                self._latitude = Lat
-            }
-            if let Lon = coord["Lon"] as? Double {
-                self._longitude = Lon
-            }
-        }
-        if let name = locationDict["name"] as? String {
-            self._cityName = name
-        }
-        if let main = locationDict["main"] as? Dictionary<String, AnyObject> {
-            if let temp = main["temp"] as? Double {
-                self._temperature = temp
-            }
-        }
-        if let weather = locationDict["weather"] as? [Dictionary<String, AnyObject>] {
-            if let icon = weather[0]["icon"] as? String {
-                self._weatherType = icon
-            }
+        if let weather = locationDict["weather"] as? [JSONDictionary] {
+            self.weatherType = weather[0]["icon"] as? String ?? "n/a"
+        } else {
+            self.weatherType = "n/a"
         }
     }
-    
-    
 }

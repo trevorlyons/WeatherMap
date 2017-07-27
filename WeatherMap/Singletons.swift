@@ -19,5 +19,4 @@ class Singleton {
     var unitSelectedDarkSky: String = "si"
     var unitSelectedOWM: String = "metric"
     var languageSelected: String = "English"
-    
 }

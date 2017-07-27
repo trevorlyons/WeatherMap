@@ -21,32 +21,31 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     @IBOutlet weak var warningView: RoundedCornerView!
     
     lazy var slideInTransitioningDelegate = SlideInPresentationManager()
-    
     let locationManager = CLLocationManager()
     var currentLocation: CLLocation!
     var mapHasCenteredOnce = false
     var mapUrl: String!
     var mapAnnotation: MapAnnotation!
     var mapAnnotations = [MapAnnotation]()
-    var mapAnnotationsWithDuplicates = [MapAnnotation]()
+    
+    var oldAnnotation: Int = 0
+    var newAnnotation: Int = 0
+    
+    
+    
+    
     var matchingItems = [MKMapItem]()
     var selectedPin: MKPlacemark? = nil
     var newPin: Favourites!
     var favouritesVC: FavouritesVC!
-    
     var searchCompleter = MKLocalSearchCompleter()
     var searchResults = [MKLocalSearchCompletion]()
-    
     var zoomLevelBeforeChange: Double!
     var lowerLeftLong: Double!
     var lowerLeftLat: Double!
     var upperRightLong: Double!
     var upperRightLat: Double!
-    
     let defaults = UserDefaults.standard
-
-
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,18 +66,15 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         locationManager.requestWhenInUseAuthorization()
         locationManager.startMonitoringSignificantLocationChanges()
         
-        
         loadFavouritesData()
         searchBar.isHidden = true
         tableView.isHidden = true
         searchClipping.isHidden = true
         mapView.isRotateEnabled = false
         
-        
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(pressScreenDropPin(gesture:)))
         longPressGesture.minimumPressDuration = 0.3
         self.mapView.addGestureRecognizer(longPressGesture)
-        
         
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         tap.cancelsTouchesInView = false
@@ -88,10 +84,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         defaults.register(defaults: ["OWM" : "metric"])
         defaults.register(defaults: ["Language" : "English"])
         loadUserDefaults()
-        
-        
     }
-    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -102,13 +95,16 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         
         let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
         if launchedBefore  {
-            print("Not first launch.")
+            print("App previously launched")
         } else {
-            print("First launch, setting UserDefault.")
+            print("First launch, setting UserDefault")
             performSegue(withIdentifier: "showTutorial", sender: self)
             UserDefaults.standard.set(true, forKey: "launchedBefore")
         }
     }
+    
+    
+    // Network connection status function
     
     func updateUserInterface() {
         guard let status = Network.reachability?.status else { return }
@@ -131,12 +127,16 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     
+    // Load settings function
+    
     func loadUserDefaults() {
         Singleton.sharedInstance.unitSelectedDarkSky = defaults.string(forKey: "DarkSky")!
         Singleton.sharedInstance.unitSelectedOWM = defaults.string(forKey: "OWM")!
         Singleton.sharedInstance.languageSelected = defaults.string(forKey: "Language")!
     }
 
+    
+    // MapView functions - Location authorization and centering
     
     func locationAuthStatus() {
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
@@ -146,7 +146,6 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
             Location.sharedInstance.longitude = currentLocation.coordinate.longitude
         } else {
             locationManager.requestWhenInUseAuthorization()
-            locationAuthStatus()
         }
     }
     
@@ -168,21 +167,25 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
                 mapHasCenteredOnce = true
             }
         }
+//        let userAnnotationView = mapView.view(for: userLocation)
+//        userAnnotationView?.canShowCallout = false
     }
     
     
+    // MapView functions - Download API data and annotate mapView
     
+    func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
+        for view in views {
+            view.canShowCallout = false
+        }
+    }
     
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         zoomLevelBeforeChange = ((mapView.getZoomLevel() * 100).rounded() / 100)
-        
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        
         var apiScale: String
-        print("Zoom: \(mapView.getZoomLevel())")
-        
         if mapView.getZoomLevel() < 2 {
             mapView.setCenter(coordinate: mapView.centerCoordinate, zoomLevel: 2, animated: true)
             apiScale = "1"
@@ -208,63 +211,110 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         } else {
             apiScale = "0"
         }
-        print(apiScale)
-        
         if ((mapView.getZoomLevel() * 100).rounded() / 100) == zoomLevelBeforeChange {
-            print("don't remove annotations")
-        } else {
-            let allAnnotations = self.mapView.annotations
-            self.mapView.removeAnnotations(allAnnotations)
+//        } else {
+//            let allAnnotations = self.mapView.annotations
+//            self.mapView.removeAnnotations(allAnnotations)
         }
-
+        
+        let allAnnotations = self.mapView.annotations
+        self.mapView.removeAnnotations(allAnnotations)
+        
         let latitudeDelta = mapView.region.span.latitudeDelta
         let longitudeDelta = mapView.region.span.longitudeDelta
         let centerCoordLat = mapView.centerCoordinate.latitude
         let centerCoordLong = mapView.centerCoordinate.longitude
-        
         lowerLeftLong = (centerCoordLong - (longitudeDelta) / 2)
         lowerLeftLat = (centerCoordLat - (latitudeDelta) / 2)
         upperRightLong = (centerCoordLong + (longitudeDelta) / 2)
         upperRightLat = (centerCoordLat + (latitudeDelta) / 2)
         
-        mapUrl = "http://api.openweathermap.org/data/2.5/box/city?bbox=\(lowerLeftLong!),\(lowerLeftLat!),\(upperRightLong!),\(upperRightLat!),\(apiScale)&appid=d9edbc6106170dc5ca87733c4b46128d&units=\(Singleton.sharedInstance.unitSelectedOWM)"
+        mapUrl = "\(OWMUrl)\(lowerLeftLong!),\(lowerLeftLat!),\(upperRightLong!),\(upperRightLat!),\(apiScale)\(OWMKey)\(Singleton.sharedInstance.unitSelectedOWM)"
+        print(mapUrl)
         
         downloadMapWeatherApi {
             self.mapAnnotations = []
         }
     }
 
-    
-    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
             return nil
         }
         let reuseId = "reuseId"
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
+        
+        
+//        newAnnotation = 0
+//        oldAnnotation = 0
+//        for anno in mapView.annotations {
+//            if annotation.coordinate.latitude == anno.coordinate.latitude && annotation.coordinate.longitude == anno.coordinate.longitude {
+//                oldAnnotation += 1
+//            } else {
+//                newAnnotation += 1
+//            }
+//        }
+//        print("repeats: \(oldAnnotation)")
+//        print("new: \(newAnnotation)")
+//        if oldAnnotation <= 1 {
+//            print("TREVOR: less then 2")
+//            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+//            annotationView?.canShowCallout = false
+//            annotationView?.centerOffset = CGPoint(x: 0.0, y: -20.0)
+//            let lbl = UILabel(frame: CGRect(x: 16, y: 45, width: 30, height: 15))
+//            lbl.font = UIFont(name: "AvenirNext-Medium", size: 14)
+//            lbl.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 0.8)
+//            lbl.textAlignment = .center
+//            lbl.tag = 42
+//            annotationView?.frame = lbl.frame
+//            annotationView?.addSubview(lbl)
+//            let weatherImg = UIImageView(frame: CGRect(x: 14, y: 14, width: 30, height: 30))
+//            weatherImg.contentMode = .center
+//            weatherImg.tag = 43
+//            annotationView?.frame = weatherImg.frame
+//            annotationView?.addSubview(weatherImg)
+//        
+//        } else if oldAnnotation >= 2 {
+//            print("TREVOR: more then 2")
+//            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
+//            annotationView?.canShowCallout = false
+//            annotationView?.centerOffset = CGPoint(x: 0.0, y: -20.0)
+//            let lbl = UILabel(frame: CGRect(x: 40, y: 45, width: 30, height: 15))
+//            lbl.font = UIFont(name: "AvenirNext-Medium", size: 14)
+//            lbl.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 0.8)
+//            lbl.textAlignment = .center
+//            lbl.tag = 42
+//            annotationView?.frame = lbl.frame
+//            annotationView?.addSubview(lbl)
+//            let weatherImg = UIImageView(frame: CGRect(x: 40, y: 14, width: 30, height: 30))
+//            weatherImg.contentMode = .center
+//            weatherImg.tag = 43
+//            annotationView?.frame = weatherImg.frame
+//            annotationView?.addSubview(weatherImg)
+//            annotationView?.isHidden = true
+//        }
+        
         if annotationView == nil {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             annotationView?.canShowCallout = false
             annotationView?.centerOffset = CGPoint(x: 0.0, y: -20.0)
-            let lbl = UILabel(frame: CGRect(x: 12, y: 34, width: 35, height: 15))
-//            let lbl = UILabel(frame: CGRect(x: 16, y: 45, width: 30, height: 15))
+            let lbl = UILabel(frame: CGRect(x: 13, y: 45, width: 35, height: 15))
             lbl.font = UIFont(name: "AvenirNext-Medium", size: 14)
             lbl.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 0.8)
             lbl.textAlignment = .center
             lbl.tag = 42
             annotationView?.frame = lbl.frame
             annotationView?.addSubview(lbl)
-            let weatherImg = UIImageView(frame: CGRect(x: 12, y: 5, width: 30, height: 30))
-//            let weatherImg = UIImageView(frame: CGRect(x: 14, y: 14, width: 30, height: 30))
+            let weatherImg = UIImageView(frame: CGRect(x: 14, y: 14, width: 30, height: 30))
             weatherImg.contentMode = .center
             weatherImg.tag = 43
             annotationView?.frame = weatherImg.frame
             annotationView?.addSubview(weatherImg)
+            
         } else {
             annotationView?.annotation = annotation
         }
         let customPointAnnotation = annotation as! CustomAnnotation
-        
         var weatherIcon: String!
         if customPointAnnotation.attribute == "01d" {
             weatherIcon = "clear-day"
@@ -285,28 +335,28 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         } else {
             weatherIcon = ""
         }
-        
         let lbl = annotationView?.viewWithTag(42) as! UILabel
         lbl.text = customPointAnnotation.subtitle
         let weatherImg = annotationView?.viewWithTag(43) as! UIImageView
         weatherImg.image = UIImage(named: weatherIcon)
+
         var customPin: String!
         if customPointAnnotation.subtitle == "" {
             customPin = "locationDrop"
         } else {
-            customPin = "location"
+            customPin = "location-shadow"
         }
         annotationView?.image = UIImage(named: customPin)
         return annotationView
     }
     
-    
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        let send = SegueData(cityName: ((view.annotation?.title)!)!, latitude: (view.annotation?.coordinate.latitude)!, longitude: (view.annotation?.coordinate.longitude)!)
+        let send = SegueData(cityName: (((view.annotation?.title)!)!), latitude: (view.annotation?.coordinate.latitude)!, longitude: (view.annotation?.coordinate.longitude)!)
         performSegue(withIdentifier: "selectedCity", sender: send)
+        
+        mapView.deselectAnnotation(view.annotation, animated: false)
     }
-    
-    
+
     func downloadMapWeatherApi(completed: DownloadComplete) {
         Alamofire.request(self.mapUrl).responseJSON { response in
             let result = response.result
@@ -324,7 +374,6 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         completed()
     }
     
-    
     func annotate() {
         for location in self.mapAnnotations {
             let annotation = CustomAnnotation()
@@ -333,13 +382,13 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
             annotation.attribute = location.weatherType
             annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
             mapView.addAnnotation(annotation)
-        
         }
     }
     
     
+    // Search functions
+    // Search - TableView
     
-    // Search TableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath) as? SearchCell {
             let selectedItem = searchResults[indexPath.row]
@@ -354,7 +403,6 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         return SearchCell()
     }
     
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let selectedItem = searchResults[indexPath.row]
         if selectedItem.subtitle != "" {
@@ -363,12 +411,9 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         return 40
     }
     
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return searchResults.count
     }
-    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -377,7 +422,6 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         let search = MKLocalSearch(request: request)
         search.start { response, _ in
             guard let response = response else { return }
-
             let selectedItem = response.mapItems[0].placemark
             self.dropPinZoomIn(placemark: selectedItem)
         }
@@ -388,14 +432,8 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) {
-            cell.separatorInset.right = cell.bounds.size.width
-        }
-    }
+    // Search - Bar
     
-    
-    // SearchBar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         tableView.isHidden = false
         searchClipping.isHidden = false
@@ -418,18 +456,14 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-        
         print(error.localizedDescription)
     }
     
     
-
-    
+    // Annotate and move screen functions
     
     func dropPinZoomIn(placemark:MKPlacemark){
-        // cache the pin
         selectedPin = placemark
-        // clear existing pins
         mapView.removeAnnotations(mapView.annotations)
         let annotation = CustomAnnotation()
         annotation.coordinate = placemark.coordinate
@@ -494,38 +528,31 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     
+    // Override segue transition styles
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if let controller = segue.destination as? SettingsVC {
             slideInTransitioningDelegate.direction = .bottom
             controller.transitioningDelegate = slideInTransitioningDelegate
             controller.modalPresentationStyle = .custom
-            
         } else if let controller = segue.destination as? CityWeatherVC {
-            
             if let x = sender as? SegueData {
                 controller.segueData = x
             }
-            
             slideInTransitioningDelegate.direction = .bottom
             controller.transitioningDelegate = slideInTransitioningDelegate
             controller.modalPresentationStyle = .custom
-            
         } else if let controller = segue.destination as? FavouritesVC {
             slideInTransitioningDelegate.direction = .bottom
             controller.transitioningDelegate = slideInTransitioningDelegate
             controller.modalPresentationStyle = .custom
-            
             controller.mapPanDelegate = self
         } else if let controller = segue.destination as? TutorialVC {
             let screenSize = UIScreen.main.bounds
             let screenWidth = screenSize.width
             let screenHeight = screenSize.height
             controller.preferredContentSize = CGSize(width: screenWidth*0.9, height: screenHeight*0.7)
-            
             let popoverController = controller.popoverPresentationController
-            
             if popoverController != nil {
                 popoverController!.delegate = self
                 popoverController!.sourceView = self.view
@@ -540,6 +567,8 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     
+    // Load favourites data function
+    
     func loadFavouritesData() {
         if let favouritesData = NSKeyedUnarchiver.unarchiveObject(withFile: Favourites.ArchiveURL.path) as? [Favourites] {
             Singleton.sharedInstance.favouritesArray = favouritesData
@@ -547,8 +576,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     
-
-    
+    // Screen press actions
     
     @IBAction func unwindToWeatherMapVC(segue: UIStoryboardSegue) {
     }
@@ -569,7 +597,35 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     @IBAction func locatePressed(_ sender: UITapGestureRecognizer) {
-        centerMapOnLocation(location: currentLocation)
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedAlways, .authorizedWhenInUse:
+            locationManager.delegate = self
+            locationAuthStatus()
+            centerMapOnLocation(location: currentLocation)
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .denied:
+            let alertController = UIAlertController (title: "", message: "User location currently not activated. Change to 'While Using the App' to pan to user location", preferredStyle: .alert)
+            
+            let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+                guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
+                    return
+                }
+                if UIApplication.shared.canOpenURL(settingsUrl) {
+                    UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                        print("Settings opened: \(success)")
+                    })
+                }
+            }
+            alertController.addAction(settingsAction)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true, completion: nil)
+            
+        case .restricted:
+            break
+        }
     }
 
     

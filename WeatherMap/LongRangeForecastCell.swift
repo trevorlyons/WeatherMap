@@ -12,7 +12,6 @@ class LongRangeForecastCell: UITableViewCell {
 
     @IBOutlet weak var currentWeatherImg: UIImageView!
     @IBOutlet weak var dayLbl: UILabel!
-    //@IBOutlet weak var weatherTypeLbl: UILabel!
     @IBOutlet weak var precipLbl: UILabel!
     @IBOutlet weak var cloudsLbl: UILabel!
     @IBOutlet weak var dailyHighTempLbl: UILabel!
@@ -29,7 +28,6 @@ class LongRangeForecastCell: UITableViewCell {
         
         currentWeatherImg.image = UIImage(named: weatherImg)
         dayLbl.text = longRangeForecast.date
-        //weatherTypeLbl.text = longRangeForecast.weatherDesc
         precipLbl.text = "\(Int((longRangeForecast.precip)*100))%"
         cloudsLbl.text = "\(Int((longRangeForecast.clouds)*100))%"
         dailyHighTempLbl.text = "\(Int(longRangeForecast.highTemp))"

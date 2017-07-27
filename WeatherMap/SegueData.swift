@@ -10,32 +10,13 @@ import Foundation
 
 class SegueData {
     
-    private var _cityName: String!
-    //private var _temperature: String!
-    private var _latitude: Double!
-    private var _longitude: Double!
-    
-    var cityName: String {
-        return _cityName
-    }
-    
-//    var temperature: String {
-//        return _temperature
-//    }
-    
-    var latitude: Double {
-        return _latitude
-    }
-    
-    var longitude: Double {
-        return _longitude
-    }
-    
+    let cityName: String
+    let latitude: Double
+    let longitude: Double
     
     init(cityName: String, latitude: Double, longitude: Double) {
-        _cityName = cityName
-//        _temperature = temperature
-        _latitude = latitude
-        _longitude = longitude
+        self.cityName = cityName
+        self.latitude = latitude
+        self.longitude = longitude
     }
 }

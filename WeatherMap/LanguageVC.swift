@@ -31,6 +31,9 @@ class LanguageVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         readDefaults()
     }
     
+    
+    // TableView
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "languages", for: indexPath) as? LanguagesCell {
             let language = languages[indexPath.row]
@@ -70,13 +73,17 @@ class LanguageVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     
+    // Read existing default settings
+    
     func readDefaults() {
         self.languages[0].selector = defaults.bool(forKey: "setEnglish")
         self.languages[1].selector = defaults.bool(forKey: "setSpanish")
     }
     
+    
+    // Screen press actions
+    
     @IBAction func backPressed(_ sender: UITapGestureRecognizer) {
         performSegue(withIdentifier: "unwindSegueToSettings", sender: self)
     }
-    
 }

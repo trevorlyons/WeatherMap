@@ -72,7 +72,7 @@ class CurrentWeather {
 extension Date {
     func currentDate() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
+        dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
         dateFormatter.timeZone = TimeZone(secondsFromGMT: Singleton.sharedInstance.timeZoneOffset)
         return dateFormatter.string(from: self)
