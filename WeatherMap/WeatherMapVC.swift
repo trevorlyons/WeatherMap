@@ -167,8 +167,6 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
                 mapHasCenteredOnce = true
             }
         }
-//        let userAnnotationView = mapView.view(for: userLocation)
-//        userAnnotationView?.canShowCallout = false
     }
     
     
@@ -178,10 +176,6 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         for view in views {
             view.canShowCallout = false
         }
-    }
-    
-    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-        zoomLevelBeforeChange = ((mapView.getZoomLevel() * 100).rounded() / 100)
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
@@ -211,11 +205,6 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         } else {
             apiScale = "0"
         }
-        if ((mapView.getZoomLevel() * 100).rounded() / 100) == zoomLevelBeforeChange {
-//        } else {
-//            let allAnnotations = self.mapView.annotations
-//            self.mapView.removeAnnotations(allAnnotations)
-        }
         
         let allAnnotations = self.mapView.annotations
         self.mapView.removeAnnotations(allAnnotations)
@@ -230,7 +219,6 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         upperRightLat = (centerCoordLat + (latitudeDelta) / 2)
         
         mapUrl = "\(OWMUrl)\(lowerLeftLong!),\(lowerLeftLat!),\(upperRightLong!),\(upperRightLat!),\(apiScale)\(OWMKey)\(Singleton.sharedInstance.unitSelectedOWM)"
-        print(mapUrl)
         
         downloadMapWeatherApi {
             self.mapAnnotations = []
@@ -243,57 +231,6 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         }
         let reuseId = "reuseId"
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
-        
-        
-//        newAnnotation = 0
-//        oldAnnotation = 0
-//        for anno in mapView.annotations {
-//            if annotation.coordinate.latitude == anno.coordinate.latitude && annotation.coordinate.longitude == anno.coordinate.longitude {
-//                oldAnnotation += 1
-//            } else {
-//                newAnnotation += 1
-//            }
-//        }
-//        print("repeats: \(oldAnnotation)")
-//        print("new: \(newAnnotation)")
-//        if oldAnnotation <= 1 {
-//            print("TREVOR: less then 2")
-//            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-//            annotationView?.canShowCallout = false
-//            annotationView?.centerOffset = CGPoint(x: 0.0, y: -20.0)
-//            let lbl = UILabel(frame: CGRect(x: 16, y: 45, width: 30, height: 15))
-//            lbl.font = UIFont(name: "AvenirNext-Medium", size: 14)
-//            lbl.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 0.8)
-//            lbl.textAlignment = .center
-//            lbl.tag = 42
-//            annotationView?.frame = lbl.frame
-//            annotationView?.addSubview(lbl)
-//            let weatherImg = UIImageView(frame: CGRect(x: 14, y: 14, width: 30, height: 30))
-//            weatherImg.contentMode = .center
-//            weatherImg.tag = 43
-//            annotationView?.frame = weatherImg.frame
-//            annotationView?.addSubview(weatherImg)
-//        
-//        } else if oldAnnotation >= 2 {
-//            print("TREVOR: more then 2")
-//            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
-//            annotationView?.canShowCallout = false
-//            annotationView?.centerOffset = CGPoint(x: 0.0, y: -20.0)
-//            let lbl = UILabel(frame: CGRect(x: 40, y: 45, width: 30, height: 15))
-//            lbl.font = UIFont(name: "AvenirNext-Medium", size: 14)
-//            lbl.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 0.8)
-//            lbl.textAlignment = .center
-//            lbl.tag = 42
-//            annotationView?.frame = lbl.frame
-//            annotationView?.addSubview(lbl)
-//            let weatherImg = UIImageView(frame: CGRect(x: 40, y: 14, width: 30, height: 30))
-//            weatherImg.contentMode = .center
-//            weatherImg.tag = 43
-//            annotationView?.frame = weatherImg.frame
-//            annotationView?.addSubview(weatherImg)
-//            annotationView?.isHidden = true
-//        }
-        
         if annotationView == nil {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             annotationView?.canShowCallout = false
@@ -310,7 +247,6 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
             weatherImg.tag = 43
             annotationView?.frame = weatherImg.frame
             annotationView?.addSubview(weatherImg)
-            
         } else {
             annotationView?.annotation = annotation
         }
@@ -339,7 +275,6 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         lbl.text = customPointAnnotation.subtitle
         let weatherImg = annotationView?.viewWithTag(43) as! UIImageView
         weatherImg.image = UIImage(named: weatherIcon)
-
         var customPin: String!
         if customPointAnnotation.subtitle == "" {
             customPin = "locationDrop"
