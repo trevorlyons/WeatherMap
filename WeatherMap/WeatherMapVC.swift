@@ -27,13 +27,6 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     var mapUrl: String!
     var mapAnnotation: MapAnnotation!
     var mapAnnotations = [MapAnnotation]()
-    
-    var oldAnnotation: Int = 0
-    var newAnnotation: Int = 0
-    
-    
-    
-    
     var matchingItems = [MKMapItem]()
     var selectedPin: MKPlacemark? = nil
     var newPin: Favourites!
@@ -206,9 +199,12 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
             apiScale = "0"
         }
         
-        let allAnnotations = self.mapView.annotations
-        self.mapView.removeAnnotations(allAnnotations)
-        
+        for annotation in mapView.annotations {
+            if annotation.subtitle! != "" {
+                self.mapView.removeAnnotation(annotation)
+            }
+        }
+
         let latitudeDelta = mapView.region.span.latitudeDelta
         let longitudeDelta = mapView.region.span.longitudeDelta
         let centerCoordLat = mapView.centerCoordinate.latitude
