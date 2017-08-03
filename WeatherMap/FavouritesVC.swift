@@ -8,6 +8,7 @@
 
 import UIKit
 import os.log
+import Alamofire
 
 protocol HandleMapPan {
     func dropPinAndPan(location: Favourites)
@@ -25,16 +26,40 @@ class FavouritesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         tableView.delegate = self
         tableView.dataSource = self
-        self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 1))
+        
+        self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 0))
     }
     
+//    override func viewDidAppear(_ animated: Bool) {
+//        self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 1))
+//        
+//    }
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        
+//        self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 1))
+//    }
     
-    // Tableview
+    
+    // Tableview & Weather API Download
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "favouritesCell", for: indexPath) as? FavouritesCell {
             let favourites = Singleton.sharedInstance.favouritesArray[indexPath.row]
-            cell.configureCell(favourites: favourites)
+            cell.configureCityName(favourites: favourites)
+            func downloadApiData(completed: DownloadComplete) {
+                let currentWeatherUrl = URL(string: "\(darkSkyUrl)\(favourites.latitude),\(favourites.longitude)?units=\(Singleton.sharedInstance.unitSelectedDarkSky)")!
+                
+                Alamofire.request(currentWeatherUrl).responseJSON { response in
+                    let result = response.result
+                    if let array = result.value as? JSONDictionary {
+                        let favouritesWeather = FavouritesWeather(favouritesDict: array)
+                        cell.configureWeatherData(favouritesWeather: favouritesWeather)
+                    }
+                }
+                completed()
+            }
+            downloadApiData { print("Trevor: here")}
             return cell
         } else {
             return FavouritesCell()
@@ -56,11 +81,16 @@ class FavouritesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         self.performSegue(withIdentifier: "favouritesCityWeather", sender: send)
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             Singleton.sharedInstance.favouritesArray.remove(at: indexPath.row)
-            self.tableView.reloadData()
+            tableView.deleteRows(at: [indexPath], with: .none)
             saveFavouritesData()
+//            self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 1))
         }
     }
     

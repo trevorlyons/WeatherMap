@@ -30,8 +30,8 @@ class LongRangeForecastCell: UITableViewCell {
         dayLbl.text = longRangeForecast.date
         precipLbl.text = "\(Int((longRangeForecast.precip)*100))%"
         cloudsLbl.text = "\(Int((longRangeForecast.clouds)*100))%"
-        dailyHighTempLbl.text = "\(Int(longRangeForecast.highTemp))"
-        dailyLowTempLbl.text = "\(Int(longRangeForecast.lowTemp))"
+        dailyHighTempLbl.text = "\(Int(longRangeForecast.highTemp))°"
+        dailyLowTempLbl.text = "\(Int(longRangeForecast.lowTemp))°"
     }
 
 }

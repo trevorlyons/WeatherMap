@@ -9,12 +9,17 @@
 import UIKit
 import MessageUI
 
+protocol HandleRemoveAnnotations {
+    func removeAndReplaceAnnotations()
+}
+
 class SettingsVC: UIViewController, MFMailComposeViewControllerDelegate, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var unitTypeLbl: UILabel!
     @IBOutlet weak var langSelectedLbl: UILabel!
     
     lazy var slideInTransitioningDelegate = SlideInPresentationManager()
+    var removeAnnotationsDelegate: HandleRemoveAnnotations!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +35,7 @@ class SettingsVC: UIViewController, MFMailComposeViewControllerDelegate, UIPopov
         let mail = MFMailComposeViewController()
         mail.mailComposeDelegate = self
         mail.setSubject("Weather Map Feedback")
-        mail.setToRecipients(["trevorjclyons@hotmail.com"])
+        mail.setToRecipients(["weather.maps.feedback@gmail.com"])
         return mail
     }
 
@@ -96,7 +101,7 @@ class SettingsVC: UIViewController, MFMailComposeViewControllerDelegate, UIPopov
     }
     
     @IBAction func rateAppPressed(_ sender: UITapGestureRecognizer) {
-        rateApp(appId: "id959379869") { success in
+        rateApp(appId: "id1265065569") { success in
             print("RateApp \(success)")
         }
     }
@@ -129,6 +134,7 @@ class SettingsVC: UIViewController, MFMailComposeViewControllerDelegate, UIPopov
     @IBAction func unwindToSettings(segue: UIStoryboardSegue) {
         unitTypeLbl.text = Singleton.sharedInstance.unitSelectedOWM.capitalized
         langSelectedLbl.text = Singleton.sharedInstance.languageSelected
+        removeAnnotationsDelegate!.removeAndReplaceAnnotations()
     }
     
 
