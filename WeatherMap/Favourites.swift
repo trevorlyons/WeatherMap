@@ -14,7 +14,7 @@ class Favourites: NSObject, NSCoding {
     let cityName: String
     let latitude: Double
     let longitude: Double
-    
+
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
     static let ArchiveURL = DocumentsDirectory.appendingPathComponent("favouritesArray")
     
@@ -25,7 +25,6 @@ class Favourites: NSObject, NSCoding {
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        
         guard
             let cityName = aDecoder.decodeObject(forKey: "cityName") as? String
             else { return nil }
@@ -39,6 +38,7 @@ class Favourites: NSObject, NSCoding {
         aCoder.encode(latitude, forKey: "latitude")
         aCoder.encode(longitude, forKey: "longitude")
     }
+
 }
 
 

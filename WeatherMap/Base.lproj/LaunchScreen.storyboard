@@ -32,9 +32,9 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UDq-RW-Tkm">
-                                        <rect key="frame" x="7" y="174" width="149" height="32.5"/>
+                                        <rect key="frame" x="1.5" y="174" width="160" height="32.5"/>
                                         <attributedString key="attributedText">
-                                            <fragment content="Weather Map">
+                                            <fragment content="Weather Maps">
                                                 <attributes>
                                                     <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <font key="NSFont" size="36" name="SignPainter-HouseScript"/>

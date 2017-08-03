@@ -12,9 +12,16 @@ class FavouritesCell: UITableViewCell {
     
 
     @IBOutlet weak var favouritesLbl: UILabel!
-
+    @IBOutlet weak var weatherImg: UIImageView!
+    @IBOutlet weak var temperatureLbl: UILabel!
     
-    func configureCell(favourites: Favourites) {
+    
+    func configureCityName(favourites: Favourites) {
         favouritesLbl.text = favourites.cityName
+    }
+    
+    func configureWeatherData(favouritesWeather: FavouritesWeather) {
+        weatherImg.image = UIImage(named: favouritesWeather.weatherType)
+        temperatureLbl.text = "\(Int(favouritesWeather.currentTemp))°"
     }
 }

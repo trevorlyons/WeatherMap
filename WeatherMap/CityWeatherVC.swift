@@ -166,10 +166,10 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         currentWeatherType.text = currentWeather.weatherDesc
         currentWeatherType.isHidden = false
         currentWeatherImg.image = UIImage(named: "\(currentWeather.weatherType)L")
-        dayHighTempLbl.text = "\(Int(currentWeather.highTemp))"
+        dayHighTempLbl.text = "\(Int(currentWeather.highTemp))°"
         dayHighTempLbl.isHidden = false
         highTempImg.isHidden = false
-        dayLowTempLbl.text = "\(Int(currentWeather.lowTemp))"
+        dayLowTempLbl.text = "\(Int(currentWeather.lowTemp))°"
         dayLowTempLbl.isHidden = false
         lowTempImg.isHidden = false
         temperatureLbl.text = "\(Int(currentWeather.currentTemp))°"

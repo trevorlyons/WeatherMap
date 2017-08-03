@@ -20,12 +20,22 @@ class HourlyForecastCell: UICollectionViewCell {
         hourLbl.text = hourlyForecast.time
         currentWeatherImg.image = UIImage(named: hourlyForecast.weatherDesc)
         currentTempLbl.text = "\(Int(hourlyForecast.temp))°"
-        if hourlyForecast.precip >= 0.00 && hourlyForecast.precip < 0.2 {
+        var precipPercent: String
+        if hourlyForecast.precip == 0.00 {
             precipLbl.isHidden = true
+            precipPercent = ""
+        } else if hourlyForecast.precip > 0.00 && hourlyForecast.precip < 0.1 {
+            precipLbl.isHidden = false
+            precipPercent = "5%"
         } else {
             precipLbl.isHidden = false
+            precipPercent = "\(roundToTens(x: (hourlyForecast.precip*100)))%"
         }
-        precipLbl.text = "\(Int(hourlyForecast.precip * 100))%"
+        precipLbl.text = precipPercent
+    }
+    
+    func roundToTens(x : Double) -> Int {
+        return 10 * Int(round(x / 10.0))
     }
     
 }

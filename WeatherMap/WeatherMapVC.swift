@@ -12,7 +12,7 @@ import Alamofire
 import CoreLocation
 
 
-class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, HandleMapPan, MKLocalSearchCompleterDelegate, UIPopoverPresentationControllerDelegate {
+class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, HandleMapPan, MKLocalSearchCompleterDelegate, UIPopoverPresentationControllerDelegate, UIGestureRecognizerDelegate, HandleRemoveAnnotations {
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -27,6 +27,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     var mapUrl: String!
     var mapAnnotation: MapAnnotation!
     var mapAnnotations = [MapAnnotation]()
+    var onlyNewMapAnnotations = [MapAnnotation]()
     var matchingItems = [MKMapItem]()
     var selectedPin: MKPlacemark? = nil
     var newPin: Favourites!
@@ -71,7 +72,19 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         tap.cancelsTouchesInView = false
+        tap.numberOfTapsRequired = 1
         self.view.addGestureRecognizer(tap)
+        
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.didDoubleTapMap(_:)))
+        doubleTapGesture.numberOfTapsRequired = 2
+        doubleTapGesture.delegate = self
+        mapView.addGestureRecognizer(doubleTapGesture)
+        
+        tap.require(toFail: doubleTapGesture)
+        
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.didPinchMap(_:)))
+        pinchGesture.delegate = self
+        mapView.addGestureRecognizer(pinchGesture)
         
         defaults.register(defaults: ["DarkSky" : "si"])
         defaults.register(defaults: ["OWM" : "metric"])
@@ -163,6 +176,43 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     
+    // MapView functions - Gesture recognizers
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    func didPinchMap(_ sender: UIGestureRecognizer) {
+        if sender.state == .ended {
+            removeAnnotations()
+        }
+    }
+    
+    func didDoubleTapMap(_ sender: UIGestureRecognizer) {
+        if sender.state == .ended {
+            removeAnnotations()
+        }
+    }
+    
+    func removeAnnotations() {
+        let allAnnotations = self.mapView.annotations
+        self.mapView.removeAnnotations(allAnnotations)
+        self.mapAnnotations = []
+        self.onlyNewMapAnnotations = []
+    }
+    
+    func removeAndReplaceAnnotations() {
+        let allAnnotations = self.mapView.annotations
+        self.mapView.removeAnnotations(allAnnotations)
+        self.mapAnnotations = []
+        self.onlyNewMapAnnotations = []
+        getMapUrl()
+        downloadMapWeatherApi() {
+            self.onlyNewMapAnnotations = []
+        }
+    }
+    
+    
     // MapView functions - Download API data and annotate mapView
     
     func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
@@ -172,6 +222,13 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        getMapUrl()
+        downloadMapWeatherApi {
+            self.onlyNewMapAnnotations = []
+        }
+    }
+    
+    func getMapUrl() {
         var apiScale: String
         if mapView.getZoomLevel() < 2 {
             mapView.setCenter(coordinate: mapView.centerCoordinate, zoomLevel: 2, animated: true)
@@ -190,21 +247,17 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
             apiScale = "9"
         } else if mapView.getZoomLevel() >= 8.5 && mapView.getZoomLevel() <= 9.5 {
             apiScale = "11"
-        } else if mapView.getZoomLevel() >= 9.5 && mapView.getZoomLevel() <= 10.0 {
+        } else if mapView.getZoomLevel() >= 9.5 && mapView.getZoomLevel() <= 10.5 {
+            apiScale = "12"
+        } else if mapView.getZoomLevel() >= 10.5 && mapView.getZoomLevel() <= 13.0 {
             apiScale = "13"
-        } else if mapView.getZoomLevel() > 10 {
-            mapView.setCenter(coordinate: mapView.centerCoordinate, zoomLevel: 10, animated: true)
+        } else if mapView.getZoomLevel() > 13.0 {
+            mapView.setCenter(coordinate: mapView.centerCoordinate, zoomLevel: 13, animated: true)
             apiScale = "13"
         } else {
             apiScale = "0"
         }
         
-        for annotation in mapView.annotations {
-            if annotation.subtitle! != "" {
-                self.mapView.removeAnnotation(annotation)
-            }
-        }
-
         let latitudeDelta = mapView.region.span.latitudeDelta
         let longitudeDelta = mapView.region.span.longitudeDelta
         let centerCoordLat = mapView.centerCoordinate.latitude
@@ -215,10 +268,6 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         upperRightLat = (centerCoordLat + (latitudeDelta) / 2)
         
         mapUrl = "\(OWMUrl)\(lowerLeftLong!),\(lowerLeftLat!),\(upperRightLong!),\(upperRightLat!),\(apiScale)\(OWMKey)\(Singleton.sharedInstance.unitSelectedOWM)"
-        
-        downloadMapWeatherApi {
-            self.mapAnnotations = []
-        }
     }
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -252,11 +301,11 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
             weatherIcon = "clear-day"
         } else if customPointAnnotation.attribute == "01n" {
             weatherIcon = "clear-night"
-        } else if customPointAnnotation.attribute == "02d" {
+        } else if customPointAnnotation.attribute == "02d" || customPointAnnotation.attribute == "03d" {
             weatherIcon = "partly-cloudy-day"
-        } else if customPointAnnotation.attribute == "02n" {
+        } else if customPointAnnotation.attribute == "02n" || customPointAnnotation.attribute == "03n" {
             weatherIcon = "partly-cloudy-night"
-        } else if customPointAnnotation.attribute == "03d" || customPointAnnotation.attribute == "03n" || customPointAnnotation.attribute == "04d" || customPointAnnotation.attribute == "04n" {
+        } else if customPointAnnotation.attribute == "04d" || customPointAnnotation.attribute == "04n" {
             weatherIcon = "cloudy"
         } else if customPointAnnotation.attribute == "09d" || customPointAnnotation.attribute == "09n" || customPointAnnotation.attribute == "10d" || customPointAnnotation.attribute == "10n" || customPointAnnotation.attribute == "11d" || customPointAnnotation.attribute == "11n" {
             weatherIcon = "rain"
@@ -275,6 +324,17 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         if customPointAnnotation.subtitle == "" {
             customPin = "locationDrop"
         } else {
+//            for anno in Singleton.sharedInstance.favouritesArray {
+//                print("\(customPointAnnotation.title!) - \(anno.cityName)")
+//                print("\(customPointAnnotation.coordinate.latitude) - \(anno.latitude)")
+//                if anno.latitude == customPointAnnotation.coordinate.latitude {
+//                    customPin = "location-favourite"
+//                    lbl.textColor = UIColor(white: 1, alpha: 1)
+//                } else {
+//                    customPin = "location-shadow"
+//                    lbl.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 0.8)
+//                }
+//            }
             customPin = "location-shadow"
         }
         annotationView?.image = UIImage(named: customPin)
@@ -296,7 +356,11 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
                     
                     for obj in list {
                         let annotation = MapAnnotation(locationDict: obj)
-                        self.mapAnnotations.append(annotation)
+                        if self.mapAnnotations.contains(where: { $0.cityName == annotation.cityName }) {
+                        } else {
+                            self.mapAnnotations.append(annotation)
+                            self.onlyNewMapAnnotations.append(annotation)
+                        }
                     }
                     self.annotate()
                 }
@@ -306,7 +370,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     func annotate() {
-        for location in self.mapAnnotations {
+        for location in self.onlyNewMapAnnotations {
             let annotation = CustomAnnotation()
             annotation.title = location.cityName
             annotation.subtitle = "\(Int(location.temperature))°"
@@ -394,8 +458,8 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     // Annotate and move screen functions
     
     func dropPinZoomIn(placemark:MKPlacemark){
+        removeAnnotations()
         selectedPin = placemark
-        mapView.removeAnnotations(mapView.annotations)
         let annotation = CustomAnnotation()
         annotation.coordinate = placemark.coordinate
         annotation.title = placemark.name
@@ -408,8 +472,8 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     func dropPinAndPan(location: Favourites) {
+        removeAnnotations()
         self.newPin = location
-        mapView.removeAnnotations(mapView.annotations)
         let annotation = CustomAnnotation()
         annotation.coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude)
         annotation.title = location.cityName
@@ -466,6 +530,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
             slideInTransitioningDelegate.direction = .bottom
             controller.transitioningDelegate = slideInTransitioningDelegate
             controller.modalPresentationStyle = .custom
+            controller.removeAnnotationsDelegate = self
         } else if let controller = segue.destination as? CityWeatherVC {
             if let x = sender as? SegueData {
                 controller.segueData = x
@@ -490,6 +555,8 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
                 popoverController!.sourceRect = CGRect(x: self.view.bounds.midX, y: (self.view.bounds.midY)+50, width: 0, height: 0)
                 popoverController!.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
             }
+//        } else if let controller = segue.destination as? MeasurementUnitsVC {
+//            controller.removeAnnotationsDelegate = self
         }
     }
     
