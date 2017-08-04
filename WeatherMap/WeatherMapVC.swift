@@ -555,8 +555,6 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
                 popoverController!.sourceRect = CGRect(x: self.view.bounds.midX, y: (self.view.bounds.midY)+50, width: 0, height: 0)
                 popoverController!.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
             }
-//        } else if let controller = segue.destination as? MeasurementUnitsVC {
-//            controller.removeAnnotationsDelegate = self
         }
     }
     

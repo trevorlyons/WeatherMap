@@ -30,16 +30,6 @@ class FavouritesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 0))
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 1))
-//        
-//    }
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        
-//        self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 1))
-//    }
-    
     
     // Tableview & Weather API Download
     
@@ -59,7 +49,7 @@ class FavouritesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 }
                 completed()
             }
-            downloadApiData { print("Trevor: here")}
+            downloadApiData {}
             return cell
         } else {
             return FavouritesCell()
