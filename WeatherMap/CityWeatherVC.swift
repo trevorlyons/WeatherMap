@@ -32,6 +32,10 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var pressureLbl: UILabel!
     @IBOutlet weak var highTempImg: UIImageView!
     @IBOutlet weak var lowTempImg: UIImageView!
+    @IBOutlet weak var uvIndexLbl: UILabel!
+    @IBOutlet weak var uvIndexHighLbl: UILabel!
+    @IBOutlet weak var sunriseLbl: UILabel!
+    @IBOutlet weak var sunsetLbl: UILabel!
     
     var currentWeather: CurrentWeather!
     var longRangeForecast: LongRangeForecast!
@@ -83,6 +87,20 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 if let offset = dict["offset"] as? Double {
                     Singleton.sharedInstance.timeZoneOffset = Int(offset) * 3600
                 }
+                if let daily = dict["daily"] as? Dictionary<String, AnyObject> {
+                    if let data = daily["data"] as? [Dictionary<String, AnyObject>] {
+                        for obj in data {
+                            let forecast = LongRangeForecast(longWeatherDict: obj)
+                            self.longRangeForecasts.append(forecast)
+                            let sunrise = HourlyForecast(sunriseDict: obj)
+                            self.hourlyForecasts.append(sunrise)
+                            let sunset = HourlyForecast(sunsetDict: obj)
+                            self.hourlyForecasts.append(sunset)
+                        }
+                        self.longRangeForecasts.remove(at: 0)
+                        self.tableView.reloadData()
+                    }
+                }
                 if let hourly = dict["hourly"] as? Dictionary<String, AnyObject> {
                     if let data = hourly["data"] as? [Dictionary<String, AnyObject>] {
                         for obj in data {
@@ -90,16 +108,10 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                             self.hourlyForecasts.append(forecast)
                         }
                         self.collectionView.reloadData()
-                    }
-                }
-                if let daily = dict["daily"] as? Dictionary<String, AnyObject> {
-                    if let data = daily["data"] as? [Dictionary<String, AnyObject>] {
-                        for obj in data {
-                            let forecast = LongRangeForecast(longWeatherDict: obj)
-                            self.longRangeForecasts.append(forecast)
+                        self.hourlyForecasts.sort() { ($0.time) < ($1.time) }
+                        if self.hourlyForecasts[0].weatherDesc == "sunset" || self.hourlyForecasts[0].weatherDesc == "sunrise" {
+                            self.hourlyForecasts.remove(at: 0)
                         }
-                        self.longRangeForecasts.remove(at: 0)
-                        self.tableView.reloadData()
                     }
                 }
             }
@@ -150,7 +162,7 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return hourlyForecasts.count
+        return hourlyForecasts.count - 11
     }
     
     
@@ -180,7 +192,7 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         } else {
             precipType = currentWeather.precipType
         }
-        precipProbabilityLbl.text = "Currently, there is a \(Int(currentWeather.precipPropbability * 100))% chance of \(precipType)."
+        precipProbabilityLbl.text = "At this moment the chance of \(precipType) is \(Int(currentWeather.precipPropbability * 100))%"
         humidityLbl.text = "\(Int(currentWeather.humidity * 100))%"
         var windDirection: String
         if currentWeather.windDirection >= 0 && currentWeather.windDirection <= 90 {
@@ -200,6 +212,10 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         }
         windSpeedLbl.text = "\(windDirection) \(Int(currentWeather.windSpeed)) \(windSpeedUnits)"
         pressureLbl.text = "\(Int(currentWeather.pressure)) mb"
+        uvIndexLbl.text = "\(Int(currentWeather.uvIndex))"
+        uvIndexHighLbl.text = "Today's high UV Index is \(Int(currentWeather.uvIndexHigh)) at \(currentWeather.uvIndexHighTime)"
+        sunriseLbl.text = "\(currentWeather.sunrise)"
+        sunsetLbl.text = "\(currentWeather.sunset)"
     }
     
     
@@ -239,7 +255,6 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 if obj.cityName.contains("\(segueData.cityName)") {
                     if let index = Singleton.sharedInstance.favouritesArray.index(of: obj) {
                         Singleton.sharedInstance.favouritesArray.remove(at: index)
-                        print("Trevor: remove index")
                     }
                 }
             }
@@ -248,6 +263,7 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             favouritesBtn.setImage(UIImage(named: "Star"), for: .normal)
         } else {
             Singleton.sharedInstance.favouritesArray.append(favs)
+            Singleton.sharedInstance.favouritesArray.sort() { ($0.cityName) < ($1.cityName) }
             saveFavouritesData()
             favourited = true
             favouritesBtn.setImage(UIImage(named: "star-filled"), for: .normal)

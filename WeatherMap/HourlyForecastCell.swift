@@ -17,7 +17,17 @@ class HourlyForecastCell: UICollectionViewCell {
     
     func configureCell(hourlyForecast: HourlyForecast) {
         
-        hourLbl.text = hourlyForecast.time
+        var time: String
+        if hourlyForecast.weatherDesc == "sunset" || hourlyForecast.weatherDesc == "sunrise" {
+            let unixConvertedDate = Date(timeIntervalSince1970: hourlyForecast.time)
+            time = unixConvertedDate.computeTime()
+            currentTempLbl.isHidden = true
+        } else {
+            let unixConvertedDate = Date(timeIntervalSince1970: hourlyForecast.time)
+            time = unixConvertedDate.hourOfTheDay()
+            currentTempLbl.isHidden = false
+        }
+        hourLbl.text = time
         currentWeatherImg.image = UIImage(named: hourlyForecast.weatherDesc)
         currentTempLbl.text = "\(Int(hourlyForecast.temp))°"
         var precipPercent: String

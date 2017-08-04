@@ -17,7 +17,7 @@ class FavouritesCell: UITableViewCell {
     
     
     func configureCityName(favourites: Favourites) {
-        favouritesLbl.text = favourites.cityName
+        favouritesLbl.text = "\(favourites.cityName)"
     }
     
     func configureWeatherData(favouritesWeather: FavouritesWeather) {

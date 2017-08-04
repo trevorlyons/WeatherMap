@@ -65,10 +65,10 @@
                                 <rect key="frame" x="0.0" y="72" width="375" height="1617"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rtK-Kz-Dyp" userLabel="Container View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1139.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1169.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfM-Az-SX8" userLabel="Weclome" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="4" width="365" height="283"/>
+                                                <rect key="frame" x="5" y="4" width="365" height="313"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Weather Maps!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ref-n5-ygp">
                                                         <rect key="frame" x="74" y="10" width="217.5" height="23.5"/>
@@ -76,13 +76,20 @@
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TMm-jy-pty">
-                                                        <rect key="frame" x="30" y="38" width="320" height="235"/>
-                                                        <string key="text">Weather Maps is designed to assist with trip planning. It's now easy to scan an area to see where the best sunny spot for the day, or upcoming vacation, will be! 
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TMm-jy-pty">
+                                                        <rect key="frame" x="30" y="38" width="320" height="265"/>
+                                                        <attributedString key="attributedText">
+                                                            <fragment>
+                                                                <string key="content">Weather Maps is designed to assist with trip planning. It's now easy to scan an area to see where the best sunny spot for the day, or upcoming vacation, will be! 
 This tutorial will walk you through using all of Weather Maps features quickly and easily.
 You can skip it with the ‘x’ above and review it later in our settings section or scroll through now.</string>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
+                                                                <attributes>
+                                                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <font key="NSFont" size="16" name="AvenirNext-Regular"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="15" tighteningFactorForTruncation="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clear-day" translatesAutoresizingMaskIntoConstraints="NO" id="hKQ-eG-5Hb">
@@ -106,7 +113,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HFL-dP-obb" userLabel="Pan and Zoom" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="295" width="365" height="224"/>
+                                                <rect key="frame" x="5" y="325" width="365" height="224"/>
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DbH-z0-Qsl">
                                                         <rect key="frame" x="30" y="10" width="320" height="82"/>
@@ -190,7 +197,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OdI-U0-QQ4" userLabel="Custom Pins" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="527" width="365" height="123.5"/>
+                                                <rect key="frame" x="5" y="557" width="365" height="123.5"/>
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Gc-VV-sCS">
                                                         <rect key="frame" x="30" y="10" width="320" height="103.5"/>
@@ -231,7 +238,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rIY-o4-yji" userLabel="Favourites" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="805" width="365" height="324.5"/>
+                                                <rect key="frame" x="5" y="835" width="365" height="324.5"/>
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J7b-SL-JE1">
                                                         <rect key="frame" x="30" y="10" width="320" height="103.5"/>
@@ -311,7 +318,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mqm-fk-FhU" userLabel="Search" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="658" width="365" height="139"/>
+                                                <rect key="frame" x="5" y="688" width="365" height="139"/>
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DgI-oD-TZa">
                                                         <rect key="frame" x="30" y="10" width="320" height="82"/>
@@ -514,7 +521,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                         </constraints>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="709-GU-ANm" userLabel="search">
-                                        <rect key="frame" x="12" y="24.5" width="30" height="30"/>
+                                        <rect key="frame" x="12" y="25" width="30" height="30"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="aen-pz-2DN"/>
@@ -525,7 +532,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S8n-xG-53C" userLabel="settings">
-                                        <rect key="frame" x="332" y="24.5" width="30" height="30"/>
+                                        <rect key="frame" x="332" y="25" width="30" height="30"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="RAb-xT-IAO"/>
@@ -814,7 +821,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L1x-bI-6kJ" userLabel="breakline">
                                                 <rect key="frame" x="40" y="65" width="285" height="1"/>
-                                                <color key="backgroundColor" red="0.18251711130000001" green="0.25237369539999999" blue="0.5139318705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.18431372549019609" green="0.25098039215686274" blue="0.51372549019607838" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="0.5" id="jQf-7p-qx1"/>
                                                 </constraints>
@@ -1467,7 +1474,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="644" y="636"/>
+            <point key="canvasLocation" x="1615" y="636"/>
         </scene>
         <!--AcknowledgementsVC-->
         <scene sceneID="jql-1e-o9B">
@@ -1632,21 +1639,24 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                         <viewControllerLayoutGuide type="bottom" id="xSl-TB-Mwd"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cIw-DX-xUz">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7JE-Wa-xVK" userLabel="Background">
-                                <rect key="frame" x="0.0" y="28" width="375" height="996"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="1272"/>
                                 <color key="backgroundColor" red="0.13725490200000001" green="0.18039215689999999" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XkB-bc-mGa" userLabel="Header" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="IGb-k6-Thg">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="IGb-k6-Thg">
                                         <rect key="frame" x="10" y="8" width="355" height="25"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k29-2P-Uby">
                                                 <rect key="frame" x="0.0" y="0.0" width="28" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="28" id="H1r-Gv-esd"/>
+                                                </constraints>
                                                 <state key="normal" image="Down Arrow">
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="calibratedRGB"/>
                                                 </state>
@@ -1662,6 +1672,9 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VvP-5l-DRT">
                                                 <rect key="frame" x="327" y="0.0" width="28" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="28" id="Ot7-gf-rte"/>
+                                                </constraints>
                                                 <state key="normal" image="Star"/>
                                                 <connections>
                                                     <action selector="favouritesButtonPressed:" destination="DP8-Ry-I28" eventType="touchUpInside" id="1TJ-ZR-Qwh"/>
@@ -1685,10 +1698,10 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KKr-Sh-HKw">
-                                <rect key="frame" x="0.0" y="40" width="375" height="984"/>
+                                <rect key="frame" x="0.0" y="40" width="375" height="1260"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MzT-OT-MRP" userLabel="Container View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="880"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1020"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CPb-oo-I8b" userLabel="Current Weather" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
                                                 <rect key="frame" x="5" y="8" width="365" height="90"/>
@@ -1862,12 +1875,23 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                                                 </view>
                                                                             </subviews>
                                                                         </stackView>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="33" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZa-4W-jQV">
-                                                                            <rect key="frame" x="7.5" y="65.5" width="15" height="16.5"/>
-                                                                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="12"/>
-                                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
+                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9xk-6A-lVY">
+                                                                            <rect key="frame" x="5" y="65.5" width="20" height="15"/>
+                                                                            <subviews>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="33" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZa-4W-jQV">
+                                                                                    <rect key="frame" x="2.5" y="-1" width="15" height="16.5"/>
+                                                                                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="12"/>
+                                                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                            </subviews>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="15" id="D5T-zc-dp2"/>
+                                                                                <constraint firstAttribute="width" constant="20" id="Isi-mJ-aD6"/>
+                                                                                <constraint firstItem="GZa-4W-jQV" firstAttribute="centerY" secondItem="9xk-6A-lVY" secondAttribute="centerY" id="iHI-MK-5bq"/>
+                                                                                <constraint firstItem="GZa-4W-jQV" firstAttribute="centerX" secondItem="9xk-6A-lVY" secondAttribute="centerX" id="scZ-S8-Sz9"/>
+                                                                            </constraints>
+                                                                        </view>
                                                                     </subviews>
                                                                 </stackView>
                                                             </subviews>
@@ -2149,10 +2173,10 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                 </variation>
                                             </tableView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sU9-PF-SkT" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="641" width="365" height="231"/>
+                                                <rect key="frame" x="5" y="641" width="365" height="371"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Akt-2g-3iZ">
-                                                        <rect key="frame" x="8" y="178" width="349" height="48"/>
+                                                        <rect key="frame" x="8" y="318" width="349" height="48"/>
                                                         <subviews>
                                                             <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DarkSkyLogo" translatesAutoresizingMaskIntoConstraints="NO" id="ddf-VM-vXi">
                                                                 <rect key="frame" x="132" y="6.5" width="85" height="35"/>
@@ -2172,7 +2196,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yTp-kd-UHg">
-                                                        <rect key="frame" x="82" y="20" width="201.5" height="143"/>
+                                                        <rect key="frame" x="82" y="20" width="201.5" height="163.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PrecipProbability" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RSK-xt-hKr">
                                                                 <rect key="frame" x="42.5" y="0.0" width="117" height="20.5"/>
@@ -2181,10 +2205,10 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Qj9-Wn-Fc1">
-                                                                <rect key="frame" x="0.0" y="30.5" width="201.5" height="112.5"/>
+                                                                <rect key="frame" x="0.0" y="30.5" width="201.5" height="133"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xK5-bb-qfR">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="75.5" height="112.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="75.5" height="133"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="Ws7-ab-gET">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="75.5" height="61.5"/>
@@ -2210,16 +2234,22 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                                                 </subviews>
                                                                             </stackView>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="RHK-Wd-Wzi">
-                                                                                <rect key="frame" x="13.5" y="71.5" width="62" height="41"/>
+                                                                                <rect key="frame" x="9.5" y="71.5" width="66" height="61.5"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wind:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kkc-fh-nla">
-                                                                                        <rect key="frame" x="20.5" y="0.0" width="41.5" height="20.5"/>
+                                                                                        <rect key="frame" x="24.5" y="0.0" width="41.5" height="20.5"/>
                                                                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pressure:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Byr-O6-ZUz">
-                                                                                        <rect key="frame" x="0.0" y="20.5" width="62" height="20.5"/>
+                                                                                        <rect key="frame" x="4" y="20.5" width="62" height="20.5"/>
+                                                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                                                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                        <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                    </label>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UV Index:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlQ-ed-y8D">
+                                                                                        <rect key="frame" x="0.0" y="41" width="66" height="20.5"/>
                                                                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2229,7 +2259,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                                         </subviews>
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="chL-w6-QrX">
-                                                                        <rect key="frame" x="85.5" y="0.0" width="116" height="112.5"/>
+                                                                        <rect key="frame" x="85.5" y="0.0" width="116" height="133"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="K1x-ME-ZRm">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="104" height="61.5"/>
@@ -2255,7 +2285,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                                                 </subviews>
                                                                             </stackView>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="JuE-ku-79G">
-                                                                                <rect key="frame" x="0.0" y="71.5" width="116" height="41"/>
+                                                                                <rect key="frame" x="0.0" y="71.5" width="116" height="61.5"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wind Speed/ Dir" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OC8-yo-wzn">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="116" height="20.5"/>
@@ -2269,8 +2299,71 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                     </label>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="uvindex" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kmD-ho-oB5">
+                                                                                        <rect key="frame" x="0.0" y="41" width="55" height="20.5"/>
+                                                                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
+                                                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                        <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                    </label>
                                                                                 </subviews>
                                                                             </stackView>
+                                                                        </subviews>
+                                                                    </stackView>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eba-SI-9NP">
+                                                        <rect key="frame" x="40" y="198.5" width="285" height="1"/>
+                                                        <color key="backgroundColor" red="0.098258013369999994" green="0.12990228549999999" blue="0.31750724720000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="0.5" id="6Vc-JH-nlI"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="IfV-Xr-BbC">
+                                                        <rect key="frame" x="106" y="214.5" width="153.5" height="71.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UV Index Daily High" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jRw-87-7fF">
+                                                                <rect key="frame" x="8" y="0.0" width="138" height="20.5"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FpD-5G-1kx">
+                                                                <rect key="frame" x="0.0" y="30.5" width="153.5" height="41"/>
+                                                                <subviews>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="Zsk-iw-tsd">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="55" height="41"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunrise:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4D-oe-ikk">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="55" height="20.5"/>
+                                                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunset:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rMu-QG-Rir">
+                                                                                <rect key="frame" x="4.5" y="20.5" width="50.5" height="20.5"/>
+                                                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                    </stackView>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="T7y-52-wDo">
+                                                                        <rect key="frame" x="65" y="0.0" width="88.5" height="41"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunrise Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bz-lW-3DI">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="88.5" height="20.5"/>
+                                                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
+                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunset Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJM-kg-UNk">
+                                                                                <rect key="frame" x="0.0" y="20.5" width="84" height="20.5"/>
+                                                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
+                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
                                                                         </subviews>
                                                                     </stackView>
                                                                 </subviews>
@@ -2280,22 +2373,32 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.27450980390000002" green="0.31372549020000001" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
+                                                    <constraint firstItem="IfV-Xr-BbC" firstAttribute="top" secondItem="eba-SI-9NP" secondAttribute="bottom" constant="15" id="1XF-I9-zU7"/>
                                                     <constraint firstItem="yTp-kd-UHg" firstAttribute="top" secondItem="sU9-PF-SkT" secondAttribute="top" constant="20" id="5xn-cU-1pg"/>
                                                     <constraint firstItem="yTp-kd-UHg" firstAttribute="centerX" secondItem="sU9-PF-SkT" secondAttribute="centerX" id="EmD-QU-xDh"/>
+                                                    <constraint firstAttribute="trailing" secondItem="eba-SI-9NP" secondAttribute="trailing" constant="40" id="Fxt-j4-S6a"/>
                                                     <constraint firstAttribute="bottom" secondItem="Akt-2g-3iZ" secondAttribute="bottom" constant="5" id="Suw-Mb-5n9"/>
                                                     <constraint firstAttribute="trailing" secondItem="Akt-2g-3iZ" secondAttribute="trailing" constant="8" id="Y1i-OL-Qav"/>
                                                     <constraint firstItem="yTp-kd-UHg" firstAttribute="centerY" secondItem="sU9-PF-SkT" secondAttribute="centerY" id="Yqq-5O-iFx"/>
+                                                    <constraint firstItem="yTp-kd-UHg" firstAttribute="top" secondItem="sU9-PF-SkT" secondAttribute="top" constant="20" id="b81-qc-KHx">
+                                                        <variation key="widthClass=regular" constant="25"/>
+                                                    </constraint>
+                                                    <constraint firstItem="eba-SI-9NP" firstAttribute="top" secondItem="yTp-kd-UHg" secondAttribute="bottom" constant="15" id="cI1-4f-vup"/>
+                                                    <constraint firstItem="eba-SI-9NP" firstAttribute="leading" secondItem="sU9-PF-SkT" secondAttribute="leading" constant="40" id="hcW-pG-c9c"/>
+                                                    <constraint firstItem="IfV-Xr-BbC" firstAttribute="centerX" secondItem="sU9-PF-SkT" secondAttribute="centerX" id="o8L-j4-gs6"/>
                                                     <constraint firstItem="Akt-2g-3iZ" firstAttribute="leading" secondItem="sU9-PF-SkT" secondAttribute="leading" constant="8" id="sUx-YS-1lB"/>
                                                 </constraints>
                                                 <variation key="default">
                                                     <mask key="constraints">
                                                         <exclude reference="Yqq-5O-iFx"/>
+                                                        <exclude reference="b81-qc-KHx"/>
                                                     </mask>
                                                 </variation>
                                                 <variation key="widthClass=regular">
                                                     <mask key="constraints">
                                                         <exclude reference="5xn-cU-1pg"/>
-                                                        <include reference="Yqq-5O-iFx"/>
+                                                        <exclude reference="Yqq-5O-iFx"/>
+                                                        <include reference="b81-qc-KHx"/>
                                                     </mask>
                                                 </variation>
                                             </view>
@@ -2344,7 +2447,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                             <constraint firstItem="sU9-PF-SkT" firstAttribute="leading" secondItem="H88-WK-gC7" secondAttribute="trailing" constant="5" id="vFO-ZE-Edu">
                                                 <variation key="widthClass=regular" constant="10"/>
                                             </constraint>
-                                            <constraint firstAttribute="height" constant="880" id="y7k-g7-u9z">
+                                            <constraint firstAttribute="height" constant="1020" id="y7k-g7-u9z">
                                                 <variation key="widthClass=regular" constant="600"/>
                                             </constraint>
                                             <constraint firstItem="H88-WK-gC7" firstAttribute="top" secondItem="OnC-ra-yrM" secondAttribute="bottom" constant="8" id="yAC-sv-JED">
@@ -2432,7 +2535,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="1024"/>
+                    <size key="freeformSize" width="375" height="1300"/>
                     <connections>
                         <outlet property="apparentTempLbl" destination="FQJ-YS-Xz9" id="zHh-Km-A5y"/>
                         <outlet property="bannerView" destination="OnC-ra-yrM" id="ywm-SH-raF"/>
@@ -2450,8 +2553,12 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                         <outlet property="lowTempImg" destination="U8s-dF-7hf" id="Ghi-CF-04a"/>
                         <outlet property="precipProbabilityLbl" destination="RSK-xt-hKr" id="Th6-qT-5sf"/>
                         <outlet property="pressureLbl" destination="Dvp-T9-cmp" id="gI9-eq-mHh"/>
+                        <outlet property="sunriseLbl" destination="7bz-lW-3DI" id="ygO-N8-PqD"/>
+                        <outlet property="sunsetLbl" destination="iJM-kg-UNk" id="0cH-Wd-PTG"/>
                         <outlet property="tableView" destination="H88-WK-gC7" id="xVL-4H-7RK"/>
                         <outlet property="temperatureLbl" destination="Cxr-le-TqU" id="1Mx-Ie-feI"/>
+                        <outlet property="uvIndexHighLbl" destination="jRw-87-7fF" id="R54-o3-6rl"/>
+                        <outlet property="uvIndexLbl" destination="kmD-ho-oB5" id="5ol-J0-OAn"/>
                         <outlet property="windSpeedLbl" destination="OC8-yo-wzn" id="Z2w-15-m9P"/>
                         <segue destination="rHs-uK-iwK" kind="unwind" identifier="unwindToWeatherMapVC" unwindAction="unwindToWeatherMapVCWithSegue:" id="Et8-F0-Ll5"/>
                     </connections>
@@ -2527,11 +2634,11 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                             <rect key="frame" x="0.0" y="0.0" width="365" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="g0C-OP-hcK">
-                                                    <rect key="frame" x="25" y="7.5" width="325" height="35"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="g0C-OP-hcK">
+                                                    <rect key="frame" x="15" y="7.5" width="335" height="35"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="S3D-M9-6is">
-                                                            <rect key="frame" x="0.0" y="0.0" width="242" height="35"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="S3D-M9-6is">
+                                                            <rect key="frame" x="0.0" y="0.0" width="268" height="35"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eYf-c1-JIw" customClass="RoundViewNoShadow" customModule="WeatherMap" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
@@ -2552,25 +2659,25 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="59b-3l-KjL">
-                                                                    <rect key="frame" x="42" y="0.0" width="200" height="35"/>
+                                                                    <rect key="frame" x="46" y="0.0" width="222" height="35"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Santiago De Compostela" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tmh-QR-YqU">
-                                                                            <rect key="frame" x="0.0" y="7.5" width="172.5" height="20.5"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Santiago De Compostela" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tmh-QR-YqU">
+                                                                            <rect key="frame" x="0.0" y="7.5" width="222" height="20.5"/>
                                                                             <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="200" id="OiH-EJ-JzN"/>
+                                                                        <constraint firstItem="Tmh-QR-YqU" firstAttribute="leading" secondItem="59b-3l-KjL" secondAttribute="leading" id="Eb0-PJ-Yq0"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="Tmh-QR-YqU" secondAttribute="trailing" id="dyQ-zP-0pz"/>
                                                                         <constraint firstItem="Tmh-QR-YqU" firstAttribute="centerY" secondItem="59b-3l-KjL" secondAttribute="centerY" id="gRu-8v-dPW"/>
-                                                                        <constraint firstItem="Tmh-QR-YqU" firstAttribute="leading" secondItem="59b-3l-KjL" secondAttribute="leading" id="wUb-w0-3nq"/>
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
                                                         </stackView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="w1q-QA-9GV">
-                                                            <rect key="frame" x="272" y="0.0" width="53" height="35"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="w1q-QA-9GV">
+                                                            <rect key="frame" x="275" y="0.0" width="60" height="35"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y2W-HI-uiE">
                                                                     <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
@@ -2590,18 +2697,28 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                                     </constraints>
                                                                 </view>
                                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Right Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="2sA-bs-dPw">
-                                                                    <rect key="frame" x="45" y="0.0" width="8" height="35"/>
+                                                                    <rect key="frame" x="40" y="0.0" width="20" height="35"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="20" id="jWv-J9-gg2"/>
+                                                                    </constraints>
                                                                 </imageView>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="2sA-bs-dPw" secondAttribute="trailing" id="lRh-BC-3zh"/>
+                                                            </constraints>
                                                         </stackView>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="w1q-QA-9GV" secondAttribute="trailing" id="9Kx-gI-Yf4"/>
+                                                        <constraint firstItem="S3D-M9-6is" firstAttribute="leading" secondItem="g0C-OP-hcK" secondAttribute="leading" id="VnV-c4-Aa4"/>
+                                                    </constraints>
                                                 </stackView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.27450980390000002" green="0.31372549020000001" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="g0C-OP-hcK" secondAttribute="trailing" constant="15" id="GPb-uN-kox"/>
                                                 <constraint firstItem="g0C-OP-hcK" firstAttribute="centerY" secondItem="lVK-gg-dLo" secondAttribute="centerY" id="JcC-Bd-Bx4"/>
-                                                <constraint firstItem="g0C-OP-hcK" firstAttribute="leading" secondItem="lVK-gg-dLo" secondAttribute="leading" constant="25" id="e5d-lN-Hiu"/>
+                                                <constraint firstItem="g0C-OP-hcK" firstAttribute="leading" secondItem="lVK-gg-dLo" secondAttribute="leading" constant="15" id="e5d-lN-Hiu"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.27450980390000002" green="0.31372549020000001" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -2665,8 +2782,8 @@ You can skip it with the ‘x’ above and review it later in our settings secti
         <image name="x" width="10" height="10"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wly-6O-07e"/>
-        <segue reference="TkP-V9-xtA"/>
         <segue reference="Bcs-JS-6t0"/>
+        <segue reference="dBw-uK-HAv"/>
+        <segue reference="M9i-Ad-Jim"/>
     </inferredMetricsTieBreakers>
 </document>
