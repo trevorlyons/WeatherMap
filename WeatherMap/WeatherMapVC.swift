@@ -146,10 +146,14 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     
     func locationAuthStatus() {
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
-            currentLocation = locationManager.location
-            mapView.showsUserLocation = true
-            Location.sharedInstance.latitude = currentLocation.coordinate.latitude
-            Location.sharedInstance.longitude = currentLocation.coordinate.longitude
+            if self.locationManager.location != nil {
+                currentLocation = locationManager.location
+                mapView.showsUserLocation = true
+                Location.sharedInstance.latitude = currentLocation.coordinate.latitude
+                Location.sharedInstance.longitude = currentLocation.coordinate.longitude
+            } else {
+                print("error")
+            }
         } else {
             locationManager.requestWhenInUseAuthorization()
         }
@@ -159,6 +163,10 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         if status == CLAuthorizationStatus.authorizedWhenInUse {
             mapView.showsUserLocation = true
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error while updating location " + error.localizedDescription)
     }
     
     func centerMapOnLocation(location: CLLocation) {
@@ -595,13 +603,12 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     @IBAction func locatePressed(_ sender: UITapGestureRecognizer) {
         switch CLLocationManager.authorizationStatus() {
         case .authorizedAlways, .authorizedWhenInUse:
-            locationManager.delegate = self
             locationAuthStatus()
             centerMapOnLocation(location: currentLocation)
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
         case .denied:
-            let alertController = UIAlertController (title: "", message: "User location currently not activated. Change to 'While Using the App' to pan to user location", preferredStyle: .alert)
+            let alertController = UIAlertController (title: "", message: "User Location is currently not activated. Change to 'While Using the App' to pan to user location.", preferredStyle: .alert)
             
             let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
                 guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {

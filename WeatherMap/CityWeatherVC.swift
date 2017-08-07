@@ -109,8 +109,19 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                         }
                         self.collectionView.reloadData()
                         self.hourlyForecasts.sort() { ($0.time) < ($1.time) }
-                        if self.hourlyForecasts[0].weatherDesc == "sunset" || self.hourlyForecasts[0].weatherDesc == "sunrise" {
+                        
+                        if self.hourlyForecasts[0].time == self.hourlyForecasts[1].time {
+                            self.hourlyForecasts = self.hourlyForecasts.filter() { $0.weatherDesc != "sunrise" }
+                            self.hourlyForecasts = self.hourlyForecasts.filter() { $0.weatherDesc != "sunset" }
+                        } else if self.hourlyForecasts[0].weatherDesc == "sunrise" && self.hourlyForecasts[1].weatherDesc == "sunset" {
+                            print("sunrise/ sunset")
+                            self.hourlyForecasts.removeFirst(2)
+                            self.hourlyForecasts.removeLast(10)
+                        } else if self.hourlyForecasts[0].weatherDesc == "sunrise" {
                             self.hourlyForecasts.remove(at: 0)
+                            self.hourlyForecasts.removeLast(11)
+                        } else {
+                            self.hourlyForecasts.removeLast(12)
                         }
                     }
                 }
@@ -162,7 +173,7 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return hourlyForecasts.count - 11
+        return hourlyForecasts.count
     }
     
     
@@ -277,6 +288,16 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             UIApplication.shared.open(url!, options: [:], completionHandler: nil)
         } else {
             UIApplication.shared.openURL(url!)
+        }
+    }
+}
+
+extension Array where Element: Equatable {
+    
+    // Remove first collection element that is equal to the given `object`:
+    mutating func remove(object: Element) {
+        if let index = index(of: object) {
+            remove(at: index)
         }
     }
 }
