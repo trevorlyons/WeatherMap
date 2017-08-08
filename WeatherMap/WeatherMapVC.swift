@@ -12,7 +12,7 @@ import Alamofire
 import CoreLocation
 
 
-class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, HandleMapPan, MKLocalSearchCompleterDelegate, UIPopoverPresentationControllerDelegate, UIGestureRecognizerDelegate, HandleRemoveAnnotations {
+class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, HandleMapPan, MKLocalSearchCompleterDelegate, UIPopoverPresentationControllerDelegate, UIGestureRecognizerDelegate, HandleRemoveAnnotations, deleteAnnotation, deleteAnnotationFavourites {
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -209,6 +209,12 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         self.onlyNewMapAnnotations = []
     }
     
+    func removeAnnotationsForFavourites() {
+        let allAnnotations = self.mapView.annotations
+        self.mapView.removeAnnotations(allAnnotations)
+        annotateAll()
+    }
+    
     func removeAndReplaceAnnotations() {
         let allAnnotations = self.mapView.annotations
         self.mapView.removeAnnotations(allAnnotations)
@@ -287,7 +293,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         if annotationView == nil {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             annotationView?.canShowCallout = false
-            annotationView?.centerOffset = CGPoint(x: 0.0, y: -20.0)
+            annotationView?.centerOffset = CGPoint(x: 3.0, y: -33.0)
             let lbl = UILabel(frame: CGRect(x: 13, y: 45, width: 35, height: 15))
             lbl.font = UIFont(name: "AvenirNext-Medium", size: 14)
             lbl.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 0.8)
@@ -300,6 +306,12 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
             weatherImg.tag = 43
             annotationView?.frame = weatherImg.frame
             annotationView?.addSubview(weatherImg)
+            let favouriteTop = UIImageView(frame: CGRect(x: 12, y: -1, width: 40, height: 30))
+            favouriteTop.contentMode = .center
+            favouriteTop.tag = 44
+            annotationView?.frame = favouriteTop.frame
+            annotationView?.addSubview(favouriteTop)
+            favouriteTop.isHidden = true
         } else {
             annotationView?.annotation = annotation
         }
@@ -328,22 +340,26 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         lbl.text = customPointAnnotation.subtitle
         let weatherImg = annotationView?.viewWithTag(43) as! UIImageView
         weatherImg.image = UIImage(named: weatherIcon)
+        let favouriteTop = annotationView?.viewWithTag(44) as! UIImageView
+        favouriteTop.image = UIImage(named: "favourite-top")
         var customPin: String!
         if customPointAnnotation.subtitle == "" {
             customPin = "locationDrop"
+            favouriteTop.isHidden = true
+        } else if Singleton.sharedInstance.favouritesArray.count > 0 {
+            for anno in Singleton.sharedInstance.favouritesArray {
+                if Int(anno.latitude) == Int(annotation.coordinate.latitude) && Int(anno.longitude) == Int(annotation.coordinate.longitude) && anno.cityName == annotation.title!! {
+                    customPin = "location-shadow"
+                    favouriteTop.isHidden = false
+                    break
+                } else {
+                    customPin = "location-shadow"
+                    favouriteTop.isHidden = true
+                }
+            }
         } else {
-//            for anno in Singleton.sharedInstance.favouritesArray {
-//                print("\(customPointAnnotation.title!) - \(anno.cityName)")
-//                print("\(customPointAnnotation.coordinate.latitude) - \(anno.latitude)")
-//                if anno.latitude == customPointAnnotation.coordinate.latitude {
-//                    customPin = "location-favourite"
-//                    lbl.textColor = UIColor(white: 1, alpha: 1)
-//                } else {
-//                    customPin = "location-shadow"
-//                    lbl.textColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 0.8)
-//                }
-//            }
             customPin = "location-shadow"
+            favouriteTop.isHidden = true
         }
         annotationView?.image = UIImage(named: customPin)
         return annotationView
@@ -379,6 +395,17 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     
     func annotate() {
         for location in self.onlyNewMapAnnotations {
+            let annotation = CustomAnnotation()
+            annotation.title = location.cityName
+            annotation.subtitle = "\(Int(location.temperature))°"
+            annotation.attribute = location.weatherType
+            annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+            mapView.addAnnotation(annotation)
+        }
+    }
+    
+    func annotateAll() {
+        for location in self.mapAnnotations {
             let annotation = CustomAnnotation()
             annotation.title = location.cityName
             annotation.subtitle = "\(Int(location.temperature))°"
@@ -546,11 +573,13 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
             slideInTransitioningDelegate.direction = .bottom
             controller.transitioningDelegate = slideInTransitioningDelegate
             controller.modalPresentationStyle = .custom
+            controller.deleteAnnotationsDelegate = self
         } else if let controller = segue.destination as? FavouritesVC {
             slideInTransitioningDelegate.direction = .bottom
             controller.transitioningDelegate = slideInTransitioningDelegate
             controller.modalPresentationStyle = .custom
             controller.mapPanDelegate = self
+            controller.deleteAnnotationsDelegate = self
         } else if let controller = segue.destination as? TutorialVC {
             let screenSize = UIScreen.main.bounds
             let screenWidth = screenSize.width
@@ -608,7 +637,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
         case .denied:
-            let alertController = UIAlertController (title: "", message: "User Location is currently not activated. Change to 'While Using the App' to pan to user location.", preferredStyle: .alert)
+            let alertController = UIAlertController (title: "", message: "User Location is currently not activated. Go to settings and change to 'while using the app' to pan to user location.", preferredStyle: .alert)
             
             let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
                 guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {

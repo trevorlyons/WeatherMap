@@ -1,4 +1,4 @@
-//
+
 //  CityWeatherVC.swift
 //  WeatherMap
 //
@@ -10,6 +10,10 @@ import UIKit
 import Alamofire
 import os.log
 import GoogleMobileAds
+
+protocol deleteAnnotation {
+    func removeAnnotationsForFavourites()
+}
 
 class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
 
@@ -43,6 +47,7 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     var hourlyForecast: HourlyForecast!
     var hourlyForecasts = [HourlyForecast]()
     var favourited = false
+    var deleteAnnotationsDelegate: deleteAnnotation!
     private var _segueData: SegueData!
     var segueData: SegueData {
         get {
@@ -244,7 +249,7 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     func setFavouritesIcon() {
         let array = Singleton.sharedInstance.favouritesArray
         for obj in array {
-            if obj.cityName.contains("\(segueData.cityName)") {
+            if obj.latitude == segueData.latitude && obj.longitude == segueData.longitude && obj.cityName == segueData.cityName {
                 favourited = true
                 favouritesBtn.setImage(UIImage(named: "star-filled"), for: .normal)
             }
@@ -262,19 +267,24 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         let favs = Favourites(cityName: segueData.cityName, latitude: segueData.latitude, longitude: segueData.longitude)
         
         if favourited == true {
+            
             for obj in Singleton.sharedInstance.favouritesArray {
-                if obj.cityName.contains("\(segueData.cityName)") {
+                if obj.latitude == segueData.latitude && obj.longitude == segueData.longitude && obj.cityName == segueData.cityName {
                     if let index = Singleton.sharedInstance.favouritesArray.index(of: obj) {
+                        
                         Singleton.sharedInstance.favouritesArray.remove(at: index)
+                        
                     }
                 }
             }
+            deleteAnnotationsDelegate.removeAnnotationsForFavourites()
             saveFavouritesData()
             favourited = false
             favouritesBtn.setImage(UIImage(named: "Star"), for: .normal)
-        } else {
+        } else if favourited == false {
             Singleton.sharedInstance.favouritesArray.append(favs)
             Singleton.sharedInstance.favouritesArray.sort() { ($0.cityName) < ($1.cityName) }
+            deleteAnnotationsDelegate.removeAnnotationsForFavourites()
             saveFavouritesData()
             favourited = true
             favouritesBtn.setImage(UIImage(named: "star-filled"), for: .normal)
@@ -288,16 +298,6 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             UIApplication.shared.open(url!, options: [:], completionHandler: nil)
         } else {
             UIApplication.shared.openURL(url!)
-        }
-    }
-}
-
-extension Array where Element: Equatable {
-    
-    // Remove first collection element that is equal to the given `object`:
-    mutating func remove(object: Element) {
-        if let index = index(of: object) {
-            remove(at: index)
         }
     }
 }

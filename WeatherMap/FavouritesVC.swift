@@ -14,12 +14,18 @@ protocol HandleMapPan {
     func dropPinAndPan(location: Favourites)
 }
 
+protocol deleteAnnotationFavourites {
+    func removeAnnotationsForFavourites()
+}
+
+
 class FavouritesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     
     lazy var slideInTransitioningDelegate = SlideInPresentationManager()
     var mapPanDelegate: HandleMapPan!
+    var deleteAnnotationsDelegate: deleteAnnotationFavourites!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,8 +85,8 @@ class FavouritesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         if editingStyle == .delete {
             Singleton.sharedInstance.favouritesArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .none)
+            deleteAnnotationsDelegate.removeAnnotationsForFavourites()
             saveFavouritesData()
-//            self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 1))
         }
     }
     
