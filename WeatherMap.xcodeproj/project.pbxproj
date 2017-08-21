@@ -18,6 +18,8 @@
 		8C271D3F1ED30B1B00803A36 /* FavouritesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C271D3E1ED30B1B00803A36 /* FavouritesCell.swift */; };
 		8C271D411ED30C5B00803A36 /* Favourites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C271D401ED30C5B00803A36 /* Favourites.swift */; };
 		8C2EB57C1EEECDAC002D536A /* RoundedCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2EB57B1EEECDAC002D536A /* RoundedCornerView.swift */; };
+		8C30218F1F4A105F0038A7D6 /* TempChartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C30218E1F4A105E0038A7D6 /* TempChartVC.swift */; };
+		8C3021911F4A107E0038A7D6 /* RainChartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3021901F4A107E0038A7D6 /* RainChartVC.swift */; };
 		8C321B901EC1A2D9009B9EB4 /* LongRangeForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C321B8F1EC1A2D9009B9EB4 /* LongRangeForecast.swift */; };
 		8C321B921EC1AB98009B9EB4 /* HourlyForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C321B911EC1AB98009B9EB4 /* HourlyForecast.swift */; };
 		8C45E7141EBA2437006E6B91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C45E7131EBA2437006E6B91 /* AppDelegate.swift */; };
@@ -71,6 +73,8 @@
 		8C271D3E1ED30B1B00803A36 /* FavouritesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouritesCell.swift; sourceTree = "<group>"; };
 		8C271D401ED30C5B00803A36 /* Favourites.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favourites.swift; sourceTree = "<group>"; };
 		8C2EB57B1EEECDAC002D536A /* RoundedCornerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedCornerView.swift; sourceTree = "<group>"; };
+		8C30218E1F4A105E0038A7D6 /* TempChartVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TempChartVC.swift; sourceTree = "<group>"; };
+		8C3021901F4A107E0038A7D6 /* RainChartVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RainChartVC.swift; sourceTree = "<group>"; };
 		8C321B8F1EC1A2D9009B9EB4 /* LongRangeForecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LongRangeForecast.swift; sourceTree = "<group>"; };
 		8C321B911EC1AB98009B9EB4 /* HourlyForecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourlyForecast.swift; sourceTree = "<group>"; };
 		8C45E7101EBA2437006E6B91 /* WeatherMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,6 +141,8 @@
 				8CA5FD001F13F1F40039B764 /* LanguageVC.swift */,
 				8CA5FCFE1F13E5220039B764 /* AcknowledgementsVC.swift */,
 				8C74781F1F1B928900DE487D /* TutorialVC.swift */,
+				8C30218E1F4A105E0038A7D6 /* TempChartVC.swift */,
+				8C3021901F4A107E0038A7D6 /* RainChartVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -398,6 +404,7 @@
 				8C05A9511F3090BA00EDD900 /* FavouritesWeather.swift in Sources */,
 				8CA5FD011F13F1F40039B764 /* LanguageVC.swift in Sources */,
 				8C271D3D1ED308B300803A36 /* FavouritesVC.swift in Sources */,
+				8C30218F1F4A105F0038A7D6 /* TempChartVC.swift in Sources */,
 				8C9372EA1EC4496A00BFDBD9 /* Location.swift in Sources */,
 				8C321B921EC1AB98009B9EB4 /* HourlyForecast.swift in Sources */,
 				8C271D3F1ED30B1B00803A36 /* FavouritesCell.swift in Sources */,
@@ -410,6 +417,7 @@
 				8CB2A7D01EEED0FB00ABD5EA /* TableRoundedCornerView.swift in Sources */,
 				8CA5FD031F13F3F80039B764 /* Languages.swift in Sources */,
 				8CB2A7D21EEED11700ABD5EA /* CollectionRoundedCornerView.swift in Sources */,
+				8C3021911F4A107E0038A7D6 /* RainChartVC.swift in Sources */,
 				8C05A9531F31063700EDD900 /* RoundViewNoShadow.swift in Sources */,
 				8CA5FCFF1F13E5220039B764 /* AcknowledgementsVC.swift in Sources */,
 				8C9372EE1EC4D05400BFDBD9 /* MapAnnotation.swift in Sources */,
