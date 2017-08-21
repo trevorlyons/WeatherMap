@@ -15,7 +15,7 @@ protocol deleteAnnotation {
     func removeAnnotationsForFavourites()
 }
 
-class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate {
 
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -40,6 +40,8 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var uvIndexHighLbl: UILabel!
     @IBOutlet weak var sunriseLbl: UILabel!
     @IBOutlet weak var sunsetLbl: UILabel!
+    @IBOutlet weak var tempChartView: UIView!
+    @IBOutlet weak var rainChartView: UIView!
     
     var currentWeather: CurrentWeather!
     var longRangeForecast: LongRangeForecast!
@@ -257,6 +259,27 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     
+    // Override segue transition styles
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let screenSize = UIScreen.main.bounds
+        let screenWidth = screenSize.width
+        if let controller = segue.destination as? TempChartVC {
+            controller.preferredContentSize = CGSize(width: screenWidth*0.85, height: 200)
+            let popoverController = controller.popoverPresentationController
+            if popoverController != nil {
+                popoverController?.backgroundColor = UIColor(red: 56/255, green: 65/255, blue: 117/255, alpha: 1)
+                popoverController!.delegate = self
+                popoverController!.sourceView = tempChartView
+                popoverController!.sourceRect = tempChartView.bounds
+            }
+        }
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return .none
+    }
+    
     // Screen press actions
     
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -299,5 +322,12 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         } else {
             UIApplication.shared.openURL(url!)
         }
+    }
+    
+    @IBAction func tempChartPressed(_ sender: UITapGestureRecognizer) {
+        performSegue(withIdentifier: "showTempChart", sender: self)
+    }
+    
+    @IBAction func rainChartPressed(_ sender: UITapGestureRecognizer) {
     }
 }
