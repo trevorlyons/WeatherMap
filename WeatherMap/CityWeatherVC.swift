@@ -87,7 +87,6 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func downloadApiData(completed: DownloadComplete) {
         let currentWeatherUrl = URL(string: "\(darkSkyUrl)\(segueData.latitude),\(segueData.longitude)?units=\(Singleton.sharedInstance.unitSelectedDarkSky)")!
-        
         Alamofire.request(currentWeatherUrl).responseJSON { response in
             let result = response.result
             if let dict = result.value as? Dictionary<String, AnyObject> {
@@ -262,13 +261,16 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     // Override segue transition styles
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let screenSize = UIScreen.main.bounds
-        let screenWidth = screenSize.width
+//        let screenSize = UIScreen.main.bounds
+//        let screenWidth = screenSize.width
         if let controller = segue.destination as? TempChartVC {
-            controller.preferredContentSize = CGSize(width: screenWidth*0.85, height: 200)
+            controller.preferredContentSize = CGSize(width: 300, height: 200)
+            if let x = sender as? SegueData {
+                controller.segueData = x
+            }
             let popoverController = controller.popoverPresentationController
             if popoverController != nil {
-                popoverController?.backgroundColor = UIColor(red: 56/255, green: 65/255, blue: 117/255, alpha: 1)
+                popoverController?.backgroundColor = UIColor(red: 35/255, green: 46/255, blue: 94/255, alpha: 1)
                 popoverController!.delegate = self
                 popoverController!.sourceView = tempChartView
                 popoverController!.sourceRect = tempChartView.bounds
@@ -325,7 +327,8 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     @IBAction func tempChartPressed(_ sender: UITapGestureRecognizer) {
-        performSegue(withIdentifier: "showTempChart", sender: self)
+        let send = SegueData(cityName: segueData.cityName, latitude: segueData.latitude, longitude: segueData.longitude)
+        performSegue(withIdentifier: "showTempChart", sender: send)
     }
     
     @IBAction func rainChartPressed(_ sender: UITapGestureRecognizer) {
