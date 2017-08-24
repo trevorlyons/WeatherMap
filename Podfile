@@ -5,4 +5,5 @@ use_frameworks!
 target 'WeatherMap' do
   pod 'Alamofire', '~> 4.4'
   pod 'Google-Mobile-Ads-SDK'
+  pod 'Charts'
 end

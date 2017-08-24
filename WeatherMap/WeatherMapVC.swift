@@ -282,6 +282,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         upperRightLat = (centerCoordLat + (latitudeDelta) / 2)
         
         mapUrl = "\(OWMUrl)\(lowerLeftLong!),\(lowerLeftLat!),\(upperRightLong!),\(upperRightLat!),\(apiScale)\(OWMKey)\(Singleton.sharedInstance.unitSelectedOWM)"
+        print(mapUrl)
     }
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
