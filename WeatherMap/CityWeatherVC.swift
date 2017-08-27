@@ -275,6 +275,18 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 popoverController!.sourceView = tempChartView
                 popoverController!.sourceRect = tempChartView.bounds
             }
+        } else if let controller = segue.destination as? RainChartVC {
+            controller.preferredContentSize = CGSize(width: 300, height: 200)
+            if let x = sender as? SegueData {
+                controller.segueData = x
+            }
+            let popoverController = controller.popoverPresentationController
+            if popoverController != nil {
+                popoverController?.backgroundColor = UIColor(red: 35/255, green: 46/255, blue: 94/255, alpha: 1)
+                popoverController!.delegate = self
+                popoverController!.sourceView = rainChartView
+                popoverController!.sourceRect = rainChartView.bounds
+            }
         }
     }
     
@@ -332,5 +344,7 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     @IBAction func rainChartPressed(_ sender: UITapGestureRecognizer) {
+        let send = SegueData(cityName: segueData.cityName, latitude: segueData.latitude, longitude: segueData.longitude)
+        performSegue(withIdentifier: "showRainfall", sender: send)
     }
 }
