@@ -13,16 +13,15 @@ import Charts
 class TempChartVC: UIViewController {
     
     @IBOutlet weak var tempLineChart: LineChartView!
-    @IBOutlet weak var monthsXAxis: UIStackView!
     @IBOutlet weak var noDataAvailableView: RoundedCornerView!
     @IBOutlet weak var loadingLbl: UILabel!
     
-    var tempAvg: TemperatureChart!
     var tempAvgs = [TemperatureChart]()
     var tempMaxs = [TemperatureChart]()
     var tempMins = [TemperatureChart]()
     var station: String!
     var stations = [ClosestStation]()
+    var units: String!
     private var _segueData: SegueData!
     var segueData: SegueData {
         get {
@@ -36,7 +35,6 @@ class TempChartVC: UIViewController {
         super.viewDidLoad()
         
         tempLineChart.isHidden = true
-        monthsXAxis.isHidden = true
         noDataAvailableView.isHidden = true
         
         findClosestNOAAStation {}
@@ -79,43 +77,8 @@ class TempChartVC: UIViewController {
                 }
             }
             if self.station != nil {
-                let NOAATempUrl = URL(string: "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&startdate=2016-01-01&enddate=2016-12-01&datatypeid=TAVG,TMAX,TMIN&stationid=\(self.station!)&limit=36")
-                print(NOAATempUrl!)
-                
-                Alamofire.request(NOAATempUrl!, headers: headers).responseJSON { response in
-                    let result = response.result
-                    if let dict = result.value as? JSONDictionary {
-                        if dict.count != 0 {
-                            if let results = dict["results"] as? [JSONDictionary] {
-                                if results.count > 7 {
-                                    for obj in results {
-                                        let dataType = obj["datatype"] as? String ?? "n/a"
-                                        if dataType == "TAVG" {
-                                            let tempChartData = TemperatureChart(tempDict: obj)
-                                            self.tempAvgs.append(tempChartData)
-                                        } else if dataType == "TMAX" {
-                                            let tempChartData = TemperatureChart(tempDict: obj)
-                                            self.tempMaxs.append(tempChartData)
-                                        } else if dataType == "TMIN" {
-                                            let tempChartData = TemperatureChart(tempDict: obj)
-                                            self.tempMins.append(tempChartData)
-                                        }
-                                    }
-                                    self.updateChart()
-                                    self.loadingLbl.isHidden = true
-                                    self.tempLineChart.isHidden = false
-                                    self.monthsXAxis.isHidden = false
-                                } else {
-                                    self.loadingLbl.isHidden = true
-                                    self.noDataAvailableView.isHidden = false
-                                }
-                            }
-                        } else {
-                            self.loadingLbl.isHidden = true
-                            self.noDataAvailableView.isHidden = false
-                        }
-                    }
-                }
+                self.downloadWeatherData {}
+
             } else {
                 self.loadingLbl.isHidden = true
                 self.noDataAvailableView.isHidden = false
@@ -124,10 +87,59 @@ class TempChartVC: UIViewController {
         completed()
     }
     
+    func downloadWeatherData(completed: DownloadComplete) {
+        if Singleton.sharedInstance.unitSelectedOWM == "metric" {
+            self.units = "metric"
+        } else {
+            self.units = "standard"
+        }
+        
+        let NOAATempUrl = URL(string: "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&startdate=2016-01-01&enddate=2016-12-01&datatypeid=TAVG,TMAX,TMIN&stationid=\(self.station!)&limit=1000&units=\(self.units!)")
+        print(NOAATempUrl!)
+        let headers: HTTPHeaders = ["token": "UOWhOfDlwQTucPNBsmcRMskuxRjXlGJi"]
+        
+        Alamofire.request(NOAATempUrl!, headers: headers).responseJSON { response in
+            let result = response.result
+            if let dict = result.value as? JSONDictionary {
+                if dict.count != 0 {
+                    if let results = dict["results"] as? [JSONDictionary] {
+                        if results.count > 30 {
+                            for obj in results {
+                                let dataType = obj["datatype"] as? String ?? "n/a"
+                                if dataType == "TAVG" {
+                                    let tempChartData = TemperatureChart(tempDict: obj)
+                                    self.tempAvgs.append(tempChartData)
+                                } else if dataType == "TMAX" {
+                                    let tempChartData = TemperatureChart(tempDict: obj)
+                                    self.tempMaxs.append(tempChartData)
+                                } else if dataType == "TMIN" {
+                                    let tempChartData = TemperatureChart(tempDict: obj)
+                                    self.tempMins.append(tempChartData)
+                                }
+                            }
+                            self.updateChart()
+                            self.loadingLbl.isHidden = true
+                            self.tempLineChart.isHidden = false
+                        } else {
+                            self.loadingLbl.isHidden = true
+                            self.noDataAvailableView.isHidden = false
+                        }
+                    }
+                } else {
+                    self.loadingLbl.isHidden = true
+                    self.noDataAvailableView.isHidden = false
+                }
+            }
+        }
+    }
+    
     
     // Configure Chart
     
     func updateChart() {
+        let format: LineChartFormatter = LineChartFormatter()
+        let xaxis: XAxis = XAxis()
+        
         var lineChartEntry = [ChartDataEntry]()
         var lineChartEntry2 = [ChartDataEntry]()
         var lineChartEntry3 = [ChartDataEntry]()
@@ -143,35 +155,37 @@ class TempChartVC: UIViewController {
             let value3 = ChartDataEntry(x: Double(i), y: tempMins[i].temp)
             lineChartEntry3.append(value3)
         }
-        let line = LineChartDataSet(values: lineChartEntry, label: "Avg Temp")
-        let line2 = LineChartDataSet(values: lineChartEntry2, label: "Max Temp")
-        let line3 = LineChartDataSet(values: lineChartEntry3, label: "Min Temp")
-
-        line.colors = [NSUIColor.yellow]
+        xaxis.valueFormatter = format
+        
+        let line = LineChartDataSet(values: lineChartEntry, label: "")
+        let line2 = LineChartDataSet(values: lineChartEntry2, label: "")
+        let line3 = LineChartDataSet(values: lineChartEntry3, label: "Avg, Max, Min Temp")
+        line.colors = [NSUIColor(red: 255/255, green: 241/255, blue: 53/255, alpha: 1)]
         line.lineWidth = 3.0
-        line.lineCapType = .round
         line.drawCircleHoleEnabled = false
         line.drawCirclesEnabled = false
         line.drawValuesEnabled = false
-        
-        line2.colors = [NSUIColor.red]
+        line2.colors = [NSUIColor(red: 255/255, green: 49/255, blue: 49/255, alpha: 1)]
         line2.lineWidth = 3.0
-        line2.lineCapType = .round
         line2.drawCircleHoleEnabled = false
         line2.drawCirclesEnabled = false
         line2.drawValuesEnabled = false
-        
-        line3.colors = [NSUIColor.blue]
+        line3.colors = [NSUIColor(red: 78/255, green: 133/255, blue: 255/255, alpha: 1)]
         line3.lineWidth = 3.0
-        line3.lineCapType = .round
         line3.drawCircleHoleEnabled = false
         line3.drawCirclesEnabled = false
         line3.drawValuesEnabled = false
+        if Singleton.sharedInstance.unitSelectedOWM == "metric" {
+            line3.label?.append(" (C)")
+        } else {
+            line3.label?.append(" (F)")
+        }
         
         let data = LineChartData()
         data.addDataSet(line)
         data.addDataSet(line2)
         data.addDataSet(line3)
+        
         tempLineChart.data = data
         
         tempLineChart.chartDescription?.text = ""
@@ -179,18 +193,25 @@ class TempChartVC: UIViewController {
         tempLineChart.drawGridBackgroundEnabled = false
         tempLineChart.pinchZoomEnabled = false
         tempLineChart.doubleTapToZoomEnabled = false
+        tempLineChart.highlightPerTapEnabled = false
+        tempLineChart.highlightPerDragEnabled = false
         tempLineChart.legend.textColor = .white
         tempLineChart.legend.font = UIFont(name: "AvenirNext-Regular", size: 11)!
         tempLineChart.legend.verticalAlignment = .top
         tempLineChart.legend.horizontalAlignment = .left
+        tempLineChart.legend.formSize = 8
+        tempLineChart.legend.form = .circle
+        tempLineChart.legend.xEntrySpace = 0
         
-        tempLineChart.xAxis.drawGridLinesEnabled = false
         tempLineChart.xAxis.drawAxisLineEnabled = false
-        tempLineChart.xAxis.labelPosition = .bottom
+        tempLineChart.xAxis.drawGridLinesEnabled = false
+        tempLineChart.xAxis.valueFormatter = xaxis.valueFormatter
+        tempLineChart.xAxis.labelFont = UIFont(name: "AvenirNext-Medium", size: 11)!
         tempLineChart.xAxis.labelTextColor = .white
-        tempLineChart.xAxis.labelFont = UIFont(name: "AvenirNext-Medium", size: 12)!
+        tempLineChart.xAxis.labelPosition = .bottom
         tempLineChart.xAxis.labelCount = 12
-        tempLineChart.xAxis.drawLabelsEnabled = false
+        tempLineChart.xAxis.granularityEnabled = true
+        tempLineChart.xAxis.granularity = 1
         
         tempLineChart.leftAxis.drawAxisLineEnabled = false
         tempLineChart.leftAxis.drawGridLinesEnabled = false
@@ -202,6 +223,10 @@ class TempChartVC: UIViewController {
         tempLineChart.rightAxis.drawGridLinesEnabled = false
         tempLineChart.rightAxis.drawAxisLineEnabled = false
         tempLineChart.rightAxis.drawLabelsEnabled = false
+    }
+    
+    @IBAction func xPressed(_ sender: UITapGestureRecognizer) {
+        dismiss(animated: true, completion: nil)
     }
 }
 
