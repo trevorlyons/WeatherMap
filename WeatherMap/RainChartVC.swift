@@ -47,7 +47,7 @@ class RainChartVC: UIViewController {
         let upRLat = segueData.latitude + 1
         let upRLon = segueData.longitude + 1
         
-        let NOAAStationsUrl = URL(string: "https://www.ncdc.noaa.gov/cdo-web/api/v2/stations?extent=\(lowLLat),\(lowLLon),\(upRLat),\(upRLon)&startdate=2016-01-01&enddate=2016-12-01&limit=200&datasetid=GSOM&datatypeid=PRCP")
+        let NOAAStationsUrl = URL(string: "https://www.ncdc.noaa.gov/cdo-web/api/v2/stations?extent=\(lowLLat),\(lowLLon),\(upRLat),\(upRLon)&startdate=2016-01-01&enddate=2016-12-01&limit=200&datasetid=GSOM&datatypeid=TAVG")
         print(NOAAStationsUrl!)
         let headers: HTTPHeaders = ["token": "UOWhOfDlwQTucPNBsmcRMskuxRjXlGJi"]
         
@@ -56,15 +56,49 @@ class RainChartVC: UIViewController {
             if let dict = result.value as? JSONDictionary {
                 if let results = dict["results"] as? [JSONDictionary] {
                     for obj in results {
-                        let stationName = obj["name"] as? String ?? "n/a"
-                        let stationId = obj["id"] as? String ?? "n/a"
-                        let stationLat = obj["latitude"] as? Double ?? 0.0
-                        let stationLong = obj["longitude"] as? Double ?? 0.0
-                        let deltaLat = stationLat - self.segueData.latitude
-                        let deltaLong = stationLong - self.segueData.longitude
-                        let deltaDist = sqrt((deltaLat * deltaLat)+(deltaLong * deltaLong))
-                        let stationData = ClosestStation(stationId: stationId, stationDist: deltaDist, stationName: stationName)
-                        self.stations.append(stationData)
+                        let dataCoverage = obj["datacoverage"] as? Double ?? 0.0
+                        if dataCoverage == 1 {
+                            let stationName = obj["name"] as? String ?? "n/a"
+                            let stationId = obj["id"] as? String ?? "n/a"
+                            let stationLat = obj["latitude"] as? Double ?? 0.0
+                            let stationLong = obj["longitude"] as? Double ?? 0.0
+                            let deltaLat = stationLat - self.segueData.latitude
+                            let deltaLong = stationLong - self.segueData.longitude
+                            let deltaDist = sqrt((deltaLat * deltaLat)+(deltaLong * deltaLong))
+                            let stationData = ClosestStation(stationId: stationId, stationDist: deltaDist, stationName: stationName)
+                            self.stations.append(stationData)
+                        }
+                    }
+                    if self.stations.count == 0 {
+                        print("No perfect stations, trying above 0.9")
+                        for obj in results {
+                            let dataCoverage = obj["datacoverage"] as? Double ?? 0.0
+                            if dataCoverage >= 0.9 {
+                                let stationName = obj["name"] as? String ?? "n/a"
+                                let stationId = obj["id"] as? String ?? "n/a"
+                                let stationLat = obj["latitude"] as? Double ?? 0.0
+                                let stationLong = obj["longitude"] as? Double ?? 0.0
+                                let deltaLat = stationLat - self.segueData.latitude
+                                let deltaLong = stationLong - self.segueData.longitude
+                                let deltaDist = sqrt((deltaLat * deltaLat)+(deltaLong * deltaLong))
+                                let stationData = ClosestStation(stationId: stationId, stationDist: deltaDist, stationName: stationName)
+                                self.stations.append(stationData)
+                            }
+                        }
+                    }
+                    if self.stations.count == 0 {
+                        print("No good stations available. Continuing with closest station")
+                        for obj in results {
+                            let stationName = obj["name"] as? String ?? "n/a"
+                            let stationId = obj["id"] as? String ?? "n/a"
+                            let stationLat = obj["latitude"] as? Double ?? 0.0
+                            let stationLong = obj["longitude"] as? Double ?? 0.0
+                            let deltaLat = stationLat - self.segueData.latitude
+                            let deltaLong = stationLong - self.segueData.longitude
+                            let deltaDist = sqrt((deltaLat * deltaLat)+(deltaLong * deltaLong))
+                            let stationData = ClosestStation(stationId: stationId, stationDist: deltaDist, stationName: stationName)
+                            self.stations.append(stationData)
+                        }
                     }
                     self.stations.sort() { ($0.stationDist) < ($1.stationDist) }
                     print("\(self.stations[0].stationDist) \(self.stations[0].stationId) \(self.stations[0].stationName)")
@@ -88,18 +122,12 @@ class RainChartVC: UIViewController {
                     if let dict = result.value as? JSONDictionary {
                         if dict.count != 0 {
                             if let results = dict["results"] as? [JSONDictionary] {
-                                if results.count > 1 {
+                                if results.count >= 1 {
                                     for obj in results {
-//                                        let date = obj["date"] as? String ?? "n/a"
-//                                        if (date.range(of: "-01-01") != nil) {
-//                                            print(date)
-//                                            print(obj)
-//                                        }
                                         let tempChartData = TemperatureChart(tempDict: obj)
                                         self.rainAccums.append(tempChartData)
                                     }
-
-                                    let janEntry = TemperatureChart(date: "2016-01-01T00:00:00", temp: 0.001)
+                                    let janEntry = TemperatureChart(date: "2016-01-01T00:00:00", temp: 0)
                                     let febEntry = TemperatureChart(date: "2016-02-01T00:00:00", temp: 0)
                                     let marEntry = TemperatureChart(date: "2016-03-01T00:00:00", temp: 0)
                                     let aprEntry = TemperatureChart(date: "2016-04-01T00:00:00", temp: 0)
@@ -205,7 +233,6 @@ class RainChartVC: UIViewController {
         var barChartEntry = [BarChartDataEntry]()
         for i in 0..<rainAccums.count {
             let value = BarChartDataEntry(x: Double(i), y: Double(round(10*rainAccums[i].temp)/10))
-            print(rainAccums[i].temp)
             barChartEntry.append(value)
         }
         xaxis.valueFormatter = format
