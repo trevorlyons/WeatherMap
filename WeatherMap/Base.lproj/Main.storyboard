@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
+    <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -65,10 +65,10 @@
                                 <rect key="frame" x="0.0" y="72" width="375" height="1617"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rtK-Kz-Dyp" userLabel="Container View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1351.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1417"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfM-Az-SX8" userLabel="Weclome" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="4" width="365" height="313"/>
+                                                <rect key="frame" x="5" y="4" width="365" height="378.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Weather Maps!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ref-n5-ygp">
                                                         <rect key="frame" x="74" y="10" width="217.5" height="23.5"/>
@@ -77,14 +77,14 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TMm-jy-pty">
-                                                        <rect key="frame" x="30" y="38" width="320" height="265"/>
+                                                        <rect key="frame" x="30" y="38" width="320" height="330.5"/>
                                                         <attributedString key="attributedText">
                                                             <fragment>
-                                                                <string key="content">Weather Maps is designed to assist with trip planning. It's now easy to scan an area to see where the best sunny spot for the day, or upcoming vacation, will be! 
+                                                                <string key="content">Weather Maps is designed to assist with trip planning. It's now easy to scan an area to see where the best sunny spot for the day, or upcoming vacation, will be. Use the hourly and seven day forecasts for upcoming plans and the "Last Years Averages" feature for future planning! 
 This tutorial will walk you through using all of Weather Maps features quickly and easily.
 You can skip it with the ‘x’ above and review it later in our settings section or scroll through now.</string>
                                                                 <attributes>
-                                                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <font key="NSFont" size="16" name="AvenirNext-Regular"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="15" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
@@ -113,7 +113,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HFL-dP-obb" userLabel="Pan and Zoom" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="325" width="365" height="224"/>
+                                                <rect key="frame" x="5" y="390.5" width="365" height="224"/>
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DbH-z0-Qsl">
                                                         <rect key="frame" x="30" y="10" width="320" height="82"/>
@@ -197,7 +197,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OdI-U0-QQ4" userLabel="Custom Pins" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="557" width="365" height="123.5"/>
+                                                <rect key="frame" x="5" y="622.5" width="365" height="123.5"/>
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Gc-VV-sCS">
                                                         <rect key="frame" x="30" y="10" width="320" height="103.5"/>
@@ -238,7 +238,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rIY-o4-yji" userLabel="Favourites" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="835" width="365" height="506.5"/>
+                                                <rect key="frame" x="5" y="900.5" width="365" height="506.5"/>
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J7b-SL-JE1">
                                                         <rect key="frame" x="30" y="10" width="320" height="103.5"/>
@@ -381,7 +381,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mqm-fk-FhU" userLabel="Search" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="688" width="365" height="139"/>
+                                                <rect key="frame" x="5" y="753.5" width="365" height="139"/>
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DgI-oD-TZa">
                                                         <rect key="frame" x="30" y="10" width="320" height="82"/>
@@ -530,25 +530,25 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="oao-x0-zHs">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="oao-x0-zHs">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="667"/>
                                 <gestureRecognizers/>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Al-M5-Jn6" customClass="HeaderView" customModule="WeatherMap" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="75"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleAspectFit" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="2bz-t6-511">
-                                        <rect key="frame" x="15" y="27" width="345" height="25"/>
+                                        <rect key="frame" x="15" y="34.5" width="738" height="32.5"/>
                                         <subviews>
                                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZzG-XE-Q65">
-                                                <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="25" height="32.5"/>
                                                 <state key="normal" image="Search"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wq5-GD-gee">
-                                                <rect key="frame" x="119" y="0.0" width="107" height="25"/>
+                                                <rect key="frame" x="289" y="0.0" width="160" height="32.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="Weather Maps">
                                                         <attributes>
@@ -572,7 +572,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                 </variation>
                                             </label>
                                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UYq-Uc-oiZ">
-                                                <rect key="frame" x="320" y="0.0" width="25" height="25"/>
+                                                <rect key="frame" x="713" y="0.0" width="25" height="32.5"/>
                                                 <state key="normal" image="Settings Cog"/>
                                                 <connections>
                                                     <segue destination="YL4-nr-ctP" kind="presentation" identifier="settings" modalPresentationStyle="overCurrentContext" id="BcU-AB-oip"/>
@@ -584,7 +584,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                         </constraints>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="709-GU-ANm" userLabel="search">
-                                        <rect key="frame" x="12" y="25" width="30" height="30"/>
+                                        <rect key="frame" x="12" y="36.5" width="30" height="30"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="aen-pz-2DN"/>
@@ -595,7 +595,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S8n-xG-53C" userLabel="settings">
-                                        <rect key="frame" x="332" y="25" width="30" height="30"/>
+                                        <rect key="frame" x="725" y="36.5" width="30" height="30"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="RAb-xT-IAO"/>
@@ -622,7 +622,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                 </constraints>
                             </view>
                             <searchBar clipsSubviews="YES" contentMode="redraw" placeholder="Search by city name" translatesAutoresizingMaskIntoConstraints="NO" id="LoF-MU-BfP" customClass="SearchBarView" customModule="WeatherMap" customModuleProvider="target" propertyAccessControl="none">
-                                <rect key="frame" x="0.0" y="60" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="75" width="768" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="gnj-aW-vhl"/>
                                 </constraints>
@@ -636,10 +636,10 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                 </userDefinedRuntimeAttributes>
                             </searchBar>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tLV-Y4-ot3" customClass="SearchClippingView" customModule="WeatherMap" customModuleProvider="target">
-                                <rect key="frame" x="16" y="104" width="343" height="200"/>
+                                <rect key="frame" x="20" y="119" width="728" height="200"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vp1-3h-Blr" customClass="SearchTableView" customModule="WeatherMap" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="160"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="728" height="160"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="160" id="fKn-B0-clK"/>
@@ -648,10 +648,10 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                         <inset key="separatorInset" minX="35" minY="0.0" maxX="35" maxY="0.0"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="searchCell" id="MVl-mb-iKq" customClass="SearchCell" customModule="WeatherMap" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="343" height="44"/>
+                                                <rect key="frame" x="0.0" y="28" width="728" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MVl-mb-iKq" id="qZ9-St-jEb">
-                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="728" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iuq-fH-LmL">
@@ -683,10 +683,10 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EVN-gq-LLQ" customClass="RoundView" customModule="WeatherMap" customModuleProvider="target">
-                                <rect key="frame" x="16" y="597" width="50" height="50"/>
+                                <rect key="frame" x="30" y="924" width="70" height="70"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xOJ-bL-BJt">
-                                        <rect key="frame" x="14" y="13" width="23" height="24"/>
+                                        <rect key="frame" x="24" y="23" width="23" height="24"/>
                                         <state key="normal" image="Star"/>
                                     </button>
                                 </subviews>
@@ -707,10 +707,10 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dIj-ho-I1V" customClass="RoundView" customModule="WeatherMap" customModuleProvider="target">
-                                <rect key="frame" x="16" y="527" width="50" height="50"/>
+                                <rect key="frame" x="30" y="824" width="70" height="70"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Svb-Z2-My4">
-                                        <rect key="frame" x="14" y="12" width="22" height="26"/>
+                                        <rect key="frame" x="24" y="22" width="22" height="26"/>
                                         <state key="normal" image="Locate"/>
                                     </button>
                                 </subviews>
@@ -731,10 +731,10 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                 </connections>
                             </view>
                             <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y3Y-r6-XxS" userLabel="Warning - no connection" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                <rect key="frame" x="46" y="74" width="283" height="30"/>
+                                <rect key="frame" x="50" y="89" width="668" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Network Connection Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qi5-dR-fQ2">
-                                        <rect key="frame" x="46" y="4.5" width="191.5" height="22"/>
+                                        <rect key="frame" x="238.5" y="4.5" width="191.5" height="22"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -826,21 +826,21 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                         <viewControllerLayoutGuide type="bottom" id="y0N-SZ-7fx"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tG5-lk-ch2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZQk-WE-LS2" userLabel="Background">
-                                <rect key="frame" x="0.0" y="28" width="375" height="639"/>
+                                <rect key="frame" x="0.0" y="28" width="768" height="996"/>
                                 <color key="backgroundColor" red="0.13725490200000001" green="0.18039215689999999" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6eU-MB-x1C">
-                                <rect key="frame" x="5" y="40" width="365" height="627"/>
+                                <rect key="frame" x="5" y="40" width="758" height="984"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tD1-Em-1FU" userLabel="App Settings" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="8" width="365" height="125"/>
+                                        <rect key="frame" x="0.0" y="8" width="758" height="125"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KV3-nu-yWn" userLabel="MeasurementUnits">
-                                                <rect key="frame" x="5" y="15" width="355" height="45"/>
+                                                <rect key="frame" x="5" y="15" width="748" height="45"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Measurement Units" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tdK-0B-YHz">
                                                         <rect key="frame" x="15" y="11.5" width="142.5" height="22"/>
@@ -849,16 +849,16 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Right Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="nET-S3-qS3">
-                                                        <rect key="frame" x="332" y="15.5" width="8" height="14"/>
+                                                        <rect key="frame" x="725" y="15.5" width="8" height="14"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Metric" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1kj-Fz-v9P">
-                                                        <rect key="frame" x="282" y="13.5" width="38" height="18"/>
+                                                        <rect key="frame" x="675" y="13.5" width="38" height="18"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="13"/>
                                                         <color key="textColor" red="0.99303108449999999" green="0.92052930590000004" blue="0.31934186819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="exT-gY-cWG" userLabel="gestureView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="45"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="748" height="45"/>
                                                         <accessibility key="accessibilityConfiguration">
                                                             <accessibilityTraits key="traits" button="YES" selected="YES"/>
                                                             <bool key="isElement" value="YES"/>
@@ -884,14 +884,14 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L1x-bI-6kJ" userLabel="breakline">
-                                                <rect key="frame" x="40" y="65" width="285" height="1"/>
+                                                <rect key="frame" x="40" y="65" width="678" height="1"/>
                                                 <color key="backgroundColor" red="0.18431372549019609" green="0.25098039215686274" blue="0.51372549019607838" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="0.5" id="jQf-7p-qx1"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mWc-6l-mEk" userLabel="Language">
-                                                <rect key="frame" x="5" y="71" width="355" height="45"/>
+                                                <rect key="frame" x="5" y="71" width="748" height="45"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Language" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gso-7t-vn2">
                                                         <rect key="frame" x="15" y="11.5" width="74" height="22"/>
@@ -900,16 +900,16 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Right Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="9Xc-em-uPZ">
-                                                        <rect key="frame" x="332" y="15.5" width="8" height="14"/>
+                                                        <rect key="frame" x="725" y="15.5" width="8" height="14"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="English" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OZ7-xB-POD">
-                                                        <rect key="frame" x="276" y="13.5" width="44" height="18"/>
+                                                        <rect key="frame" x="669" y="13.5" width="44" height="18"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="13"/>
                                                         <color key="textColor" red="0.99303108449999999" green="0.92052930590000004" blue="0.31934186819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B7G-a7-fzH" userLabel="gestureView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="45"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="748" height="45"/>
                                                         <accessibility key="accessibilityConfiguration">
                                                             <accessibilityTraits key="traits" button="YES" selected="YES"/>
                                                             <bool key="isElement" value="YES"/>
@@ -951,10 +951,10 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ui8-AB-OSF" userLabel="Tutorial" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="141" width="365" height="75"/>
+                                        <rect key="frame" x="0.0" y="141" width="758" height="75"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="39c-3I-Erd" userLabel="tutorial">
-                                                <rect key="frame" x="5" y="15" width="355" height="45"/>
+                                                <rect key="frame" x="5" y="15" width="748" height="45"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tutorial" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M86-1c-bPC">
                                                         <rect key="frame" x="15" y="11.5" width="55" height="22"/>
@@ -963,10 +963,10 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Right Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="BwI-qy-jaH">
-                                                        <rect key="frame" x="332" y="15.5" width="8" height="14"/>
+                                                        <rect key="frame" x="725" y="15.5" width="8" height="14"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fTd-oT-IJl" userLabel="gestureView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="45"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="748" height="45"/>
                                                         <accessibility key="accessibilityConfiguration">
                                                             <accessibilityTraits key="traits" button="YES" selected="YES"/>
                                                             <bool key="isElement" value="YES"/>
@@ -1000,10 +1000,10 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nWj-Jd-Vnd" userLabel="Ratings and Feedback" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="224" width="365" height="125"/>
+                                        <rect key="frame" x="0.0" y="224" width="758" height="125"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F64-4k-5q3" userLabel="Feedback">
-                                                <rect key="frame" x="5" y="15" width="355" height="45"/>
+                                                <rect key="frame" x="5" y="15" width="748" height="45"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feedback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zRu-4S-BDC">
                                                         <rect key="frame" x="15" y="11.5" width="72" height="22"/>
@@ -1012,10 +1012,10 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Right Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="RBb-5u-vjE">
-                                                        <rect key="frame" x="332" y="15.5" width="8" height="14"/>
+                                                        <rect key="frame" x="725" y="15.5" width="8" height="14"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I4o-bQ-g8E" userLabel="gestureView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="45"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="748" height="45"/>
                                                         <accessibility key="accessibilityConfiguration">
                                                             <accessibilityTraits key="traits" button="YES" selected="YES"/>
                                                             <bool key="isElement" value="YES"/>
@@ -1039,14 +1039,14 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x7n-iw-gzh" userLabel="breakline">
-                                                <rect key="frame" x="40" y="65" width="285" height="1"/>
+                                                <rect key="frame" x="40" y="65" width="678" height="1"/>
                                                 <color key="backgroundColor" red="0.18251711130000001" green="0.25237369539999999" blue="0.5139318705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="0.5" id="Drr-WK-oxO"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BHf-E4-NpY" userLabel="Rate App">
-                                                <rect key="frame" x="5" y="71" width="355" height="45"/>
+                                                <rect key="frame" x="5" y="71" width="748" height="45"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate Our App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Nd-Dq-UHH">
                                                         <rect key="frame" x="15" y="11.5" width="101" height="22"/>
@@ -1055,10 +1055,10 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Right Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="DkM-SR-frV">
-                                                        <rect key="frame" x="332" y="15.5" width="8" height="14"/>
+                                                        <rect key="frame" x="725" y="15.5" width="8" height="14"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vVa-3v-gdW" userLabel="gestureView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="45"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="748" height="45"/>
                                                         <accessibility key="accessibilityConfiguration">
                                                             <accessibilityTraits key="traits" button="YES" selected="YES"/>
                                                             <bool key="isElement" value="YES"/>
@@ -1098,10 +1098,10 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="McZ-RP-avB" userLabel="Acknowledgements" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="357" width="365" height="75"/>
+                                        <rect key="frame" x="0.0" y="357" width="758" height="75"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xLj-cj-Qsj" userLabel="Acknoledgements">
-                                                <rect key="frame" x="5" y="15" width="355" height="45"/>
+                                                <rect key="frame" x="5" y="15" width="748" height="45"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Acknowledgements" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DlE-2W-TMZ">
                                                         <rect key="frame" x="15" y="11.5" width="147" height="22"/>
@@ -1110,10 +1110,10 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Right Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="Mex-nI-KkX">
-                                                        <rect key="frame" x="332" y="15.5" width="8" height="14"/>
+                                                        <rect key="frame" x="725" y="15.5" width="8" height="14"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3SP-W4-OKW" userLabel="gestureView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="45"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="748" height="45"/>
                                                         <accessibility key="accessibilityConfiguration">
                                                             <accessibilityTraits key="traits" button="YES" selected="YES"/>
                                                             <bool key="isElement" value="YES"/>
@@ -1166,10 +1166,10 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                 </constraints>
                             </scrollView>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QgC-rb-BEH" userLabel="Header" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="js4-BV-rVC">
-                                        <rect key="frame" x="154.5" y="8" width="67" height="25"/>
+                                        <rect key="frame" x="351" y="8" width="67" height="25"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -1262,18 +1262,18 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                         <viewControllerLayoutGuide type="bottom" id="4ZG-0T-OTk"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="LcQ-lM-xgc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bUP-vD-WsW" userLabel="Background">
-                                <rect key="frame" x="0.0" y="28" width="375" height="639"/>
+                                <rect key="frame" x="0.0" y="28" width="768" height="996"/>
                                 <color key="backgroundColor" red="0.13725490200000001" green="0.18039215689999999" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cx5-py-kEo" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                <rect key="frame" x="5" y="48" width="365" height="130"/>
+                                <rect key="frame" x="5" y="48" width="758" height="130"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gDZ-yA-rq7">
-                                        <rect key="frame" x="10" y="20" width="345" height="45"/>
+                                        <rect key="frame" x="10" y="20" width="738" height="45"/>
                                         <color key="backgroundColor" red="0.27450980390000002" green="0.31372549020000001" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="G8w-PE-BVx"/>
@@ -1282,10 +1282,10 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                         <inset key="separatorInset" minX="30" minY="0.0" maxX="30" maxY="0.0"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="languages" editingAccessoryType="checkmark" id="Z0L-Vy-fz2" customClass="LanguagesCell" customModule="WeatherMap" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="345" height="44"/>
+                                                <rect key="frame" x="0.0" y="28" width="738" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z0L-Vy-fz2" id="Atn-Dj-Xa1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="345" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="738" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unselected" translatesAutoresizingMaskIntoConstraints="NO" id="q7C-vy-W6Q">
@@ -1315,7 +1315,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                         </prototypes>
                                     </tableView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="French and Spanish coming soon!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CjE-LO-7ks">
-                                        <rect key="frame" x="50.5" y="80" width="263.5" height="23.5"/>
+                                        <rect key="frame" x="247" y="80" width="263.5" height="23.5"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                         <color key="textColor" red="0.99303108449999999" green="0.92052930590000004" blue="0.31934186819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1332,10 +1332,10 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                 </constraints>
                             </view>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YCD-DZ-5qd" userLabel="Header" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Language" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNi-xx-hX7">
-                                        <rect key="frame" x="146" y="8" width="83" height="25"/>
+                                        <rect key="frame" x="342.5" y="8" width="83" height="25"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -1411,27 +1411,27 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                         <viewControllerLayoutGuide type="bottom" id="ufP-k4-bnI"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8rO-em-Gy0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xon-jr-w6P" userLabel="Background">
-                                <rect key="frame" x="0.0" y="28" width="375" height="639"/>
+                                <rect key="frame" x="0.0" y="28" width="768" height="996"/>
                                 <color key="backgroundColor" red="0.13725490200000001" green="0.18039215689999999" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cph-xP-fuo" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                <rect key="frame" x="5" y="48" width="365" height="130"/>
+                                <rect key="frame" x="5" y="48" width="758" height="130"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1R7-5p-EFY">
-                                        <rect key="frame" x="10" y="20" width="345" height="105"/>
+                                        <rect key="frame" x="10" y="20" width="738" height="105"/>
                                         <color key="backgroundColor" red="0.27450980390000002" green="0.31372549020000001" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="separatorColor" red="0.18251711130000001" green="0.25237369539999999" blue="0.5139318705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <inset key="separatorInset" minX="30" minY="0.0" maxX="30" maxY="0.0"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="units" editingAccessoryType="checkmark" id="J8I-JO-brm" customClass="UnitsCell" customModule="WeatherMap" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="345" height="44"/>
+                                                <rect key="frame" x="0.0" y="28" width="738" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="J8I-JO-brm" id="Ae7-gS-r5T">
-                                                    <rect key="frame" x="0.0" y="0.0" width="345" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="738" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unselected" translatesAutoresizingMaskIntoConstraints="NO" id="BXb-Vt-qQs">
@@ -1471,10 +1471,10 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                 </constraints>
                             </view>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qax-Ic-lo8" userLabel="Header" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Units" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6lb-TY-vYh">
-                                        <rect key="frame" x="166.5" y="8" width="42" height="25"/>
+                                        <rect key="frame" x="363" y="8" width="42" height="25"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -1549,24 +1549,24 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                         <viewControllerLayoutGuide type="bottom" id="cbV-bR-dDY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Lrf-QU-88P">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2up-0n-fFJ" userLabel="Background">
-                                <rect key="frame" x="0.0" y="28" width="375" height="639"/>
+                                <rect key="frame" x="0.0" y="28" width="768" height="996"/>
                                 <color key="backgroundColor" red="0.13725490196078433" green="0.1803921568627451" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ztq-fc-OBF" userLabel="Detail" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                <rect key="frame" x="5" y="186.5" width="365" height="108.5"/>
+                                <rect key="frame" x="5" y="164.5" width="758" height="86.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City weather details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6DJ-Hy-4ii">
-                                        <rect key="frame" x="105.5" y="10" width="154.5" height="24"/>
+                                        <rect key="frame" x="302" y="10" width="154.5" height="24"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" text="Hourly and daily weather details powered by DarkSky." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iPS-Uh-TN4">
-                                        <rect key="frame" x="30" y="38.5" width="320" height="60"/>
+                                        <rect key="frame" x="30" y="38.5" width="713" height="38"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1592,16 +1592,16 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bb8-Jd-TRP" userLabel="Map" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                <rect key="frame" x="5" y="48" width="365" height="130.5"/>
+                                <rect key="frame" x="5" y="48" width="758" height="108.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wEi-46-IU6">
-                                        <rect key="frame" x="165" y="10" width="35.5" height="24"/>
+                                        <rect key="frame" x="361.5" y="10" width="35.5" height="24"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" text="Search and map and provided by Apple MapKit. Weather data for the map is supplied by OpenWeatherMap." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Smx-ky-Nux">
-                                        <rect key="frame" x="30" y="38.5" width="320" height="82"/>
+                                        <rect key="frame" x="30" y="38.5" width="713" height="60"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1627,10 +1627,10 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                 </constraints>
                             </view>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TC4-Jg-E1T" userLabel="Header" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Acknowledgements" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B7l-HS-E7T">
-                                        <rect key="frame" x="105" y="8" width="165.5" height="25"/>
+                                        <rect key="frame" x="301.5" y="8" width="165.5" height="25"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -1729,7 +1729,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                 </connections>
                                             </button>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zn0-Zc-U3O">
-                                                <rect key="frame" x="134" y="0.0" width="87" height="25"/>
+                                                <rect key="frame" x="177.5" y="0.0" width="0.0" height="25"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -1765,53 +1765,53 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                 <rect key="frame" x="0.0" y="40" width="375" height="1260"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MzT-OT-MRP" userLabel="Container View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1160"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CPb-oo-I8b" userLabel="Current Weather" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="8" width="365" height="90"/>
+                                                <rect key="frame" x="5" y="15" width="365" height="100"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zGb-zW-drz">
-                                                        <rect key="frame" x="10" y="6" width="345" height="78"/>
+                                                        <rect key="frame" x="10" y="6" width="345" height="88"/>
                                                         <subviews>
-                                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" text="31°" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="42" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="61X-68-BJa">
-                                                                <rect key="frame" x="0.0" y="0.0" width="114.5" height="78"/>
+                                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" ambiguous="YES" text="31°" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="42" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="61X-68-BJa">
+                                                                <rect key="frame" x="0.0" y="-5" width="0.0" height="98.5"/>
                                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="72"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="w5d-lC-SR0">
-                                                                <rect key="frame" x="142.5" y="1.5" width="75" height="75"/>
+                                                                <rect key="frame" x="0.0" y="6.5" width="75" height="75"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="75" id="Dcu-Rq-VW5"/>
                                                                     <constraint firstAttribute="width" constant="75" id="kKv-1t-mhR"/>
                                                                 </constraints>
                                                             </imageView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="slU-vA-XmI">
-                                                                <rect key="frame" x="245" y="3.5" width="100" height="71.5"/>
+                                                                <rect key="frame" x="245" y="44" width="100" height="0.0"/>
                                                                 <subviews>
-                                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="June, 1 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NKQ-Pr-vdA">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="20.5"/>
+                                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="June, 1 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NKQ-Pr-vdA">
+                                                                        <rect key="frame" x="0.0" y="-2.5" width="100" height="0.0"/>
                                                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mostly Cloudy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sEQ-fh-ERj">
-                                                                        <rect key="frame" x="0.0" y="25.5" width="100" height="20.5"/>
+                                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Mostly Cloudy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sEQ-fh-ERj">
+                                                                        <rect key="frame" x="0.0" y="-2.5" width="100" height="0.0"/>
                                                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cSY-Z0-kzg">
-                                                                        <rect key="frame" x="0.0" y="51" width="100" height="20.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="0.0"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillProportionally" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="yjT-ml-QIp">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="20.5"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="0.0"/>
                                                                                 <subviews>
-                                                                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="center" image="high" translatesAutoresizingMaskIntoConstraints="NO" id="Hbf-se-jip">
-                                                                                        <rect key="frame" x="0.0" y="4" width="6.5" height="12"/>
+                                                                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="center" ambiguous="YES" image="high" translatesAutoresizingMaskIntoConstraints="NO" id="Hbf-se-jip">
+                                                                                        <rect key="frame" x="-260" y="-100.5" width="0.0" height="12"/>
                                                                                     </imageView>
-                                                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" text="32°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XK3-cr-AvF">
-                                                                                        <rect key="frame" x="9.5" y="0.0" width="40.5" height="20.5"/>
+                                                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="32°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XK3-cr-AvF">
+                                                                                        <rect key="frame" x="-260" y="-105" width="0.0" height="20.5"/>
                                                                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                         <nil key="highlightedColor"/>
@@ -1819,13 +1819,13 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                                                 </subviews>
                                                                             </stackView>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="9bk-4n-Yfr">
-                                                                                <rect key="frame" x="50" y="0.0" width="50" height="20.5"/>
+                                                                                <rect key="frame" x="50" y="0.0" width="50" height="0.0"/>
                                                                                 <subviews>
-                                                                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="center" image="low" translatesAutoresizingMaskIntoConstraints="NO" id="U8s-dF-7hf">
-                                                                                        <rect key="frame" x="0.0" y="4" width="6.5" height="12"/>
+                                                                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="center" ambiguous="YES" image="low" translatesAutoresizingMaskIntoConstraints="NO" id="U8s-dF-7hf">
+                                                                                        <rect key="frame" x="-310" y="-100.5" width="0.0" height="12"/>
                                                                                     </imageView>
-                                                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" text="15°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DIs-Dc-eFl">
-                                                                                        <rect key="frame" x="9.5" y="0.0" width="40.5" height="20.5"/>
+                                                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" ambiguous="YES" text="15°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DIs-Dc-eFl">
+                                                                                        <rect key="frame" x="-310" y="-105" width="0.0" height="20.5"/>
                                                                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                         <nil key="highlightedColor"/>
@@ -1872,8 +1872,8 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                     </mask>
                                                 </variation>
                                             </view>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="o2H-r1-vHd" customClass="CollectionRoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="164" width="365" height="90"/>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" ambiguous="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="o2H-r1-vHd" customClass="CollectionRoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
+                                                <rect key="frame" x="5" y="15" width="365" height="100"/>
                                                 <color key="backgroundColor" red="0.27450980390000002" green="0.31372549020000001" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="90" id="GEj-Aj-Wve">
@@ -1889,7 +1889,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="hourlyForecastCell" id="0oZ-g4-byL" customClass="HourlyForecastCell" customModule="WeatherMap" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="2.5" width="45" height="85"/>
+                                                        <rect key="frame" x="0.0" y="7.5" width="45" height="85"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="45" height="85"/>
@@ -1985,7 +1985,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                 </variation>
                                             </collectionView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OnC-ra-yrM" customClass="GADBannerView">
-                                                <rect key="frame" x="0.0" y="106" width="375" height="50"/>
+                                                <rect key="frame" x="0.0" y="130" width="375" height="90"/>
                                                 <color key="backgroundColor" red="0.27450980390000002" green="0.31372549020000001" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="90" id="aS7-t4-Jfb"/>
@@ -2006,8 +2006,8 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                     </mask>
                                                 </variation>
                                             </view>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="53" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="H88-WK-gC7" customClass="TableRoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="262" width="365" height="371"/>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="53" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="H88-WK-gC7" customClass="TableRoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
+                                                <rect key="frame" x="5" y="235" width="365" height="371"/>
                                                 <color key="backgroundColor" red="0.27450980390000002" green="0.31372549020000001" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="371" id="1BS-Lr-IVg">
@@ -2236,13 +2236,13 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                     </mask>
                                                 </variation>
                                             </tableView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sU9-PF-SkT" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sU9-PF-SkT" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
                                                 <rect key="frame" x="5" y="764" width="365" height="388"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Akt-2g-3iZ">
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Akt-2g-3iZ">
                                                         <rect key="frame" x="8" y="335" width="349" height="48"/>
                                                         <subviews>
-                                                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DarkSkyLogo" translatesAutoresizingMaskIntoConstraints="NO" id="ddf-VM-vXi">
+                                                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="DarkSkyLogo" translatesAutoresizingMaskIntoConstraints="NO" id="ddf-VM-vXi">
                                                                 <rect key="frame" x="132" y="6.5" width="85" height="35"/>
                                                                 <gestureRecognizers/>
                                                                 <constraints>
@@ -2259,41 +2259,41 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                             <constraint firstItem="ddf-VM-vXi" firstAttribute="centerX" secondItem="Akt-2g-3iZ" secondAttribute="centerX" id="SgG-pf-jgb"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today's Weather Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fSk-DU-nfj">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Today's Weather Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fSk-DU-nfj">
                                                         <rect key="frame" x="122.5" y="5" width="120.5" height="15.5"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="11"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eba-SI-9NP">
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eba-SI-9NP">
                                                         <rect key="frame" x="40" y="219" width="285" height="1"/>
                                                         <color key="backgroundColor" red="0.098258013369999994" green="0.12990228549999999" blue="0.31750724720000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="0.5" id="6Vc-JH-nlI"/>
                                                         </constraints>
                                                     </view>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="IfV-Xr-BbC">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="IfV-Xr-BbC">
                                                         <rect key="frame" x="133.5" y="235" width="99" height="71.5"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jRw-87-7fF">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jRw-87-7fF">
                                                                 <rect key="frame" x="44.5" y="0.0" width="10" height="20.5"/>
                                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FpD-5G-1kx">
+                                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FpD-5G-1kx">
                                                                 <rect key="frame" x="0.0" y="30.5" width="99" height="41"/>
                                                                 <subviews>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="Zsk-iw-tsd">
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="Zsk-iw-tsd">
                                                                         <rect key="frame" x="0.0" y="0.0" width="55" height="41"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunrise:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4D-oe-ikk">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sunrise:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4D-oe-ikk">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="55" height="20.5"/>
                                                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunset:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rMu-QG-Rir">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sunset:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rMu-QG-Rir">
                                                                                 <rect key="frame" x="4.5" y="20.5" width="50.5" height="20.5"/>
                                                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2301,16 +2301,16 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                                             </label>
                                                                         </subviews>
                                                                     </stackView>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="T7y-52-wDo">
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="T7y-52-wDo">
                                                                         <rect key="frame" x="65" y="0.0" width="34" height="41"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-------" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bz-lW-3DI">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-------" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bz-lW-3DI">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="34" height="20.5"/>
                                                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-------" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJM-kg-UNk">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-------" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJM-kg-UNk">
                                                                                 <rect key="frame" x="0.0" y="20.5" width="34" height="20.5"/>
                                                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2322,37 +2322,37 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                             </stackView>
                                                         </subviews>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yTp-kd-UHg">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yTp-kd-UHg">
                                                         <rect key="frame" x="121" y="40.5" width="124" height="163.5"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RSK-xt-hKr">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RSK-xt-hKr">
                                                                 <rect key="frame" x="57" y="0.0" width="10" height="20.5"/>
                                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Qj9-Wn-Fc1">
+                                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Qj9-Wn-Fc1">
                                                                 <rect key="frame" x="0.0" y="30.5" width="124" height="133"/>
                                                                 <subviews>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xK5-bb-qfR">
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xK5-bb-qfR">
                                                                         <rect key="frame" x="0.0" y="0.0" width="75.5" height="133"/>
                                                                         <subviews>
-                                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="Ws7-ab-gET">
+                                                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="Ws7-ab-gET">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="75.5" height="61.5"/>
                                                                                 <subviews>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Real Temp:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fD5-97-wOx">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Real Temp:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fD5-97-wOx">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="75.5" height="20.5"/>
                                                                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feels Like:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbh-XL-8FQ">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Feels Like:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbh-XL-8FQ">
                                                                                         <rect key="frame" x="4.5" y="20.5" width="71" height="20.5"/>
                                                                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Humidity:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FI7-3M-hQu">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Humidity:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FI7-3M-hQu">
                                                                                         <rect key="frame" x="9" y="41" width="66.5" height="20.5"/>
                                                                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2360,22 +2360,22 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                                                     </label>
                                                                                 </subviews>
                                                                             </stackView>
-                                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="RHK-Wd-Wzi">
+                                                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="RHK-Wd-Wzi">
                                                                                 <rect key="frame" x="9.5" y="71.5" width="66" height="61.5"/>
                                                                                 <subviews>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wind:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kkc-fh-nla">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Wind:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kkc-fh-nla">
                                                                                         <rect key="frame" x="24.5" y="0.0" width="41.5" height="20.5"/>
                                                                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pressure:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Byr-O6-ZUz">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Pressure:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Byr-O6-ZUz">
                                                                                         <rect key="frame" x="4" y="20.5" width="62" height="20.5"/>
                                                                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UV Index:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlQ-ed-y8D">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="UV Index:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlQ-ed-y8D">
                                                                                         <rect key="frame" x="0.0" y="41" width="66" height="20.5"/>
                                                                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2385,25 +2385,25 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                                             </stackView>
                                                                         </subviews>
                                                                     </stackView>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="chL-w6-QrX">
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="chL-w6-QrX">
                                                                         <rect key="frame" x="85.5" y="0.0" width="38.5" height="133"/>
                                                                         <subviews>
-                                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="K1x-ME-ZRm">
+                                                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="K1x-ME-ZRm">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="10" height="61.5"/>
                                                                                 <subviews>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cxr-le-TqU">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cxr-le-TqU">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="10" height="20.5"/>
                                                                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQJ-YS-Xz9">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQJ-YS-Xz9">
                                                                                         <rect key="frame" x="0.0" y="20.5" width="10" height="20.5"/>
                                                                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6zZ-z9-SyP">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6zZ-z9-SyP">
                                                                                         <rect key="frame" x="0.0" y="41" width="10" height="20.5"/>
                                                                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2411,22 +2411,22 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                                                     </label>
                                                                                 </subviews>
                                                                             </stackView>
-                                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="JuE-ku-79G">
+                                                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="JuE-ku-79G">
                                                                                 <rect key="frame" x="0.0" y="71.5" width="38.5" height="61.5"/>
                                                                                 <subviews>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--------" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OC8-yo-wzn">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="--------" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OC8-yo-wzn">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="38.5" height="20.5"/>
                                                                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-------" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dvp-T9-cmp">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-------" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dvp-T9-cmp">
                                                                                         <rect key="frame" x="0.0" y="20.5" width="34" height="20.5"/>
                                                                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kmD-ho-oB5">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kmD-ho-oB5">
                                                                                         <rect key="frame" x="0.0" y="41" width="5" height="20.5"/>
                                                                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2473,22 +2473,22 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                     </mask>
                                                 </variation>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wrb-fi-wgl" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wrb-fi-wgl" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
                                                 <rect key="frame" x="5" y="641" width="365" height="115"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Year's Monthly Weather Charts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G3W-xF-ggh">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Last Year's Monthly Weather Charts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G3W-xF-ggh">
                                                         <rect key="frame" x="94.5" y="5" width="176" height="15.5"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="11"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6bW-JB-60B" userLabel="Temperature charts">
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6bW-JB-60B" userLabel="Temperature charts">
                                                         <rect key="frame" x="0.0" y="19" width="365" height="45"/>
                                                         <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Right Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="BG2-iL-tju">
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Right Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="BG2-iL-tju">
                                                                 <rect key="frame" x="342" y="15" width="8" height="14"/>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average Temperatures" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vuZ-zJ-Rxb">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Average Temperatures" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vuZ-zJ-Rxb">
                                                                 <rect key="frame" x="15" y="13" width="156" height="20.5"/>
                                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2507,7 +2507,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                             <outletCollection property="gestureRecognizers" destination="LMk-mt-LUw" appends="YES" id="TaH-wK-xzH"/>
                                                         </connections>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q8h-lA-Lqe">
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q8h-lA-Lqe">
                                                         <rect key="frame" x="40" y="64" width="285" height="1"/>
                                                         <color key="backgroundColor" red="0.098258013369999994" green="0.12990228549999999" blue="0.31750724720000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
@@ -2515,13 +2515,13 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                             <constraint firstAttribute="height" constant="0.5" id="i50-Ws-d4i"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gm6-D8-4W6" userLabel="Rain charts">
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gm6-D8-4W6" userLabel="Rain charts">
                                                         <rect key="frame" x="0.0" y="65" width="365" height="45"/>
                                                         <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Right Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="iJp-G2-C9y">
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Right Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="iJp-G2-C9y">
                                                                 <rect key="frame" x="342" y="15" width="8" height="14"/>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Accumulated Rainfall" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yNK-hG-giS">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Accumulated Rainfall" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yNK-hG-giS">
                                                                 <rect key="frame" x="15" y="12.5" width="145.5" height="20.5"/>
                                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2938,18 +2938,18 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                         <viewControllerLayoutGuide type="bottom" id="XVv-b7-d7w"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Rb3-Hn-UCE">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NXY-2E-jEo" userLabel="Background">
-                                <rect key="frame" x="0.0" y="28" width="375" height="639"/>
+                                <rect key="frame" x="0.0" y="28" width="768" height="996"/>
                                 <color key="backgroundColor" red="0.13725490200000001" green="0.18039215689999999" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tvT-17-6fB" userLabel="Header" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Locations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GRJ-Zn-YXs">
-                                        <rect key="frame" x="133.5" y="8" width="108.5" height="25"/>
+                                        <rect key="frame" x="330" y="8" width="108.5" height="25"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -2977,17 +2977,17 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BEa-QR-d8Y" customClass="TableRoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                <rect key="frame" x="5" y="48" width="365" height="611"/>
+                                <rect key="frame" x="5" y="48" width="758" height="968"/>
                                 <color key="backgroundColor" red="0.27450980390000002" green="0.31372549020000001" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" red="0.098039215686274508" green="0.12941176470588234" blue="0.31764705882352939" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="30" minY="0.0" maxX="30" maxY="0.0"/>
                                 <color key="sectionIndexBackgroundColor" red="0.27450980390000002" green="0.31372549020000001" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="0.0" reuseIdentifier="favouritesCell" id="ph4-z6-Neu" customClass="FavouritesCell" customModule="WeatherMap" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="365" height="50"/>
+                                        <rect key="frame" x="0.0" y="28" width="758" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ph4-z6-Neu" id="lVK-gg-dLo">
-                                            <rect key="frame" x="0.0" y="0.0" width="365" height="49.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="758" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="g0C-OP-hcK">

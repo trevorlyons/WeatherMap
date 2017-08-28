@@ -58,18 +58,49 @@ class TempChartVC: UIViewController {
             if let dict = result.value as? JSONDictionary {
                 if let results = dict["results"] as? [JSONDictionary] {
                     for obj in results {
-                        let stationName = obj["name"] as? String ?? "n/a"
-                        print(stationName)
-                        let stationId = obj["id"] as? String ?? "n/a"
-                        print(stationId)
-                        let stationLat = obj["latitude"] as? Double ?? 0.0
-                        let stationLong = obj["longitude"] as? Double ?? 0.0
-                        let deltaLat = stationLat - self.segueData.latitude
-                        let deltaLong = stationLong - self.segueData.longitude
-                        let deltaDist = sqrt((deltaLat * deltaLat)+(deltaLong * deltaLong))
-                        print(deltaDist)
-                        let stationData = ClosestStation(stationId: stationId, stationDist: deltaDist, stationName: stationName)
-                        self.stations.append(stationData)
+                        let dataCoverage = obj["datacoverage"] as? Double ?? 0.0
+                        if dataCoverage == 1 {
+                            let stationName = obj["name"] as? String ?? "n/a"
+                            let stationId = obj["id"] as? String ?? "n/a"
+                            let stationLat = obj["latitude"] as? Double ?? 0.0
+                            let stationLong = obj["longitude"] as? Double ?? 0.0
+                            let deltaLat = stationLat - self.segueData.latitude
+                            let deltaLong = stationLong - self.segueData.longitude
+                            let deltaDist = sqrt((deltaLat * deltaLat)+(deltaLong * deltaLong))
+                            let stationData = ClosestStation(stationId: stationId, stationDist: deltaDist, stationName: stationName)
+                            self.stations.append(stationData)
+                        }
+                    }
+                    if self.stations.count == 0 {
+                        print("No perfect stations, trying below 0.9")
+                        for obj in results {
+                            let dataCoverage = obj["datacoverage"] as? Double ?? 0.0
+                            if dataCoverage >= 0.9 {
+                                let stationName = obj["name"] as? String ?? "n/a"
+                                let stationId = obj["id"] as? String ?? "n/a"
+                                let stationLat = obj["latitude"] as? Double ?? 0.0
+                                let stationLong = obj["longitude"] as? Double ?? 0.0
+                                let deltaLat = stationLat - self.segueData.latitude
+                                let deltaLong = stationLong - self.segueData.longitude
+                                let deltaDist = sqrt((deltaLat * deltaLat)+(deltaLong * deltaLong))
+                                let stationData = ClosestStation(stationId: stationId, stationDist: deltaDist, stationName: stationName)
+                                self.stations.append(stationData)
+                            }
+                        }
+                    }
+                    if self.stations.count == 0 {
+                        print("No good stations available. Continuing with closest station")
+                        for obj in results {
+                            let stationName = obj["name"] as? String ?? "n/a"
+                            let stationId = obj["id"] as? String ?? "n/a"
+                            let stationLat = obj["latitude"] as? Double ?? 0.0
+                            let stationLong = obj["longitude"] as? Double ?? 0.0
+                            let deltaLat = stationLat - self.segueData.latitude
+                            let deltaLong = stationLong - self.segueData.longitude
+                            let deltaDist = sqrt((deltaLat * deltaLat)+(deltaLong * deltaLong))
+                            let stationData = ClosestStation(stationId: stationId, stationDist: deltaDist, stationName: stationName)
+                            self.stations.append(stationData)
+                        }
                     }
                     self.stations.sort() { ($0.stationDist) < ($1.stationDist) }
                     print("\(self.stations[0].stationDist) \(self.stations[0].stationId) \(self.stations[0].stationName)")
@@ -103,7 +134,7 @@ class TempChartVC: UIViewController {
             if let dict = result.value as? JSONDictionary {
                 if dict.count != 0 {
                     if let results = dict["results"] as? [JSONDictionary] {
-                        if results.count > 30 {
+                        if results.count > 10 {
                             for obj in results {
                                 let dataType = obj["datatype"] as? String ?? "n/a"
                                 if dataType == "TAVG" {
@@ -117,9 +148,23 @@ class TempChartVC: UIViewController {
                                     self.tempMins.append(tempChartData)
                                 }
                             }
-                            self.updateChart()
-                            self.loadingLbl.isHidden = true
-                            self.tempLineChart.isHidden = false
+                            if self.tempAvgs.count < 11 {
+                                self.tempAvgs = []
+                            }
+                            if self.tempMaxs.count < 11 {
+                                self.tempMaxs = []
+                            }
+                            if self.tempMins.count < 11 {
+                                self.tempMins = []
+                            }
+                            if self.tempAvgs.count == 0 && self.tempMins.count == 0 && self.tempMaxs.count == 0 {
+                                self.loadingLbl.isHidden = true
+                                self.noDataAvailableView.isHidden = false
+                            } else {
+                                self.updateChart()
+                                self.loadingLbl.isHidden = true
+                                self.tempLineChart.isHidden = false
+                            }
                         } else {
                             self.loadingLbl.isHidden = true
                             self.noDataAvailableView.isHidden = false
@@ -160,6 +205,7 @@ class TempChartVC: UIViewController {
         let line = LineChartDataSet(values: lineChartEntry, label: "")
         let line2 = LineChartDataSet(values: lineChartEntry2, label: "")
         let line3 = LineChartDataSet(values: lineChartEntry3, label: "Avg, Max, Min Temp")
+
         line.colors = [NSUIColor(red: 255/255, green: 241/255, blue: 53/255, alpha: 1)]
         line.lineWidth = 3.0
         line.drawCircleHoleEnabled = false
