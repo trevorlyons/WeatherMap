@@ -14,14 +14,28 @@ class TempChartVC: UIViewController {
     
     @IBOutlet weak var tempLineChart: LineChartView!
     @IBOutlet weak var noDataAvailableView: RoundedCornerView!
-    @IBOutlet weak var loadingLbl: UILabel!
+    @IBOutlet weak var loadingView: UIView!
+    @IBOutlet weak var ellipsesLbl: UILabel!
     
     var tempAvgs = [TemperatureChart]()
     var tempMaxs = [TemperatureChart]()
     var tempMins = [TemperatureChart]()
+    var jans = [TemperatureChart]()
+    var febs = [TemperatureChart]()
+    var mars = [TemperatureChart]()
+    var aprs = [TemperatureChart]()
+    var mays = [TemperatureChart]()
+    var juns = [TemperatureChart]()
+    var juls = [TemperatureChart]()
+    var augs = [TemperatureChart]()
+    var seps = [TemperatureChart]()
+    var octs = [TemperatureChart]()
+    var novs = [TemperatureChart]()
+    var decs = [TemperatureChart]()
     var station: String!
     var stations = [ClosestStation]()
     var units: String!
+    var ellipsesTimer: Timer?
     private var _segueData: SegueData!
     var segueData: SegueData {
         get {
@@ -37,7 +51,24 @@ class TempChartVC: UIViewController {
         tempLineChart.isHidden = true
         noDataAvailableView.isHidden = true
         
+
+        ellipsesTimer = Timer.scheduledTimer(timeInterval: 0.6, target: self, selector: #selector(updateLabelEllipses(timer:)), userInfo: nil, repeats: true)
+        
         findClosestNOAAStation {}
+    }
+    
+    
+    // Loading Timer
+    
+    func updateLabelEllipses(timer: Timer) {
+        let messageText: String = self.ellipsesLbl.text!
+        let dotCount: Int = (ellipsesLbl.text?.characters.count)! - messageText.replacingOccurrences(of: ".", with: "").characters.count + 1
+        self.ellipsesLbl.text = " "
+        var addOn: String = "."
+        if dotCount < 4 {
+            addOn = "".padding(toLength: dotCount, withPad: ".", startingAt: 0)
+        }
+        self.ellipsesLbl.text = self.ellipsesLbl.text!.appending(addOn)
     }
     
     
@@ -49,7 +80,12 @@ class TempChartVC: UIViewController {
         let upRLat = segueData.latitude + 1
         let upRLon = segueData.longitude + 1
         
-        let NOAAStationsUrl = URL(string: "https://www.ncdc.noaa.gov/cdo-web/api/v2/stations?extent=\(lowLLat),\(lowLLon),\(upRLat),\(upRLon)&startdate=2016-01-01&enddate=2016-12-01&limit=200&datasetid=GSOM&datatypeid=TAVG")
+        let date = Date()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year], from: date)
+        let year =  components.year! - 1
+        
+        let NOAAStationsUrl = URL(string: "https://www.ncdc.noaa.gov/cdo-web/api/v2/stations?extent=\(lowLLat),\(lowLLon),\(upRLat),\(upRLon)&startdate=\(year)-01-01&enddate=\(year)-12-01&limit=300&datasetid=GSOM&datatypeid=TAVG")
         print(NOAAStationsUrl!)
         let headers: HTTPHeaders = ["token": "UOWhOfDlwQTucPNBsmcRMskuxRjXlGJi"]
         
@@ -111,7 +147,7 @@ class TempChartVC: UIViewController {
                 self.downloadWeatherData {}
 
             } else {
-                self.loadingLbl.isHidden = true
+                self.loadingView.isHidden = true
                 self.noDataAvailableView.isHidden = false
             }
         }
@@ -125,7 +161,12 @@ class TempChartVC: UIViewController {
             self.units = "standard"
         }
         
-        let NOAATempUrl = URL(string: "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&startdate=2016-01-01&enddate=2016-12-01&datatypeid=TAVG,TMAX,TMIN&stationid=\(self.station!)&limit=1000&units=\(self.units!)")
+        let date = Date()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year], from: date)
+        let year =  components.year! - 1
+        
+        let NOAATempUrl = URL(string: "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&startdate=\(year)-01-01&enddate=\(year)-12-01&datatypeid=TAVG,TMAX,TMIN&stationid=\(self.station!)&limit=1000&units=\(self.units!)")
         print(NOAATempUrl!)
         let headers: HTTPHeaders = ["token": "UOWhOfDlwQTucPNBsmcRMskuxRjXlGJi"]
         
@@ -148,30 +189,187 @@ class TempChartVC: UIViewController {
                                     self.tempMins.append(tempChartData)
                                 }
                             }
+                            let janEntry = TemperatureChart(date: "\(year)-01-01T00:00:00", temp: 30)
                             if self.tempAvgs.count < 11 {
                                 self.tempAvgs = []
+                                self.tempAvgs.append(janEntry)
                             }
                             if self.tempMaxs.count < 11 {
                                 self.tempMaxs = []
+                                self.tempMaxs.append(janEntry)
                             }
                             if self.tempMins.count < 11 {
                                 self.tempMins = []
+                                self.tempMins.append(janEntry)
                             }
-                            if self.tempAvgs.count == 0 && self.tempMins.count == 0 && self.tempMaxs.count == 0 {
-                                self.loadingLbl.isHidden = true
-                                self.noDataAvailableView.isHidden = false
+                            print("AVG: \(self.tempAvgs.count) MAX: \(self.tempMaxs.count) MIN: \(self.tempMins.count)")
+                            
+                            if self.tempAvgs.count <= 1 && self.tempMins.count <= 1 && self.tempMaxs.count <= 1 {
+                                self.downloadWeatherDataDaily {}
                             } else {
                                 self.updateChart()
-                                self.loadingLbl.isHidden = true
+                                self.loadingView.isHidden = true
                                 self.tempLineChart.isHidden = false
                             }
                         } else {
-                            self.loadingLbl.isHidden = true
+                            self.downloadWeatherDataDaily {}
+                        }
+                    }
+                } else {
+                    self.downloadWeatherDataDaily {}
+                }
+            }
+        }
+    }
+    
+    func downloadWeatherDataDaily(completed: DownloadComplete) {
+        
+        print("No monthly weather data available. Trying daily")
+        
+        if Singleton.sharedInstance.unitSelectedOWM == "metric" {
+            self.units = "metric"
+        } else {
+            self.units = "standard"
+        }
+        
+        let date = Date()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year], from: date)
+        let year =  components.year! - 1
+        
+        let NOAATempUrl = URL(string: "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GHCND&startdate=\(year)-01-01&enddate=\(year)-12-31&datatypeid=TAVG&stationid=\(self.station!)&limit=1000&units=\(self.units!)")
+        print(NOAATempUrl!)
+        let headers: HTTPHeaders = ["token": "UOWhOfDlwQTucPNBsmcRMskuxRjXlGJi"]
+        
+        Alamofire.request(NOAATempUrl!, headers: headers).responseJSON { response in
+            let result = response.result
+            if let dict = result.value as? JSONDictionary {
+                if dict.count != 0 {
+                    if let results = dict["results"] as? [JSONDictionary] {
+                        if results.count >= 100 {
+                            for obj in results {
+                                let date = obj["date"] as? String ?? "n/a"
+                                if (date.range(of: "-01-") != nil) {
+                                    let tempChartData = TemperatureChart(tempDict: obj)
+                                    self.jans.append(tempChartData)
+                                } else if (date.range(of: "-02-") != nil) {
+                                    let tempChartData = TemperatureChart(tempDict: obj)
+                                    self.febs.append(tempChartData)
+                                } else if (date.range(of: "-03-") != nil) {
+                                    let tempChartData = TemperatureChart(tempDict: obj)
+                                    self.mars.append(tempChartData)
+                                } else if (date.range(of: "-04-") != nil) {
+                                    let tempChartData = TemperatureChart(tempDict: obj)
+                                    self.aprs.append(tempChartData)
+                                } else if (date.range(of: "-05-") != nil) {
+                                    let tempChartData = TemperatureChart(tempDict: obj)
+                                    self.mays.append(tempChartData)
+                                } else if (date.range(of: "-06-") != nil) {
+                                    let tempChartData = TemperatureChart(tempDict: obj)
+                                    self.juns.append(tempChartData)
+                                } else if (date.range(of: "-07-") != nil) {
+                                    let tempChartData = TemperatureChart(tempDict: obj)
+                                    self.juls.append(tempChartData)
+                                } else if (date.range(of: "-08-") != nil) {
+                                    let tempChartData = TemperatureChart(tempDict: obj)
+                                    self.augs.append(tempChartData)
+                                } else if (date.range(of: "-09-") != nil) {
+                                    let tempChartData = TemperatureChart(tempDict: obj)
+                                    self.seps.append(tempChartData)
+                                } else if (date.range(of: "-10-") != nil) {
+                                    let tempChartData = TemperatureChart(tempDict: obj)
+                                    self.octs.append(tempChartData)
+                                } else if (date.range(of: "-11-") != nil) {
+                                    let tempChartData = TemperatureChart(tempDict: obj)
+                                    self.novs.append(tempChartData)
+                                } else if (date.range(of: "-12-") != nil) {
+                                    let tempChartData = TemperatureChart(tempDict: obj)
+                                    self.decs.append(tempChartData)
+                                }
+                            }
+                            print("JAN: \(self.jans.count) FEB: \(self.febs.count) MAR: \(self.mars.count) APR: \(self.aprs.count) MAY: \(self.mays.count) JUN: \(self.juns.count) JULY: \(self.juls.count) AUG: \(self.augs.count) SEP: \(self.seps.count) OCT: \(self.octs.count) NOV: \(self.novs.count) DEC: \(self.decs.count) TOTAL: \(self.jans.count + self.febs.count + self.mars.count + self.aprs.count + self.mays.count + self.juns.count + self.juls.count + self.augs.count + self.seps.count + self.octs.count + self.novs.count + self.decs.count)")
+                            
+                            let janSum = self.jans.flatMap({ Double($0.temp) }).reduce(0, +)
+                            let febSum = self.febs.flatMap({ Double($0.temp) }).reduce(0, +)
+                            let marSum = self.mars.flatMap({ Double($0.temp) }).reduce(0, +)
+                            let aprSum = self.aprs.flatMap({ Double($0.temp) }).reduce(0, +)
+                            let maySum = self.mays.flatMap({ Double($0.temp) }).reduce(0, +)
+                            let junSum = self.juns.flatMap({ Double($0.temp) }).reduce(0, +)
+                            let julSum = self.juls.flatMap({ Double($0.temp) }).reduce(0, +)
+                            let augSum = self.augs.flatMap({ Double($0.temp) }).reduce(0, +)
+                            let sepSum = self.seps.flatMap({ Double($0.temp) }).reduce(0, +)
+                            let octSum = self.octs.flatMap({ Double($0.temp) }).reduce(0, +)
+                            let novSum = self.novs.flatMap({ Double($0.temp) }).reduce(0, +)
+                            let decSum = self.decs.flatMap({ Double($0.temp) }).reduce(0, +)
+
+                            let janAvg = janSum / Double(self.jans.count)
+                            let febAvg = febSum / Double(self.febs.count)
+                            let marAvg = marSum / Double(self.mars.count)
+                            let aprAvg = aprSum / Double(self.aprs.count)
+                            let mayAvg = maySum / Double(self.mays.count)
+                            let junAvg = junSum / Double(self.juns.count)
+                            let julAvg = julSum / Double(self.juls.count)
+                            let augAvg = augSum / Double(self.augs.count)
+                            let sepAvg = sepSum / Double(self.seps.count)
+                            let octAvg = octSum / Double(self.octs.count)
+                            let novAvg = novSum / Double(self.novs.count)
+                            let decAvg = decSum / Double(self.decs.count)
+                            
+                            self.tempAvgs = []
+                            let tempChartData = TemperatureChart(date: "\(year)-01-01T00:00:00", temp: janAvg)
+                            self.tempAvgs.append(tempChartData)
+                            let tempChartData2 = TemperatureChart(date: "\(year)-02-01T00:00:00", temp: febAvg)
+                            self.tempAvgs.append(tempChartData2)
+                            let tempChartData3 = TemperatureChart(date: "\(year)-03-01T00:00:00", temp: marAvg)
+                            self.tempAvgs.append(tempChartData3)
+                            let tempChartData4 = TemperatureChart(date: "\(year)-04-01T00:00:00", temp: aprAvg)
+                            self.tempAvgs.append(tempChartData4)
+                            let tempChartData5 = TemperatureChart(date: "\(year)-05-01T00:00:00", temp: mayAvg)
+                            self.tempAvgs.append(tempChartData5)
+                            let tempChartData6 = TemperatureChart(date: "\(year)-06-01T00:00:00", temp: junAvg)
+                            self.tempAvgs.append(tempChartData6)
+                            let tempChartData7 = TemperatureChart(date: "\(year)-07-01T00:00:00", temp: julAvg)
+                            self.tempAvgs.append(tempChartData7)
+                            let tempChartData8 = TemperatureChart(date: "\(year)-08-01T00:00:00", temp: augAvg)
+                            self.tempAvgs.append(tempChartData8)
+                            let tempChartData9 = TemperatureChart(date: "\(year)-09-01T00:00:00", temp: sepAvg)
+                            self.tempAvgs.append(tempChartData9)
+                            let tempChartData10 = TemperatureChart(date: "\(year)-10-01T00:00:00", temp: octAvg)
+                            self.tempAvgs.append(tempChartData10)
+                            let tempChartData11 = TemperatureChart(date: "\(year)-11-01T00:00:00", temp: novAvg)
+                            self.tempAvgs.append(tempChartData11)
+                            let tempChartData12 = TemperatureChart(date: "\(year)-12-01T00:00:00", temp: decAvg)
+                            self.tempAvgs.append(tempChartData12)
+                            
+                            let janEntry = TemperatureChart(date: "\(year)-01-01T00:00:00", temp: Double.nan)
+                            if self.tempAvgs.count < 11 {
+                                self.tempAvgs = []
+                                self.tempAvgs.append(janEntry)
+                            }
+                            if self.tempMaxs.count < 11 {
+                                self.tempMaxs = []
+                                self.tempMaxs.append(janEntry)
+                            }
+                            if self.tempMins.count < 11 {
+                                self.tempMins = []
+                                self.tempMins.append(janEntry)
+                            }
+                            print("AVG: \(self.tempAvgs.count) MAX: \(self.tempMaxs.count) MIN: \(self.tempMins.count)")
+                            if self.tempAvgs.count <= 1 && self.tempMins.count <= 1 && self.tempMaxs.count <= 1 {
+                                self.loadingView.isHidden = true
+                                self.noDataAvailableView.isHidden = false
+                            } else {
+                                self.updateChart()
+                                self.loadingView.isHidden = true
+                                self.tempLineChart.isHidden = false
+                            }
+                        } else {
+                            self.loadingView.isHidden = true
                             self.noDataAvailableView.isHidden = false
                         }
                     }
                 } else {
-                    self.loadingLbl.isHidden = true
+                    self.loadingView.isHidden = true
                     self.noDataAvailableView.isHidden = false
                 }
             }
@@ -207,17 +405,17 @@ class TempChartVC: UIViewController {
         let line3 = LineChartDataSet(values: lineChartEntry3, label: "Avg, Max, Min Temp")
 
         line.colors = [NSUIColor(red: 255/255, green: 241/255, blue: 53/255, alpha: 1)]
-        line.lineWidth = 3.0
+        line.lineWidth = 2.0
         line.drawCircleHoleEnabled = false
         line.drawCirclesEnabled = false
         line.drawValuesEnabled = false
         line2.colors = [NSUIColor(red: 255/255, green: 49/255, blue: 49/255, alpha: 1)]
-        line2.lineWidth = 3.0
+        line2.lineWidth = 2.0
         line2.drawCircleHoleEnabled = false
         line2.drawCirclesEnabled = false
         line2.drawValuesEnabled = false
         line3.colors = [NSUIColor(red: 78/255, green: 133/255, blue: 255/255, alpha: 1)]
-        line3.lineWidth = 3.0
+        line3.lineWidth = 2.0
         line3.drawCircleHoleEnabled = false
         line3.drawCirclesEnabled = false
         line3.drawValuesEnabled = false
@@ -233,8 +431,7 @@ class TempChartVC: UIViewController {
         data.addDataSet(line3)
         
         tempLineChart.data = data
-        
-        tempLineChart.chartDescription?.text = ""
+        tempLineChart.chartDescription?.enabled = false
         tempLineChart.backgroundColor = UIColor(red: 35/255, green: 46/255, blue: 94/255, alpha: 1)
         tempLineChart.drawGridBackgroundEnabled = false
         tempLineChart.pinchZoomEnabled = false
