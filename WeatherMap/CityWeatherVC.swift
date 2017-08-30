@@ -261,10 +261,9 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     // Override segue transition styles
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let screenSize = UIScreen.main.bounds
-//        let screenWidth = screenSize.width
+
         if let controller = segue.destination as? TempChartVC {
-            controller.preferredContentSize = CGSize(width: 300, height: 200)
+            controller.preferredContentSize = CGSize(width: 325, height: 200)
             if let x = sender as? SegueData {
                 controller.segueData = x
             }
@@ -276,7 +275,7 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 popoverController!.sourceRect = tempChartView.bounds
             }
         } else if let controller = segue.destination as? RainChartVC {
-            controller.preferredContentSize = CGSize(width: 300, height: 200)
+            controller.preferredContentSize = CGSize(width: 325, height: 200)
             if let x = sender as? SegueData {
                 controller.segueData = x
             }

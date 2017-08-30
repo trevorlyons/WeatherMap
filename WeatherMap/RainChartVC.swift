@@ -13,13 +13,15 @@ import Charts
 class RainChartVC: UIViewController {
 
     @IBOutlet weak var noDataWarningView: RoundedCornerView!
-    @IBOutlet weak var loadingLbl: UILabel!
     @IBOutlet weak var rainChart: BarChartView!
+    @IBOutlet weak var loadingView: UIView!
+    @IBOutlet weak var ellipsesLbl: UILabel!
     
     var rainAccums = [TemperatureChart]()
     var station: String!
     var stations = [ClosestStation]()
     var units: String!
+    var ellipsesTimer: Timer?
     private var _segueData: SegueData!
     var segueData: SegueData {
         get {
@@ -35,7 +37,23 @@ class RainChartVC: UIViewController {
         rainChart.isHidden = true
         noDataWarningView.isHidden = true
         
+        ellipsesTimer = Timer.scheduledTimer(timeInterval: 0.6, target: self, selector: #selector(updateLabelEllipses(timer:)), userInfo: nil, repeats: true)
+        
         findClosestNOAAStation {}
+    }
+    
+    
+    // Loading Timer
+    
+    func updateLabelEllipses(timer: Timer) {
+        let messageText: String = self.ellipsesLbl.text!
+        let dotCount: Int = (ellipsesLbl.text?.characters.count)! - messageText.replacingOccurrences(of: ".", with: "").characters.count + 1
+        self.ellipsesLbl.text = " "
+        var addOn: String = "."
+        if dotCount < 4 {
+            addOn = "".padding(toLength: dotCount, withPad: ".", startingAt: 0)
+        }
+        self.ellipsesLbl.text = self.ellipsesLbl.text!.appending(addOn)
     }
     
     
@@ -46,8 +64,12 @@ class RainChartVC: UIViewController {
         let lowLLon = segueData.longitude - 1
         let upRLat = segueData.latitude + 1
         let upRLon = segueData.longitude + 1
+        let date = Date()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year], from: date)
+        let year =  components.year! - 1
         
-        let NOAAStationsUrl = URL(string: "https://www.ncdc.noaa.gov/cdo-web/api/v2/stations?extent=\(lowLLat),\(lowLLon),\(upRLat),\(upRLon)&startdate=2016-01-01&enddate=2016-12-01&limit=200&datasetid=GSOM&datatypeid=TAVG")
+        let NOAAStationsUrl = URL(string: "https://www.ncdc.noaa.gov/cdo-web/api/v2/stations?extent=\(lowLLat),\(lowLLon),\(upRLat),\(upRLon)&startdate=\(year)-01-01&enddate=\(year)-12-01&limit=300&datasetid=GSOM&datatypeid=TAVG")
         print(NOAAStationsUrl!)
         let headers: HTTPHeaders = ["token": "UOWhOfDlwQTucPNBsmcRMskuxRjXlGJi"]
         
@@ -112,7 +134,7 @@ class RainChartVC: UIViewController {
                     self.units = "standard"
                 }
                 
-                let NOAATempUrl = URL(string: "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&startdate=2016-01-01&enddate=2016-12-01&datatypeid=PRCP&stationid=\(self.station!)&limit=12&units=\(self.units!)")
+                let NOAATempUrl = URL(string: "https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&startdate=\(year)-01-01&enddate=\(year)-12-01&datatypeid=PRCP&stationid=\(self.station!)&limit=12&units=\(self.units!)")
                 print(NOAATempUrl!)
                 
                 
@@ -127,18 +149,18 @@ class RainChartVC: UIViewController {
                                         let tempChartData = TemperatureChart(tempDict: obj)
                                         self.rainAccums.append(tempChartData)
                                     }
-                                    let janEntry = TemperatureChart(date: "2016-01-01T00:00:00", temp: 0)
-                                    let febEntry = TemperatureChart(date: "2016-02-01T00:00:00", temp: 0)
-                                    let marEntry = TemperatureChart(date: "2016-03-01T00:00:00", temp: 0)
-                                    let aprEntry = TemperatureChart(date: "2016-04-01T00:00:00", temp: 0)
-                                    let mayEntry = TemperatureChart(date: "2016-05-01T00:00:00", temp: 0)
-                                    let junEntry = TemperatureChart(date: "2016-06-01T00:00:00", temp: 0)
-                                    let julEntry = TemperatureChart(date: "2016-07-01T00:00:00", temp: 0)
-                                    let augEntry = TemperatureChart(date: "2016-08-01T00:00:00", temp: 0)
-                                    let sepEntry = TemperatureChart(date: "2016-09-01T00:00:00", temp: 0)
-                                    let octEntry = TemperatureChart(date: "2016-10-01T00:00:00", temp: 0)
-                                    let novEntry = TemperatureChart(date: "2016-11-01T00:00:00", temp: 0)
-                                    let decEntry = TemperatureChart(date: "2016-12-01T00:00:00", temp: 0)
+                                    let janEntry = TemperatureChart(date: "\(year)-01-01T00:00:00", temp: 0.0001)
+                                    let febEntry = TemperatureChart(date: "\(year)-02-01T00:00:00", temp: 0.0001)
+                                    let marEntry = TemperatureChart(date: "\(year)-03-01T00:00:00", temp: 0.0001)
+                                    let aprEntry = TemperatureChart(date: "\(year)-04-01T00:00:00", temp: 0.0001)
+                                    let mayEntry = TemperatureChart(date: "\(year)-05-01T00:00:00", temp: 0.0001)
+                                    let junEntry = TemperatureChart(date: "\(year)-06-01T00:00:00", temp: 0.0001)
+                                    let julEntry = TemperatureChart(date: "\(year)-07-01T00:00:00", temp: 0.0001)
+                                    let augEntry = TemperatureChart(date: "\(year)-08-01T00:00:00", temp: 0.0001)
+                                    let sepEntry = TemperatureChart(date: "\(year)-09-01T00:00:00", temp: 0.0001)
+                                    let octEntry = TemperatureChart(date: "\(year)-10-01T00:00:00", temp: 0.0001)
+                                    let novEntry = TemperatureChart(date: "\(year)-11-01T00:00:00", temp: 0.0001)
+                                    let decEntry = TemperatureChart(date: "\(year)-12-01T00:00:00", temp: 0.0001)
                                     let containsEntry = self.rainAccums.contains{ $0.date == janEntry.date }
                                     if containsEntry {
                                     } else {
@@ -202,21 +224,21 @@ class RainChartVC: UIViewController {
                                     self.rainAccums.sort() { ($0.date) < ($1.date) }
 
                                     self.updateChart()
-                                    self.loadingLbl.isHidden = true
+                                    self.loadingView.isHidden = true
                                     self.rainChart.isHidden = false
                                 } else {
-                                    self.loadingLbl.isHidden = true
+                                    self.loadingView.isHidden = true
                                     self.noDataWarningView.isHidden = false
                                 }
                             }
                         } else {
-                            self.loadingLbl.isHidden = true
+                            self.loadingView.isHidden = true
                             self.noDataWarningView.isHidden = false
                         }
                     }
                 }
             } else {
-                self.loadingLbl.isHidden = true
+                self.loadingView.isHidden = true
                 self.noDataWarningView.isHidden = false
             }
         }
@@ -232,7 +254,7 @@ class RainChartVC: UIViewController {
         
         var barChartEntry = [BarChartDataEntry]()
         for i in 0..<rainAccums.count {
-            let value = BarChartDataEntry(x: Double(i), y: Double(round(10*rainAccums[i].temp)/10))
+            let value = BarChartDataEntry(x: Double(i), y: rainAccums[i].temp)
             barChartEntry.append(value)
         }
         xaxis.valueFormatter = format
@@ -255,15 +277,17 @@ class RainChartVC: UIViewController {
         rainChart.data = data
         
         let formatter = NumberFormatter()
-        formatter.zeroSymbol = "n/a"
         
         if Singleton.sharedInstance.unitSelectedOWM == "metric" {
             formatter.numberStyle = .none
         } else {
+            formatter.minimumFractionDigits = 1
+            formatter.maximumFractionDigits = 1
             formatter.numberStyle = .decimal
         }
+
+        data.setValueFormatter(ChartValueFormatter(formatter: formatter))
         
-        data.setValueFormatter(DefaultValueFormatter(formatter: formatter))
         
         rainChart.chartDescription?.text = ""
         rainChart.backgroundColor = UIColor(red: 35/255, green: 46/255, blue: 94/255, alpha: 1)

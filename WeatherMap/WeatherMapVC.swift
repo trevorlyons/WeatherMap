@@ -86,8 +86,21 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         pinchGesture.delegate = self
         mapView.addGestureRecognizer(pinchGesture)
         
-        defaults.register(defaults: ["DarkSky" : "si"])
-        defaults.register(defaults: ["OWM" : "metric"])
+        
+        let locale = Locale.current
+        let isMetric = locale.usesMetricSystem
+        print("TREVOR: \(isMetric)")
+        var darkSkyDefault: String!
+        var owmDefault: String!
+        if isMetric == true {
+            darkSkyDefault = "si"
+            owmDefault = "metric"
+        } else {
+            darkSkyDefault = "us"
+            owmDefault = "imperial"
+        }
+        defaults.register(defaults: ["DarkSky" : darkSkyDefault])
+        defaults.register(defaults: ["OWM" : owmDefault])
         defaults.register(defaults: ["Language" : "English"])
         loadUserDefaults()
     }

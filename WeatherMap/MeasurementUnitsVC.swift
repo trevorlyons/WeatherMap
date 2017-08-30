@@ -13,6 +13,8 @@ class MeasurementUnitsVC: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var tableView: UITableView!
     
     var units = [Units]()
+    var selectMetric: Bool!
+    var selectImperial: Bool!
     let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
@@ -23,13 +25,22 @@ class MeasurementUnitsVC: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.delegate = self
         self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 1))
         
-        let row1 = Units(unitName: "Metric", selector: true)
-        let row2 = Units(unitName: "Imperial", selector: false)
+
+        if UserDefaults.standard.value(forKey: "OWM") as? String == "imperial" {
+            selectMetric = false
+            selectImperial = true
+        } else {
+            selectMetric = true
+            selectImperial = false
+        }
+        
+        let row1 = Units(unitName: "Metric", selector: selectMetric)
+        let row2 = Units(unitName: "Imperial", selector: selectImperial)
         units.append(row1)
         units.append(row2)
         
-        UserDefaults.standard.register(defaults: ["setMetric" : true])
-        UserDefaults.standard.register(defaults: ["setImperial" : false])
+        UserDefaults.standard.register(defaults: ["setMetric" : selectMetric])
+        UserDefaults.standard.register(defaults: ["setImperial" : selectImperial])
         readDefaults()
     }
 
