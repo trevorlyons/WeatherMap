@@ -59,6 +59,10 @@ class SettingsVC: UIViewController, MFMailComposeViewControllerDelegate, UIPopov
             slideInTransitioningDelegate.direction = .right
             controller.transitioningDelegate = slideInTransitioningDelegate
             controller.modalPresentationStyle = .custom
+        } else if let controller = segue.destination as? PrivacyPolicyVC {
+            slideInTransitioningDelegate.direction = .right
+            controller.transitioningDelegate = slideInTransitioningDelegate
+            controller.modalPresentationStyle = .custom
         } else if let controller = segue.destination as? TutorialVC {
             let screenSize = UIScreen.main.bounds
             let screenWidth = screenSize.width
@@ -129,6 +133,10 @@ class SettingsVC: UIViewController, MFMailComposeViewControllerDelegate, UIPopov
     
     @IBAction func tutorialPressed(_ sender: UITapGestureRecognizer) {
         performSegue(withIdentifier: "Tutorial", sender: self)
+    }
+    
+    @IBAction func privacyPolicyPressed(_ sender: UITapGestureRecognizer) {
+        performSegue(withIdentifier: "toPrivacyPolicy", sender: self)
     }
     
     @IBAction func unwindToSettings(segue: UIStoryboardSegue) {

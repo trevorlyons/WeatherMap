@@ -27,6 +27,8 @@
 		8C45E7191EBA2437006E6B91 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C45E7171EBA2437006E6B91 /* Main.storyboard */; };
 		8C45E71B1EBA2437006E6B91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C45E71A1EBA2437006E6B91 /* Assets.xcassets */; };
 		8C45E71E1EBA2437006E6B91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C45E71C1EBA2437006E6B91 /* LaunchScreen.storyboard */; };
+		8C4693721F629BF10040CE86 /* WeatherMapsPrivacyPolicy.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8C4693711F629BF00040CE86 /* WeatherMapsPrivacyPolicy.txt */; };
+		8C4693741F629DEF0040CE86 /* PrivacyPolicyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4693731F629DEF0040CE86 /* PrivacyPolicyVC.swift */; };
 		8C64D2711F4AEB9D00CC0ED3 /* TemperatureChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C64D2701F4AEB9D00CC0ED3 /* TemperatureChart.swift */; };
 		8C64D2731F4C7B3B00CC0ED3 /* ClosestStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C64D2721F4C7B3B00CC0ED3 /* ClosestStation.swift */; };
 		8C64D2751F5062D300CC0ED3 /* BarChartFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C64D2741F5062D300CC0ED3 /* BarChartFormatter.swift */; };
@@ -89,6 +91,8 @@
 		8C45E71A1EBA2437006E6B91 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C45E71D1EBA2437006E6B91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8C45E71F1EBA2437006E6B91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C4693711F629BF00040CE86 /* WeatherMapsPrivacyPolicy.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WeatherMapsPrivacyPolicy.txt; sourceTree = "<group>"; };
+		8C4693731F629DEF0040CE86 /* PrivacyPolicyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyVC.swift; sourceTree = "<group>"; };
 		8C64D2701F4AEB9D00CC0ED3 /* TemperatureChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemperatureChart.swift; sourceTree = "<group>"; };
 		8C64D2721F4C7B3B00CC0ED3 /* ClosestStation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosestStation.swift; sourceTree = "<group>"; };
 		8C64D2741F5062D300CC0ED3 /* BarChartFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarChartFormatter.swift; sourceTree = "<group>"; };
@@ -153,6 +157,7 @@
 				8C74781F1F1B928900DE487D /* TutorialVC.swift */,
 				8C30218E1F4A105E0038A7D6 /* TempChartVC.swift */,
 				8C3021901F4A107E0038A7D6 /* RainChartVC.swift */,
+				8C4693731F629DEF0040CE86 /* PrivacyPolicyVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -210,6 +215,7 @@
 		8C13BF181EBB7AB000C078A8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8C4693711F629BF00040CE86 /* WeatherMapsPrivacyPolicy.txt */,
 				8C13BF141EBB34B400C078A8 /* SignPainter.otf */,
 				8C74781D1F1B74A000DE487D /* Reachability.swift */,
 			);
@@ -343,6 +349,7 @@
 			files = (
 				8C45E71E1EBA2437006E6B91 /* LaunchScreen.storyboard in Resources */,
 				8C45E71B1EBA2437006E6B91 /* Assets.xcassets in Resources */,
+				8C4693721F629BF10040CE86 /* WeatherMapsPrivacyPolicy.txt in Resources */,
 				8C13BF151EBB34B400C078A8 /* SignPainter.otf in Resources */,
 				8C45E7191EBA2437006E6B91 /* Main.storyboard in Resources */,
 			);
@@ -438,6 +445,7 @@
 				8C64D2731F4C7B3B00CC0ED3 /* ClosestStation.swift in Sources */,
 				8C3021911F4A107E0038A7D6 /* RainChartVC.swift in Sources */,
 				8C05A9531F31063700EDD900 /* RoundViewNoShadow.swift in Sources */,
+				8C4693741F629DEF0040CE86 /* PrivacyPolicyVC.swift in Sources */,
 				8CA5FCFF1F13E5220039B764 /* AcknowledgementsVC.swift in Sources */,
 				8C64D2791F5331D300CC0ED3 /* BarChartValueFormatter.swift in Sources */,
 				8C9372EE1EC4D05400BFDBD9 /* MapAnnotation.swift in Sources */,

@@ -65,10 +65,10 @@
                                 <rect key="frame" x="0.0" y="72" width="375" height="1617"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rtK-Kz-Dyp" userLabel="Container View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1423.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1247.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfM-Az-SX8" userLabel="Weclome" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="4" width="365" height="385"/>
+                                                <rect key="frame" x="5" y="4" width="365" height="308.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Weather Maps!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ref-n5-ygp">
                                                         <rect key="frame" x="74" y="10" width="217.5" height="23.5"/>
@@ -77,14 +77,14 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TMm-jy-pty">
-                                                        <rect key="frame" x="30" y="38" width="320" height="337"/>
+                                                        <rect key="frame" x="30" y="38" width="320" height="260.5"/>
                                                         <attributedString key="attributedText">
                                                             <fragment>
                                                                 <mutableString key="content">Weather Maps is designed to assist with trip planning. It's now easy to scan to an area, view the hourly and seven day forecasts, and find the best sunny spot for your day. If you are planning a future vacation, we have you covered with historical weather charts.
 </mutableString>
                                                                 <attributes>
                                                                     <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <font key="NSFont" size="16" name="AvenirNext-Regular"/>
+                                                                    <font key="NSFont" size="14" name="AvenirNext-Regular"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacing="15" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
@@ -93,7 +93,7 @@
 You can skip it with the ‘x’ above and review it later in our settings section or scroll through now.</string>
                                                                 <attributes>
                                                                     <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <font key="NSFont" size="16" name="AvenirNext-Regular"/>
+                                                                    <font key="NSFont" size="14" name="AvenirNext-Regular"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
@@ -121,21 +121,21 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HFL-dP-obb" userLabel="Pan and Zoom" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="397" width="365" height="224"/>
+                                                <rect key="frame" x="5" y="320.5" width="365" height="210"/>
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DbH-z0-Qsl">
-                                                        <rect key="frame" x="30" y="10" width="320" height="82"/>
+                                                        <rect key="frame" x="30" y="10" width="320" height="73.5"/>
                                                         <attributedString key="attributedText">
                                                             <fragment content="Pan and zoom">
                                                                 <attributes>
                                                                     <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <font key="NSFont" size="16" name="AvenirNext-DemiBold"/>
+                                                                    <font key="NSFont" size="14" name="AvenirNext-DemiBold"/>
                                                                 </attributes>
                                                             </fragment>
                                                             <fragment content=" to find new cities on the map marked by pins showing the weather type and current temperature.">
                                                                 <attributes>
                                                                     <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <font key="NSFont" size="16" name="AvenirNext-Regular"/>
+                                                                    <font key="NSFont" size="14" name="AvenirNext-Regular"/>
                                                                 </attributes>
                                                             </fragment>
                                                         </attributedString>
@@ -149,14 +149,14 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                         </constraints>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location-shadow" translatesAutoresizingMaskIntoConstraints="NO" id="vez-vj-vOH">
-                                                        <rect key="frame" x="155" y="92" width="54" height="60"/>
+                                                        <rect key="frame" x="155" y="83.5" width="54" height="60"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="54" id="I30-Sf-eKZ"/>
                                                             <constraint firstAttribute="height" constant="60" id="VbD-ZS-THa"/>
                                                         </constraints>
                                                     </imageView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="kG8-d8-SHL">
-                                                        <rect key="frame" x="164" y="100" width="30" height="48.5"/>
+                                                        <rect key="frame" x="164" y="91.5" width="30" height="48.5"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clear-day" translatesAutoresizingMaskIntoConstraints="NO" id="so8-J1-eNu">
                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="29"/>
@@ -181,9 +181,9 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                         </subviews>
                                                     </stackView>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" text="Press the symbol to access the cities weather forecast." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bIF-Sk-QgP">
-                                                        <rect key="frame" x="30" y="154" width="320" height="60"/>
+                                                        <rect key="frame" x="30" y="145.5" width="320" height="54.5"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                 </subviews>
@@ -205,22 +205,22 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OdI-U0-QQ4" userLabel="Custom Pins" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="629" width="365" height="123.5"/>
+                                                <rect key="frame" x="5" y="538.5" width="365" height="93.5"/>
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Gc-VV-sCS">
-                                                        <rect key="frame" x="30" y="10" width="320" height="103.5"/>
+                                                        <rect key="frame" x="30" y="10" width="320" height="73.5"/>
                                                         <attributedString key="attributedText">
                                                             <fragment content="Custom locations">
                                                                 <attributes>
                                                                     <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <font key="NSFont" size="16" name="AvenirNext-DemiBold"/>
+                                                                    <font key="NSFont" size="14" name="AvenirNext-DemiBold"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
                                                             <fragment content=" can be created if your desired location does not appear on the map by pressing and holding the desired area.">
                                                                 <attributes>
                                                                     <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <font key="NSFont" size="16" name="AvenirNext-Regular"/>
+                                                                    <font key="NSFont" size="14" name="AvenirNext-Regular"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
@@ -246,21 +246,22 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rIY-o4-yji" userLabel="Favourites" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="907" width="365" height="506.5"/>
+                                                <rect key="frame" x="5" y="759" width="365" height="478.5"/>
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J7b-SL-JE1">
-                                                        <rect key="frame" x="30" y="10" width="320" height="103.5"/>
+                                                        <rect key="frame" x="30" y="10" width="320" height="92.5"/>
                                                         <attributedString key="attributedText">
-                                                            <fragment content="Adding a location to your favorites ">
+                                                            <fragment content="Adding a location">
                                                                 <attributes>
                                                                     <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <font key="NSFont" size="16" name="AvenirNext-DemiBold"/>
+                                                                    <font key="NSFont" size="14" name="AvenirNext-DemiBold"/>
                                                                 </attributes>
                                                             </fragment>
-                                                            <fragment content="is done by pressing the outlined star in the upper right hand corner of the selected locations weather details. ">
+                                                            <fragment>
+                                                                <string key="content"> to your favorites is done by pressing the outlined star in the upper right hand corner of the selected locations weather details. </string>
                                                                 <attributes>
                                                                     <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <font key="NSFont" size="16" name="AvenirNext-Regular"/>
+                                                                    <font key="NSFont" size="14" name="AvenirNext-Regular"/>
                                                                 </attributes>
                                                             </fragment>
                                                         </attributedString>
@@ -274,7 +275,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                         </constraints>
                                                     </imageView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="BQc-28-Zma">
-                                                        <rect key="frame" x="94.5" y="118.5" width="176" height="59"/>
+                                                        <rect key="frame" x="94.5" y="107.5" width="176" height="59"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nostar" translatesAutoresizingMaskIntoConstraints="NO" id="EdB-JS-VWc">
                                                                 <rect key="frame" x="0.0" y="0.0" width="83" height="59"/>
@@ -285,34 +286,34 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                         </subviews>
                                                     </stackView>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" text="Your favourite locations will now appear on the map with a purple band on top of the normal white symbol." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ktl-JX-iP4">
-                                                        <rect key="frame" x="30" y="182.5" width="320" height="82"/>
+                                                        <rect key="frame" x="30" y="171.5" width="320" height="73.5"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bgslice" translatesAutoresizingMaskIntoConstraints="NO" id="HpH-Xw-voU">
-                                                        <rect key="frame" x="138.5" y="267.5" width="84" height="84"/>
+                                                        <rect key="frame" x="138.5" y="248" width="84" height="84"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="84" id="Vpu-Ya-duw"/>
                                                             <constraint firstAttribute="width" constant="84" id="sk8-O9-chh"/>
                                                         </constraints>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location-shadow" translatesAutoresizingMaskIntoConstraints="NO" id="U3j-zb-Hjl">
-                                                        <rect key="frame" x="155.5" y="279.5" width="54" height="60"/>
+                                                        <rect key="frame" x="155.5" y="260" width="54" height="60"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="60" id="4gI-xM-Chx"/>
                                                             <constraint firstAttribute="width" constant="54" id="EXz-4R-tzx"/>
                                                         </constraints>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favourite-top" translatesAutoresizingMaskIntoConstraints="NO" id="W1F-xJ-C4p">
-                                                        <rect key="frame" x="152" y="274.5" width="61" height="25"/>
+                                                        <rect key="frame" x="152" y="255" width="61" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="61" id="8ct-oN-JVU"/>
                                                             <constraint firstAttribute="height" constant="25" id="G9B-t5-RTu"/>
                                                         </constraints>
                                                     </imageView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="HvO-0U-wcO">
-                                                        <rect key="frame" x="164.5" y="287.5" width="30" height="48.5"/>
+                                                        <rect key="frame" x="164.5" y="268" width="30" height="48.5"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clear-day" translatesAutoresizingMaskIntoConstraints="NO" id="ANx-EF-903">
                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="29"/>
@@ -337,13 +338,13 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                         </subviews>
                                                     </stackView>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" text="You can access your favorites by pressing the favorites button on the bottom left hand corner of the map view." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ilG-oX-wh8">
-                                                        <rect key="frame" x="30" y="354.5" width="320" height="82"/>
+                                                        <rect key="frame" x="30" y="335" width="320" height="73.5"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="35y-cw-QnB" customClass="RoundView" customModule="WeatherMap" customModuleProvider="target">
-                                                        <rect key="frame" x="157" y="441.5" width="50" height="50"/>
+                                                        <rect key="frame" x="157" y="413.5" width="50" height="50"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d9k-8V-9yA">
                                                                 <rect key="frame" x="14" y="13" width="23" height="24"/>
@@ -389,22 +390,22 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mqm-fk-FhU" userLabel="Search" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="760" width="365" height="139"/>
+                                                <rect key="frame" x="5" y="639.5" width="365" height="111.5"/>
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DgI-oD-TZa">
-                                                        <rect key="frame" x="30" y="10" width="320" height="82"/>
+                                                        <rect key="frame" x="30" y="10" width="320" height="54.5"/>
                                                         <attributedString key="attributedText">
                                                             <fragment content="Searching">
                                                                 <attributes>
                                                                     <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <font key="NSFont" size="16" name="AvenirNext-DemiBold"/>
+                                                                    <font key="NSFont" size="14" name="AvenirNext-DemiBold"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
                                                             <fragment content=" for a location is accessed through the search symbol in the top left corner.">
                                                                 <attributes>
                                                                     <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <font key="NSFont" size="16" name="AvenirNext-Regular"/>
+                                                                    <font key="NSFont" size="14" name="AvenirNext-Regular"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
@@ -419,7 +420,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                         </constraints>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Search" translatesAutoresizingMaskIntoConstraints="NO" id="pCF-Td-9M7">
-                                                        <rect key="frame" x="165" y="94" width="35" height="35"/>
+                                                        <rect key="frame" x="165" y="66.5" width="35" height="35"/>
                                                         <color key="backgroundColor" red="0.1404758095741272" green="0.20412927865982056" blue="0.42288690805435181" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="35" id="9Lv-CM-p4J"/>
@@ -1106,7 +1107,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="McZ-RP-avB" userLabel="Acknowledgements" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="357" width="365" height="75"/>
+                                        <rect key="frame" x="0.0" y="357" width="365" height="125"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xLj-cj-Qsj" userLabel="Acknoledgements">
                                                 <rect key="frame" x="5" y="15" width="355" height="45"/>
@@ -1145,13 +1146,64 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                     <constraint firstItem="3SP-W4-OKW" firstAttribute="top" secondItem="xLj-cj-Qsj" secondAttribute="top" id="hcO-fV-eVl"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dvK-Ak-p8Q" userLabel="breakline">
+                                                <rect key="frame" x="40" y="65" width="285" height="1"/>
+                                                <color key="backgroundColor" red="0.098039215690000001" green="0.12941176469999999" blue="0.31764705879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="0.5" id="0SM-MO-WKE"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Th-Ca-28v" userLabel="Rate App">
+                                                <rect key="frame" x="5" y="71" width="355" height="45"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy Policy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1tH-cs-dM9">
+                                                        <rect key="frame" x="15" y="11.5" width="98" height="22"/>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Right Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="ffV-V6-BP3">
+                                                        <rect key="frame" x="332" y="15.5" width="8" height="14"/>
+                                                    </imageView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QjQ-h7-1Ld" userLabel="gestureView">
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="45"/>
+                                                        <accessibility key="accessibilityConfiguration">
+                                                            <accessibilityTraits key="traits" button="YES" selected="YES"/>
+                                                            <bool key="isElement" value="YES"/>
+                                                        </accessibility>
+                                                        <gestureRecognizers/>
+                                                    </view>
+                                                </subviews>
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstItem="QjQ-h7-1Ld" firstAttribute="leading" secondItem="5Th-Ca-28v" secondAttribute="leading" id="0gJ-02-tMa"/>
+                                                    <constraint firstAttribute="trailing" secondItem="QjQ-h7-1Ld" secondAttribute="trailing" id="GA8-Lu-Bj5"/>
+                                                    <constraint firstItem="1tH-cs-dM9" firstAttribute="centerY" secondItem="5Th-Ca-28v" secondAttribute="centerY" id="MMi-yD-mE5"/>
+                                                    <constraint firstItem="1tH-cs-dM9" firstAttribute="leading" secondItem="5Th-Ca-28v" secondAttribute="leading" constant="15" id="SnN-zF-32X"/>
+                                                    <constraint firstItem="QjQ-h7-1Ld" firstAttribute="top" secondItem="5Th-Ca-28v" secondAttribute="top" id="ViK-k3-Zin"/>
+                                                    <constraint firstItem="ffV-V6-BP3" firstAttribute="centerY" secondItem="5Th-Ca-28v" secondAttribute="centerY" id="Yk1-F2-SEJ"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ffV-V6-BP3" secondAttribute="trailing" constant="15" id="dhr-fC-tKW"/>
+                                                    <constraint firstAttribute="height" constant="45" id="lzA-sA-a2O"/>
+                                                    <constraint firstAttribute="bottom" secondItem="QjQ-h7-1Ld" secondAttribute="bottom" id="r7J-za-3TK"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="rak-7m-Rl5"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="TQr-H6-3oy" appends="YES" id="8oB-d6-nOF"/>
+                                                </connections>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" red="0.27873918414115906" green="0.3298223614692688" blue="0.52110368013381958" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="75" id="Cg7-75-aTI"/>
+                                            <constraint firstItem="dvK-Ak-p8Q" firstAttribute="leading" secondItem="McZ-RP-avB" secondAttribute="leading" constant="40" id="68G-9k-h4s"/>
+                                            <constraint firstAttribute="trailing" secondItem="5Th-Ca-28v" secondAttribute="trailing" constant="5" id="75O-vX-Lrm"/>
+                                            <constraint firstAttribute="height" constant="125" id="Cg7-75-aTI"/>
                                             <constraint firstItem="xLj-cj-Qsj" firstAttribute="leading" secondItem="McZ-RP-avB" secondAttribute="leading" constant="5" id="LeV-Vi-cs5"/>
+                                            <constraint firstItem="5Th-Ca-28v" firstAttribute="leading" secondItem="McZ-RP-avB" secondAttribute="leading" constant="5" id="Wdd-II-Iq2"/>
                                             <constraint firstItem="xLj-cj-Qsj" firstAttribute="top" secondItem="McZ-RP-avB" secondAttribute="top" constant="15" id="g92-8W-AVY"/>
                                             <constraint firstAttribute="trailing" secondItem="xLj-cj-Qsj" secondAttribute="trailing" constant="5" id="hfU-JT-hcg"/>
+                                            <constraint firstItem="5Th-Ca-28v" firstAttribute="top" secondItem="dvK-Ak-p8Q" secondAttribute="bottom" constant="5" id="kgq-hF-bpw"/>
+                                            <constraint firstAttribute="trailing" secondItem="dvK-Ak-p8Q" secondAttribute="trailing" constant="40" id="oOq-8y-TcQ"/>
+                                            <constraint firstItem="dvK-Ak-p8Q" firstAttribute="top" secondItem="xLj-cj-Qsj" secondAttribute="bottom" constant="5" id="vw1-Nb-JFs"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -1225,6 +1277,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                         <segue destination="sNx-fZ-VR6" kind="popoverPresentation" identifier="Tutorial" popoverAnchorView="6eU-MB-x1C" id="dBw-uK-HAv">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
+                        <segue destination="9bc-9y-W5v" kind="presentation" identifier="toPrivacyPolicy" id="gPL-IF-uMh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AoD-m8-l25" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1256,6 +1309,11 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                 <tapGestureRecognizer id="mp3-zL-2So" userLabel="Tutorial Pressed">
                     <connections>
                         <action selector="tutorialPressed:" destination="YL4-nr-ctP" id="Gal-Ez-Fev"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="TQr-H6-3oy" userLabel="PrivacyPolicy pressed">
+                    <connections>
+                        <action selector="privacyPolicyPressed:" destination="YL4-nr-ctP" id="fAV-kc-Dcy"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -1409,6 +1467,137 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-106" y="1361"/>
+        </scene>
+        <!--Privacy PolicyVC-->
+        <scene sceneID="0JD-ZJ-sap">
+            <objects>
+                <viewController id="9bc-9y-W5v" customClass="PrivacyPolicyVC" customModule="WeatherMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5VO-PD-JUg"/>
+                        <viewControllerLayoutGuide type="bottom" id="u6C-6T-86W"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="d7i-Ln-MPB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tL7-ZL-Nke" userLabel="Background">
+                                <rect key="frame" x="0.0" y="8" width="375" height="659"/>
+                                <color key="backgroundColor" red="0.1404758096" green="0.2041292787" blue="0.42288690810000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPR-j1-mxS">
+                                <rect key="frame" x="0.0" y="40" width="375" height="627"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MdW-9L-9ku" userLabel="Container View">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hZg-Af-AJp" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
+                                                <rect key="frame" x="5" y="8" width="365" height="172"/>
+                                                <subviews>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="X7w-1d-R34">
+                                                        <rect key="frame" x="10" y="15" width="345" height="142"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="142" id="g2F-9G-2pE"/>
+                                                        </constraints>
+                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in </string>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    </textView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.27873918414115906" green="0.3298223614692688" blue="0.52110368013381958" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="X7w-1d-R34" firstAttribute="leading" secondItem="hZg-Af-AJp" secondAttribute="leading" constant="10" id="0S1-XK-Sk6"/>
+                                                    <constraint firstAttribute="bottom" secondItem="X7w-1d-R34" secondAttribute="bottom" constant="15" id="DMG-Zv-Zsx"/>
+                                                    <constraint firstAttribute="trailing" secondItem="X7w-1d-R34" secondAttribute="trailing" constant="10" id="fXf-Gv-tO7"/>
+                                                    <constraint firstItem="X7w-1d-R34" firstAttribute="top" secondItem="hZg-Af-AJp" secondAttribute="top" constant="15" id="k0H-5K-APZ"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="hZg-Af-AJp" firstAttribute="leading" secondItem="MdW-9L-9ku" secondAttribute="leading" constant="5" id="4J1-mG-A7K"/>
+                                            <constraint firstAttribute="bottom" secondItem="hZg-Af-AJp" secondAttribute="bottom" constant="10" id="PsS-HN-vQ8"/>
+                                            <constraint firstAttribute="trailing" secondItem="hZg-Af-AJp" secondAttribute="trailing" constant="5" id="l2T-hI-Dks"/>
+                                            <constraint firstItem="hZg-Af-AJp" firstAttribute="top" secondItem="MdW-9L-9ku" secondAttribute="top" constant="8" id="sOh-WO-AU2"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="MdW-9L-9ku" firstAttribute="leading" secondItem="vPR-j1-mxS" secondAttribute="leading" id="RAU-bK-lVg"/>
+                                    <constraint firstItem="MdW-9L-9ku" firstAttribute="top" secondItem="vPR-j1-mxS" secondAttribute="top" id="c3j-HE-uRp"/>
+                                    <constraint firstAttribute="trailing" secondItem="MdW-9L-9ku" secondAttribute="trailing" id="iam-Lt-ImI"/>
+                                    <constraint firstAttribute="bottom" secondItem="MdW-9L-9ku" secondAttribute="bottom" id="x9l-iQ-fpp"/>
+                                </constraints>
+                            </scrollView>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uN9-5Q-5Ym" userLabel="Header" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy Policy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iWc-b1-chk">
+                                        <rect key="frame" x="132.5" y="8" width="110.5" height="25"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E3M-k3-NWE">
+                                        <rect key="frame" x="10" y="12.5" width="9" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="9" id="LuW-Ft-WDD"/>
+                                            <constraint firstAttribute="height" constant="15" id="tB0-1i-hyo"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" image="left Arrow"/>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AMy-VN-qSp">
+                                        <rect key="frame" x="1" y="5" width="27" height="30"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="27" id="JbO-pE-tgY"/>
+                                            <constraint firstAttribute="height" constant="30" id="Lfg-Td-46u"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="2G4-9C-gh6" appends="YES" id="eGA-Ni-zag"/>
+                                        </connections>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.27873918409999998" green="0.32982236149999999" blue="0.52110368009999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="AMy-VN-qSp" firstAttribute="centerY" secondItem="E3M-k3-NWE" secondAttribute="centerY" id="ANl-H4-2Iq"/>
+                                    <constraint firstItem="E3M-k3-NWE" firstAttribute="centerY" secondItem="uN9-5Q-5Ym" secondAttribute="centerY" id="DoF-M6-odh"/>
+                                    <constraint firstItem="iWc-b1-chk" firstAttribute="centerX" secondItem="uN9-5Q-5Ym" secondAttribute="centerX" id="E1A-lt-gAq"/>
+                                    <constraint firstItem="E3M-k3-NWE" firstAttribute="leading" secondItem="uN9-5Q-5Ym" secondAttribute="leading" constant="10" id="Gkk-Q6-w9p"/>
+                                    <constraint firstItem="iWc-b1-chk" firstAttribute="centerY" secondItem="uN9-5Q-5Ym" secondAttribute="centerY" id="I3m-Qh-A11"/>
+                                    <constraint firstItem="AMy-VN-qSp" firstAttribute="centerX" secondItem="E3M-k3-NWE" secondAttribute="centerX" id="QmW-8n-byd"/>
+                                    <constraint firstAttribute="height" constant="40" id="qDz-u3-gab"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="vPR-j1-mxS" firstAttribute="top" secondItem="uN9-5Q-5Ym" secondAttribute="bottom" id="3qA-5p-P9i"/>
+                            <constraint firstItem="uN9-5Q-5Ym" firstAttribute="leading" secondItem="d7i-Ln-MPB" secondAttribute="leading" id="5SB-J3-DKo"/>
+                            <constraint firstAttribute="bottom" secondItem="vPR-j1-mxS" secondAttribute="bottom" id="7WB-es-fyV"/>
+                            <constraint firstItem="tL7-ZL-Nke" firstAttribute="leading" secondItem="d7i-Ln-MPB" secondAttribute="leading" id="Cj5-hv-jkF"/>
+                            <constraint firstItem="u6C-6T-86W" firstAttribute="top" secondItem="tL7-ZL-Nke" secondAttribute="bottom" id="Jji-TT-Jq5"/>
+                            <constraint firstItem="tL7-ZL-Nke" firstAttribute="top" secondItem="d7i-Ln-MPB" secondAttribute="top" constant="8" id="Smz-vg-wLt"/>
+                            <constraint firstItem="MdW-9L-9ku" firstAttribute="width" secondItem="d7i-Ln-MPB" secondAttribute="width" id="Ta8-n2-bSg"/>
+                            <constraint firstAttribute="trailing" secondItem="vPR-j1-mxS" secondAttribute="trailing" id="Yg0-h3-zL9"/>
+                            <constraint firstItem="vPR-j1-mxS" firstAttribute="leading" secondItem="d7i-Ln-MPB" secondAttribute="leading" id="eQr-L8-dHX"/>
+                            <constraint firstAttribute="trailing" secondItem="uN9-5Q-5Ym" secondAttribute="trailing" id="fjp-cN-k37"/>
+                            <constraint firstAttribute="trailing" secondItem="tL7-ZL-Nke" secondAttribute="trailing" id="foP-cL-Znp"/>
+                            <constraint firstItem="uN9-5Q-5Ym" firstAttribute="top" secondItem="d7i-Ln-MPB" secondAttribute="top" id="odg-1h-6Ad"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textField" destination="X7w-1d-R34" id="08z-cX-FXe"/>
+                        <outlet property="textFieldHeightConstraint" destination="g2F-9G-2pE" id="8HI-fq-xN1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WnW-8P-V4s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="2G4-9C-gh6" userLabel="back Pressed">
+                    <connections>
+                        <action selector="backBtnPressed:" destination="9bc-9y-W5v" id="558-Sw-Qbb"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="640.79999999999995" y="1360.569715142429"/>
         </scene>
         <!--Measurement UnitsVC-->
         <scene sceneID="l0h-qX-eD3">
@@ -1568,10 +1757,10 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                 <rect key="frame" x="0.0" y="40" width="375" height="627"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OBA-3n-5hy" userLabel="Container View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="343.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="318.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bb8-Jd-TRP" userLabel="Map" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="8" width="365" height="126"/>
+                                                <rect key="frame" x="5" y="8" width="365" height="117.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wEi-46-IU6">
                                                         <rect key="frame" x="165" y="10" width="35.5" height="24"/>
@@ -1580,12 +1769,12 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Smx-ky-Nux">
-                                                        <rect key="frame" x="30" y="39" width="320" height="82"/>
+                                                        <rect key="frame" x="30" y="39" width="320" height="73.5"/>
                                                         <attributedString key="attributedText">
                                                             <fragment content="Search and map and provided by Apple MapKit. Weather data for the map is supplied by OpenWeatherMap.">
                                                                 <attributes>
                                                                     <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <font key="NSFont" size="16" name="AvenirNext-Regular"/>
+                                                                    <font key="NSFont" size="14" name="AvenirNext-Regular"/>
                                                                 </attributes>
                                                             </fragment>
                                                         </attributedString>
@@ -1612,7 +1801,7 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ztq-fc-OBF" userLabel="Detail" customClass="RoundedCornerView" customModule="WeatherMap" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="142" width="365" height="191.5"/>
+                                                <rect key="frame" x="5" y="133.5" width="365" height="175"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City weather details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6DJ-Hy-4ii">
                                                         <rect key="frame" x="105.5" y="10" width="154.5" height="24"/>
@@ -1621,13 +1810,13 @@ You can skip it with the ‘x’ above and review it later in our settings secti
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iPS-Uh-TN4">
-                                                        <rect key="frame" x="30" y="39" width="320" height="147.5"/>
+                                                        <rect key="frame" x="30" y="39" width="320" height="131"/>
                                                         <attributedString key="attributedText">
                                                             <fragment>
                                                                 <string key="content">Hourly and daily weather details powered by DarkSky.    Historical weather details sourced from the Nation Oceanic and Atmospheric Association (NOAA).</string>
                                                                 <attributes>
                                                                     <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <font key="NSFont" size="16" name="AvenirNext-Regular"/>
+                                                                    <font key="NSFont" size="14" name="AvenirNext-Regular"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
