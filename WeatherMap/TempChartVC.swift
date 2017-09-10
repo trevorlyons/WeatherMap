@@ -461,7 +461,7 @@ class TempChartVC: UIViewController {
         tempLineChart.leftAxis.labelPosition = .outsideChart
         tempLineChart.leftAxis.labelTextColor = .white
         tempLineChart.leftAxis.labelFont = UIFont(name: "AvenirNext-Medium", size: 12)!
-        tempLineChart.leftAxis.labelCount = 3
+        tempLineChart.leftAxis.labelCount = 4
         
         tempLineChart.rightAxis.drawGridLinesEnabled = false
         tempLineChart.rightAxis.drawAxisLineEnabled = false

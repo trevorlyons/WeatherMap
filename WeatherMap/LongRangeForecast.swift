@@ -27,8 +27,8 @@ class LongRangeForecast {
         self.date = unixConvertedDate.dayOfTheWeek()
         self.precip = longWeatherDict["precipProbability"] as? Double ?? 0.0
         self.clouds = longWeatherDict["cloudCover"] as? Double ?? 0.0
-        self.highTemp = longWeatherDict["temperatureMax"] as? Double ?? 0.0
-        self.lowTemp = longWeatherDict["temperatureMin"] as? Double ?? 0.0
+        self.highTemp = longWeatherDict["temperatureHigh"] as? Double ?? 0.0
+        self.lowTemp = longWeatherDict["temperatureLow"] as? Double ?? 0.0
     }
 }
 
