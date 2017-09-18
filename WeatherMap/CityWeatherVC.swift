@@ -70,10 +70,18 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         setFavouritesIcon()
         
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        // test ads
+//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        
+        //live ads
+        bannerView.adUnitID = "ca-app-pub-2871254793739488/9633223656"
+        
         bannerView.rootViewController = self
         
         let request = GADRequest()
+        
+        // allowing test simulator to view ads
+//        request.testDevices = [kGADSimulatorID]
         bannerView.load(request)
     }
     
@@ -87,6 +95,7 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func downloadApiData(completed: DownloadComplete) {
         let currentWeatherUrl = URL(string: "\(darkSkyUrl)\(segueData.latitude),\(segueData.longitude)?units=\(Singleton.sharedInstance.unitSelectedDarkSky)")!
+        print(currentWeatherUrl)
         Alamofire.request(currentWeatherUrl).responseJSON { response in
             let result = response.result
             if let dict = result.value as? Dictionary<String, AnyObject> {

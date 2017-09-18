@@ -33,10 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.statusBarStyle = .lightContent
         
         // code for testing without using real ads
-        GADMobileAds.configure(withApplicationID: "ca-app-pub-2871254793739488~2029231652")
+//        GADMobileAds.configure(withApplicationID: "ca-app-pub-2871254793739488~2029231652")
         
         // code for live ads
-//        GADMobileAds.configure(withApplicationID: "ca-app-pub-2871254793739488/9633223656")
+        GADMobileAds.configure(withApplicationID: "ca-app-pub-2871254793739488/9633223656")
         
         return true
     }
