@@ -10,7 +10,6 @@ import Foundation
 
 class Singleton {
     
-    
     static var sharedInstance = Singleton()
     private init() {}
     

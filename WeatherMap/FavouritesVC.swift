@@ -20,12 +20,21 @@ protocol deleteAnnotationFavourites {
 
 
 class FavouritesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
+    
+    // MARK: IBOutlets
+    
     @IBOutlet weak var tableView: UITableView!
+    
+    
+    // MARK: Variables and Constants
     
     lazy var slideInTransitioningDelegate = SlideInPresentationManager()
     var mapPanDelegate: HandleMapPan!
     var deleteAnnotationsDelegate: deleteAnnotationFavourites!
+    
+    
+    // MARK: viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +46,7 @@ class FavouritesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     
-    // Tableview & Weather API Download
+    // MARK: Tableview & Weather API Download
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "favouritesCell", for: indexPath) as? FavouritesCell {
@@ -91,7 +100,7 @@ class FavouritesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     
-    // Function to save favourites array
+    // MARK: Function to save favourites array
     
     func saveFavouritesData() {
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(Singleton.sharedInstance.favouritesArray, toFile: Favourites.ArchiveURL.path)
@@ -103,7 +112,7 @@ class FavouritesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     
-    // Override segue transition styles
+    // MARK: Override segue transition styles
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? CityWeatherVC {
@@ -117,7 +126,7 @@ class FavouritesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     
-    // Screen press actions
+    // MARK: Screen press actions
     
     @IBAction func backButtonPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)

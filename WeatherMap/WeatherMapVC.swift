@@ -14,11 +14,17 @@ import CoreLocation
 
 class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, HandleMapPan, MKLocalSearchCompleterDelegate, UIPopoverPresentationControllerDelegate, UIGestureRecognizerDelegate, HandleRemoveAnnotations, deleteAnnotation, deleteAnnotationFavourites {
 
+    
+    // MARK: IBOutlets
+    
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchClipping: SearchClippingView!
     @IBOutlet weak var warningView: RoundedCornerView!
+    
+    
+    // MARK: Variables and Constants
     
     lazy var slideInTransitioningDelegate = SlideInPresentationManager()
     let locationManager = CLLocationManager()
@@ -40,6 +46,9 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     var upperRightLong: Double!
     var upperRightLat: Double!
     let defaults = UserDefaults.standard
+    
+    
+    // MARK: ViewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,7 +95,6 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         pinchGesture.delegate = self
         mapView.addGestureRecognizer(pinchGesture)
         
-        
         let locale = Locale.current
         let isMetric = locale.usesMetricSystem
         print("TREVOR: \(isMetric)")
@@ -104,6 +112,9 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
         defaults.register(defaults: ["Language" : "English"])
         loadUserDefaults()
     }
+    
+    
+    // MARK: ViewDidAppear
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -123,7 +134,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     
-    // Network connection status function
+    // MARK: Network connection status function
     
     func updateUserInterface() {
         guard let status = Network.reachability?.status else { return }
@@ -146,7 +157,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     
-    // Load settings function
+    // MARK: Load settings function
     
     func loadUserDefaults() {
         Singleton.sharedInstance.unitSelectedDarkSky = defaults.string(forKey: "DarkSky")!
@@ -155,7 +166,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
 
     
-    // MapView functions - Location authorization and centering
+    // MARK: MapView functions - Location authorization and centering
     
     func locationAuthStatus() {
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
@@ -197,7 +208,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     
-    // MapView functions - Gesture recognizers
+    // MARK: MapView functions - Gesture recognizers
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
@@ -240,7 +251,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     
-    // MapView functions - Download API data and annotate mapView
+    // MARK: MapView functions - Download API data and annotate mapView
     
     func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
         for view in views {
@@ -430,7 +441,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     
-    // Search functions
+    // MARK: Search functions
     // Search - TableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -504,7 +515,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     
-    // Annotate and move screen functions
+    // MARK: Annotate and move screen functions
     
     func dropPinZoomIn(placemark:MKPlacemark){
         removeAnnotations()
@@ -572,7 +583,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     
-    // Override segue transition styles
+    // MARK: Override segue transition styles
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? SettingsVC {
@@ -614,7 +625,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     
-    // Load favourites data function
+    // MARK: Load favourites data function
     
     func loadFavouritesData() {
         if let favouritesData = NSKeyedUnarchiver.unarchiveObject(withFile: Favourites.ArchiveURL.path) as? [Favourites] {
@@ -623,7 +634,7 @@ class WeatherMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelega
     }
     
     
-    // Screen press actions
+    // MARK: IBActions
     
     @IBAction func unwindToWeatherMapVC(segue: UIStoryboardSegue) {
     }

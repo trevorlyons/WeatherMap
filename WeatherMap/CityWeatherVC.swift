@@ -16,7 +16,10 @@ protocol deleteAnnotation {
 }
 
 class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate {
-
+    
+    
+    // MARK: IBOutlets
+    
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
@@ -43,6 +46,9 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var tempChartView: UIView!
     @IBOutlet weak var rainChartView: UIView!
     
+    
+    // MARK: Variables and Constants
+    
     var currentWeather: CurrentWeather!
     var longRangeForecast: LongRangeForecast!
     var longRangeForecasts = [LongRangeForecast]()
@@ -58,6 +64,9 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             _segueData = newValue
         }
     }
+    
+    
+    // MARK: ViewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,9 +90,12 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         let request = GADRequest()
         
         // allowing test simulator to view ads
-//        request.testDevices = [kGADSimulatorID]
+        request.testDevices = [kGADSimulatorID]
         bannerView.load(request)
     }
+    
+    
+    // MARK: ViewDidAppear
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -91,7 +103,7 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
 
     
-    // Download data from API
+    // MARK: Download data from API
     
     func downloadApiData(completed: DownloadComplete) {
         let currentWeatherUrl = URL(string: "\(darkSkyUrl)\(segueData.latitude),\(segueData.longitude)?units=\(Singleton.sharedInstance.unitSelectedDarkSky)")!
@@ -150,7 +162,7 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     
-    // TableView - long range forecast
+    // MARK: TableView - long range forecast
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "longRangeForecastCell", for: indexPath) as? LongRangeForecastCell {
@@ -171,7 +183,7 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     
-    // CollectionView - hourly forecast
+    // MARK: CollectionView - hourly forecast
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hourlyForecastCell", for: indexPath) as? HourlyForecastCell {
@@ -192,7 +204,7 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     
-    // Update UI
+    // MARK: Update UI
     
     func updateCurrentWeatherUI(currentWeather: CurrentWeather) {
         cityNameLbl.text = segueData.cityName.capitalized
@@ -245,7 +257,7 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     
-    // Save current location to Favourites functions
+    // MARK: Save current location to Favourites functions
     
     func saveFavouritesData() {
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(Singleton.sharedInstance.favouritesArray, toFile: Favourites.ArchiveURL.path)
@@ -267,7 +279,7 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     
-    // Override segue transition styles
+    // MARK: Override segue transition styles
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
@@ -302,7 +314,8 @@ class CityWeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         return .none
     }
     
-    // Screen press actions
+    
+    // MARK: IBActions
     
     @IBAction func backButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: "unwindToWeatherMapVC", sender: self)

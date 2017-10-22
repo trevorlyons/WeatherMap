@@ -15,11 +15,20 @@ protocol HandleRemoveAnnotations {
 
 class SettingsVC: UIViewController, MFMailComposeViewControllerDelegate, UIPopoverPresentationControllerDelegate {
     
+    
+    // MARK: IBOutlets
+    
     @IBOutlet weak var unitTypeLbl: UILabel!
     @IBOutlet weak var langSelectedLbl: UILabel!
     
+    
+    // MARK: Variables and Constants
+    
     lazy var slideInTransitioningDelegate = SlideInPresentationManager()
     var removeAnnotationsDelegate: HandleRemoveAnnotations!
+    
+    
+    // MARK: viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +38,7 @@ class SettingsVC: UIViewController, MFMailComposeViewControllerDelegate, UIPopov
     }
     
     
-    // Mail feedback functions
+    // MARK: Mail feedback functions
     
     func configuredMailComposeViewController() -> MFMailComposeViewController {
         let mail = MFMailComposeViewController()
@@ -44,7 +53,7 @@ class SettingsVC: UIViewController, MFMailComposeViewControllerDelegate, UIPopov
     }
     
     
-    // Override transition segues
+    // MARK: Override transition segues
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? MeasurementUnitsVC {
@@ -83,7 +92,7 @@ class SettingsVC: UIViewController, MFMailComposeViewControllerDelegate, UIPopov
     }
     
     
-    // App rating function
+    // MARK: App rating function
     
     func rateApp(appId: String, completion: @escaping ((_ success: Bool)->())) {
         guard let url = URL(string : "itms-apps://itunes.apple.com/app/" + appId + "?action=write-review&mt=8") else {
@@ -98,7 +107,7 @@ class SettingsVC: UIViewController, MFMailComposeViewControllerDelegate, UIPopov
     }
     
     
-    // Screen press actions
+    // MARK: IBActions
     
     @IBAction func acknoledgementsPressed(_ sender: UITapGestureRecognizer) {
         performSegue(withIdentifier: "acknowledgementsSegue", sender: self)
