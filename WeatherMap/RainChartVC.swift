@@ -11,11 +11,17 @@ import Alamofire
 import Charts
 
 class RainChartVC: UIViewController {
-
+    
+    
+    // MARK: IBOutlets
+    
     @IBOutlet weak var noDataWarningView: RoundedCornerView!
     @IBOutlet weak var rainChart: BarChartView!
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var ellipsesLbl: UILabel!
+    
+    
+    // MARK: Variables and Constants
     
     var rainAccums = [TemperatureChart]()
     var station: String!
@@ -31,6 +37,9 @@ class RainChartVC: UIViewController {
         }
     }
     
+    
+    // MARK: viewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,7 +52,7 @@ class RainChartVC: UIViewController {
     }
     
     
-    // Loading Timer
+    // MARK: Loading Timer
     
     func updateLabelEllipses(timer: Timer) {
         let messageText: String = self.ellipsesLbl.text!
@@ -57,7 +66,7 @@ class RainChartVC: UIViewController {
     }
     
     
-    // Download API data
+    // MARK: Download API data
     
     func findClosestNOAAStation(completed: DownloadComplete) {
         let lowLLat = segueData.latitude - 1
@@ -246,7 +255,7 @@ class RainChartVC: UIViewController {
     }
     
     
-    // Configure Chart
+    // MARK: Configure Chart
     
     func updateChart() {
         let format: BarChartFormatter = BarChartFormatter()
@@ -322,7 +331,10 @@ class RainChartVC: UIViewController {
         rainChart.rightAxis.drawLabelsEnabled = false
         
     }
-
+    
+    
+    // MARK: IBActions
+    
     @IBAction func xPressed(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }

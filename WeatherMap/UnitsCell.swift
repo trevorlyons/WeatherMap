@@ -13,7 +13,6 @@ class UnitsCell: UITableViewCell {
     @IBOutlet weak var selectorImg: UIImageView!
     @IBOutlet weak var unitSelectLbl: UILabel!
 
-    
     func configureCell(units: Units) {
         
         unitSelectLbl.text = units.unitName
@@ -26,10 +25,4 @@ class UnitsCell: UITableViewCell {
         }
         selectorImg.image = UIImage(named: setSelected)
     }
-    
-
-    
-    
-    
-
 }

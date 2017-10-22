@@ -17,7 +17,7 @@ class TutorialVC: UIViewController {
     }
     
     
-    // MARK: IBActions
+    // Screen press actions
     
     @IBAction func xTapped(_ sender: UITapGestureRecognizer) {
         dismiss(animated: false, completion: nil)

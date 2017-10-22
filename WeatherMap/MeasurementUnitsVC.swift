@@ -9,23 +9,30 @@
 import UIKit
 
 class MeasurementUnitsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
+    
+    // MARK: IBOutlets
+    
     @IBOutlet weak var tableView: UITableView!
+    
+    
+    // MARK: Variables and Constants
     
     var units = [Units]()
     var selectMetric: Bool!
     var selectImperial: Bool!
     let defaults = UserDefaults.standard
     
+    
+    // MARK: viewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         tableView.dataSource = self
         tableView.delegate = self
         self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 1))
         
-
         if UserDefaults.standard.value(forKey: "OWM") as? String == "imperial" {
             selectMetric = false
             selectImperial = true
@@ -45,7 +52,7 @@ class MeasurementUnitsVC: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     
-    // TableView
+    // MARK: TableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "units", for: indexPath) as? UnitsCell {
@@ -90,7 +97,7 @@ class MeasurementUnitsVC: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
-    // Read existing default settings
+    // MARK: Read existing default settings
     
     func readDefaults() {
         self.units[0].selector = defaults.bool(forKey: "setMetric")
@@ -98,7 +105,7 @@ class MeasurementUnitsVC: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
-    // Screen press actions
+    // MARK: IBActions
     
     @IBAction func backPressed(_ sender: UITapGestureRecognizer) {
         performSegue(withIdentifier: "unwindSegueToSettings", sender: self)

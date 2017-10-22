@@ -12,16 +12,10 @@ import Charts
 
 class TempChartVC: UIViewController {
     
-    
-    // MARK: IBOutlets
-    
     @IBOutlet weak var tempLineChart: LineChartView!
     @IBOutlet weak var noDataAvailableView: RoundedCornerView!
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var ellipsesLbl: UILabel!
-    
-    
-    // MARK: Variables and Constants
     
     var tempAvgs = [TemperatureChart]()
     var tempMaxs = [TemperatureChart]()
@@ -50,9 +44,6 @@ class TempChartVC: UIViewController {
             _segueData = newValue
         }
     }
-    
-    
-    // MARK: viewDidLoad
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +58,7 @@ class TempChartVC: UIViewController {
     }
     
     
-    // MARK: Loading Timer
+    // Loading Timer
     
     func updateLabelEllipses(timer: Timer) {
         let messageText: String = self.ellipsesLbl.text!
@@ -81,7 +72,7 @@ class TempChartVC: UIViewController {
     }
     
     
-    // MARK: Download API Data
+    // Download API Data
     
     func findClosestNOAAStation(completed: DownloadComplete) {
         let lowLLat = segueData.latitude - 1
@@ -386,7 +377,7 @@ class TempChartVC: UIViewController {
     }
     
     
-    // MARK: Configure Chart
+    // Configure Chart
     
     func updateChart() {
         let format: LineChartFormatter = LineChartFormatter()
@@ -476,9 +467,6 @@ class TempChartVC: UIViewController {
         tempLineChart.rightAxis.drawAxisLineEnabled = false
         tempLineChart.rightAxis.drawLabelsEnabled = false
     }
-    
-    
-    // MARK: IBActions
     
     @IBAction func xPressed(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)

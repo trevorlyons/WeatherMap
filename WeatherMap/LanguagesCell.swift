@@ -10,8 +10,6 @@ import UIKit
 
 class LanguagesCell: UITableViewCell {
 
-    
-
     @IBOutlet weak var languageLbl: UILabel!
     @IBOutlet weak var selectorImg: UIImageView!
     
